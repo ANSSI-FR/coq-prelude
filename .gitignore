@@ -1,0 +1,15 @@
+# Makefiles configuration
+Makefile.proj.conf
+Makefile.proj
+.make
+
+# documentation
+docs/html/*
+docs/*.pdf
+
+# Coq build files
+*.v.d
+*.vo.aux
+*.glob
+*.vo
+*.aux
