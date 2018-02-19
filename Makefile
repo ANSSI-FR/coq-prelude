@@ -11,7 +11,7 @@ COQDOCFLAGS :=                                      \
 
 export COQDOCFLAGS
 
-.PHONY:all clean mrproper docs html tex coq poc
+.PHONY:all clean mrproper docs html tex coq install
 
 coq: $(SUBMAKE) $(SRC)
 	@(echo "[*] Compiling the Coq source tree")
@@ -50,3 +50,6 @@ html:
 tex:
 	make -f $(SUBMAKE) all-gal.pdf
 	mv all.pdf docs/$(NAME).pdf
+
+install:
+	make -f $(SUBMAKE) install
