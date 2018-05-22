@@ -21,8 +21,6 @@ Require Import Prelude.Control.
 Local Open Scope prelude_scope.
 
 Axioms (IO:           Type -> Type)
-       (IO_Equality:  forall (a:  Type),
-           Equality a -> Equality (IO a))
        (io_map:       forall {a b:  Type},
            (a -> b) -> IO a -> IO b)
        (io_pure:      forall {a:  Type},
@@ -31,6 +29,12 @@ Axioms (IO:           Type -> Type)
            IO (a -> b) -> IO a -> IO b)
        (io_bind:      forall {a b:  Type},
            IO a -> (a -> IO b) -> IO b).
+
+Instance Equality_IO
+         (A:  Type)
+        `{Equality A}
+  : Equality (IO A).
+Admitted.
 
 Conjectures (io_map_id:  forall (a:  Type)
                                 (H:  Equality a)
