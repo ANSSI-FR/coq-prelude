@@ -11,7 +11,7 @@ COQDOCFLAGS :=                                      \
 
 export COQDOCFLAGS
 
-.PHONY:all clean mrproper docs html tex coq install
+.PHONY:all clean mrproper docs html tex coq install uninstall
 
 coq: $(SUBMAKE) $(SRC)
 	@(echo "[*] Compiling the Coq source tree")
@@ -53,3 +53,6 @@ tex:
 
 install:
 	make -f $(SUBMAKE) install
+
+uninstall:
+	rm -rf "/usr/lib/coq/user-contrib/Prelude/"
