@@ -1,4 +1,4 @@
-(* FreeSpec
+(* coq-prelude
  * Copyright (C) 2018 ANSSI
  *
  * This program is free software: you can redistribute it and/or modify
