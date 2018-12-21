@@ -354,6 +354,17 @@ Instance nat_EqualityBool
   { equalb := Nat.eqb
   }.
 
+(** ** Z
+
+ *)
+
+Require Import Coq.ZArith.ZArith.
+
+Instance Z_Equality
+  : Equality Z :=
+  { equal := eq
+  }.
+
 (** ** Bool
 
  *)
@@ -646,6 +657,65 @@ Proof.
      apply n in Hf.
      destruct Hf.
 Qed.
+
+(** ** Sigma-type
+ *)
+
+Section SigEq.
+  Variables (T: Type)
+            (P: T -> Prop).
+
+  Inductive sig_eq
+           `{Equality T}
+            (x y:  { a: T | P a })
+    : Prop :=
+  | sig_eq_proj1 : proj1_sig x == proj1_sig y -> sig_eq x y.
+
+  Lemma sig_eq_refl
+       `{Equality T}
+        (x:  { a: T | P a })
+    : sig_eq x x.
+  Proof.
+    now constructor.
+  Qed.
+
+  Lemma sig_eq_sym
+       `{Equality T}
+        (x y:  { a: T | P a })
+    : sig_eq x y -> sig_eq y x.
+  Proof.
+    intros [H1].
+    now constructor.
+  Qed.
+
+  Lemma sig_eq_trans
+       `{Equality T}
+        (x y z:  { a: T | P a })
+    : sig_eq x y -> sig_eq y z -> sig_eq x z.
+  Proof.
+    intros [H1] [H2].
+    constructor.
+    now transitivity (proj1_sig y).
+  Qed.
+End SigEq.
+
+Arguments sig_eq [T P H] (x y).
+
+Add Parametric Relation
+    (T: Type) `{H: Equality T}
+    (P: T -> Prop)
+  : { a: T | P a } (@sig_eq T P _)
+    reflexivity proved by (@sig_eq_refl T P H)
+    symmetry proved by (@sig_eq_sym T P H)
+    transitivity proved by (@sig_eq_trans T P H)
+      as sig_eq_rel.
+
+Instance sigma_Equality
+         (T: Type) `{H: Equality T}
+         (P: T -> Prop)
+  : Equality { a: T | P a } :=
+  { equal := @sig_eq T P H
+  }.
 
 (** * Tactics
 
