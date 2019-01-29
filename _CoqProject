@@ -12,3 +12,5 @@ theories/Control/Reader.v
 theories/Control/State.v
 theories/Control/IO.v
 theories/Control/IO/ExtrHaskell.v
+
+theories/Data/Nat.v
