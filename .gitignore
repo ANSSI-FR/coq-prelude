@@ -3,8 +3,7 @@ Makefile
 Makefile.conf
 
 # documentation
-docs/html/*
-docs/*.pdf
+html/*
 
 # Coq build files
 *.v.d
@@ -12,3 +11,4 @@ docs/*.pdf
 *.glob
 *.vo
 *.aux
+.coqdeps.d
