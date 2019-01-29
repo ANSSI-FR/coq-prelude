@@ -1,7 +1,6 @@
 # Makefiles configuration
-Makefile.proj.conf
-Makefile.proj
-.make
+Makefile
+Makefile.conf
 
 # documentation
 docs/html/*
