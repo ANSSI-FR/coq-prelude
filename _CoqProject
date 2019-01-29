@@ -1,7 +1,11 @@
 -R theories Prelude
 
+theories/Tactics.v
+
 theories/PropBool.v
+
 theories/Equality.v
+
 theories/Control.v
 theories/Control/Classes.v
 theories/Control/Identity.v
@@ -14,3 +18,4 @@ theories/Control/IO.v
 theories/Control/IO/ExtrHaskell.v
 
 theories/Data/Nat.v
+theories/Data/Integer.v
