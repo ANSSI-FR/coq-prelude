@@ -124,6 +124,28 @@ Proof.
   now apply not_le_succ_n_n in Hfalse.
 Qed.
 
+Lemma Acc_lt a `{Nat a} (x y: a): y < x -> Acc lt y.
+Proof.
+  revert y.
+  nat_induction x.
+  + intros y Hfalse.
+    now apply not_le_succ_n_zero in Hfalse.
+  + intros y Hy.
+    constructor.
+    intros z Hz.
+    apply IHx.
+    unfold lt in *.
+    apply le_succ_n_succ_m_le_n_m in Hy.
+    eapply le_trans; eauto.
+Qed.
+
+Lemma lt_wf a `{Nat a}: well_founded (lt (a:=a)).
+  intros x.
+  eapply Acc_lt.
+  unfold lt.
+  apply le_refl.
+Qed.
+
 Program Instance nat_Nat
   : Nat nat :=
   { zero := O
