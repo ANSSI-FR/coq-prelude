@@ -11,14 +11,14 @@ Class Nat a :=
       -> (forall (n:   a), P n)
   }.
 
-Ltac num_induction p := induction p using peano_rect.
+Ltac nat_induction p := induction p using peano_rect.
 
 Lemma succ_n_neq_n
       {a} `{Nat a}
       (n: a)
   : succ n <> n.
 Proof.
-  num_induction n.
+  nat_induction n.
   + apply succ_not_zero.
   + intros Hfalse.
     now apply succ_injective in Hfalse.
@@ -32,9 +32,9 @@ Inductive le
 | le_succ (m: a)
   : le n m -> le n (succ m).
 
-Notation "x <= y" := (le x y): num_scope.
+Notation "x <= y" := (le x y): nat_scope.
 
-Open Scope num_scope.
+Open Scope nat_scope.
 
 Lemma le_n_succ_n
       {a} `{Nat a}
@@ -86,7 +86,7 @@ Lemma not_le_succ_n_n
       (n: a)
   : ~ succ n <= n.
 Proof.
-  num_induction n.
+  nat_induction n.
   + apply not_le_succ_n_zero.
   + intros Hfalse.
     now apply le_succ_n_succ_m_le_n_m in Hfalse.
@@ -112,7 +112,7 @@ Definition lt
   : Prop :=
   le (succ n) m.
 
-Notation "x < y" := (lt x y): num_scope.
+Notation "x < y" := (lt x y): nat_scope.
 
 Lemma lt_not_refl
       {a} `{Nat a}
