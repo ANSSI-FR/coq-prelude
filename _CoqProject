@@ -19,3 +19,5 @@ theories/Control/IO/ExtrHaskell.v
 
 theories/Data/Nat.v
 theories/Data/Integer.v
+theories/Data/Open.v
+theories/Data/Void.v
