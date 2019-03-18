@@ -1,6 +1,9 @@
-# `coq-prelude`
+# `coq-prelude` [![Build Status](https://travis-ci.org/ANSSI-FR/coq-prelude.svg?branch=master)](https://travis-ci.org/ANSSI-FR/coq-prelude)
 
 An opinionated Prelude for Coq, inspired by Haskell.
+
+The pretty-printed source tree is [available
+online.](https://anssi-fr.github.io/coq-prelude/toc.html)
 
 ## Getting Started
 
