@@ -24,17 +24,17 @@ Require Import Prelude.Equality.
 
 Local Open Scope prelude_scope.
 
-Polymorphic Definition compose
-            {a b c:  Type}
-            (g:      b -> c)
-            (f:      a -> b)
+Definition compose
+           {a b c:  Type}
+           (g:      b -> c)
+           (f:      a -> b)
   : a -> c :=
   fun (x: a)
   => g (f x).
 
-Polymorphic Definition id
-            {a:  Type}
-            (x:  a)
+Definition id
+           {a:  Type}
+           (x:  a)
   : a :=
   x.
 

@@ -33,7 +33,9 @@ Qed.
 Module unsigned.
 Section def.
   Variable n: size.
-  Program Definition max := 2^n.
+
+  #[program]
+  Definition max := 2^n.
 
   Remark max_lt_0: 0 < max.
   Proof.
@@ -56,8 +58,12 @@ End unsigned.
 Module signed.
 Section def.
   Variable n: size.
-  Program Definition min := -2^(n-1).
-  Program Definition max := 2^(n-1).
+
+  #[program]
+  Definition min := -2^(n-1).
+
+  #[program]
+  Definition max := 2^(n-1).
 
   Remark max_min_eq: max = - min.
   Proof.
@@ -69,16 +75,18 @@ Section def.
 End def.
 End signed.
 
-Program Remark max_signed_min_signed
-        (n: size)
+#[program]
+Remark max_signed_min_signed
+       (n: size)
   : signed.max n = - signed.min n.
 Proof.
   unfold signed.min, signed.max.
   now rewrite Z.opp_involutive.
 Qed.
 
-Program Remark min_signed_max_signed
-        (n: size)
+#[program]
+Remark min_signed_max_signed
+       (n: size)
   : signed.min n = - signed.max n.
 Proof.
   reflexivity.
@@ -119,8 +127,9 @@ Proof.
   apply max_signed_lt_0.
 Qed.
 
-Program Remark max_signed_max_unsigned
-        (n: size)
+#[program]
+Remark max_signed_max_unsigned
+       (n: size)
   : unsigned.max n = 2 * signed.max n.
 Proof.
   induction n as [n Hn].
@@ -131,7 +140,8 @@ Proof.
   + now apply Zlt_0_le_0_pred.
 Qed.
 
-Program Definition box n x
+#[program]
+Definition box n x
   : unsigned.t n :=
   x mod 2^n.
 Next Obligation.
@@ -164,9 +174,10 @@ Proof.
   now apply Z.mod_small.
 Qed.
 
-Program Definition unsigned_to_signed
-        {n:  size}
-        (x:  unsigned.t n)
+#[program]
+Definition unsigned_to_signed
+           {n:  size}
+           (x:  unsigned.t n)
   : signed.t n :=
   if Z_lt_ge_dec x (signed.max n)
   then x
@@ -241,9 +252,10 @@ Proof.
     reflexivity.
 Qed.
 
-Program Definition signed_to_unsigned
-        {n:  size}
-        (x:  signed.t n)
+#[program]
+Definition signed_to_unsigned
+           {n:  size}
+           (x:  signed.t n)
   : unsigned.t n :=
   if Z_lt_ge_dec x 0
   then x + Z.double (signed.max n)
@@ -306,8 +318,8 @@ Proof.
 Qed.
 
 Lemma signed_to_unsigned_unsigned_to_signed
-       {n: size}
-       (x: unsigned.t n)
+      {n: size}
+      (x: unsigned.t n)
   : signed_to_unsigned (unsigned_to_signed x) == x.
 Proof.
   constructor.
@@ -343,8 +355,8 @@ Proof.
 Qed.
 
 Lemma unsigned_to_signed_signed_to_unsigned
-       {n: size}
-       (x: signed.t n)
+      {n: size}
+      (x: signed.t n)
   : unsigned_to_signed (signed_to_unsigned x) == x.
 Proof.
   constructor.
@@ -381,9 +393,10 @@ Proof.
        now apply Zlt_not_le in H4.
 Qed.
 
-Program Definition unsigned_add
-        {n:    size}
-        (x y:  unsigned.t n)
+#[program]
+Definition unsigned_add
+           {n:    size}
+           (x y:  unsigned.t n)
   : unsigned.t n :=
   box n (x + y).
 
@@ -478,15 +491,17 @@ Proof.
   reflexivity.
 Qed.
 
-Program Definition unsigned_le
-        {n:  size}
-        (x y:  unsigned.t n)
+#[program]
+Definition unsigned_le
+           {n:  size}
+           (x y:  unsigned.t n)
   : Prop :=
    x <= y.
 
-Program Definition unsigned_le_dec
-        {n:  size}
-        (x y:  unsigned.t n)
+#[program]
+Definition unsigned_le_dec
+           {n:  size}
+           (x y:  unsigned.t n)
   : { unsigned_le x y } + { ~ unsigned_le x y } :=
   if Z_le_gt_dec x y
   then _
@@ -522,15 +537,17 @@ Proof.
   now transitivity (proj1_sig y).
 Qed.
 
-Program Definition unsigned_lt
+#[program]
+Definition unsigned_lt
            {n:    size}
            (x y:  unsigned.t n)
   : Prop :=
   x < y.
 
-Program Definition unsigned_lt_dec
-        {n:  size}
-        (x y:  unsigned.t n)
+#[program]
+Definition unsigned_lt_dec
+           {n:  size}
+           (x y:  unsigned.t n)
   : { unsigned_lt x y } + { ~ unsigned_lt x y } :=
   if Z_lt_ge_dec x y
   then _
@@ -547,7 +564,8 @@ Next Obligation.
   now apply Zle_not_gt in H.
 Defined.
 
-Program Definition unsigned_add_protect
+#[program]
+Definition unsigned_add_protect
            {n:  size}
            (x y:  unsigned.t n)
   : option (unsigned.t n) :=
@@ -647,9 +665,10 @@ Proof.
     now apply Zlt_not_le in H4'.
 Qed.
 
-Program Definition unsigned_mul
-        {n: size}
-        (x y: unsigned.t n)
+#[program]
+Definition unsigned_mul
+           {n: size}
+           (x y: unsigned.t n)
   : unsigned.t n :=
   box n (x * y).
 
@@ -662,9 +681,10 @@ Proof.
   now rewrite Z.mul_comm.
 Qed.
 
-Program Definition unsigned_mul_protect
-        {n: size}
-        (x y: unsigned.t n)
+#[program]
+Definition unsigned_mul_protect
+           {n: size}
+           (x y: unsigned.t n)
   : option (unsigned.t n) :=
   let z := x * y in
   if Z_lt_ge_dec z (unsigned.max n)
@@ -705,8 +725,9 @@ Proof.
   now rewrite Z.mul_assoc.
 Qed.
 
-Program Definition signed_mul
-        {n:    size}
-        (x y:  signed.t n)
+#[program]
+Definition signed_mul
+           {n:    size}
+           (x y:  signed.t n)
   : signed.t n :=
   unsigned_to_signed (unsigned_mul (signed_to_unsigned x) (signed_to_unsigned y)).

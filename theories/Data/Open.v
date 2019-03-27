@@ -31,9 +31,10 @@ Local Open Scope list_scope.
 
 (** If you use polymorphic definition, do no use function from the
     standard library. Define your own. *)
-Polymorphic Fixpoint cardinal
-            {a:  Type}
-            (l:  list a)
+#[polymorphic]
+Fixpoint cardinal
+         {a:  Type}
+         (l:  list a)
   : nat :=
   match l with
   | _ :: rst
@@ -42,10 +43,11 @@ Polymorphic Fixpoint cardinal
     => O
   end.
 
-Polymorphic Fixpoint get
-            (set:  list Type)
-            (n:    nat)
-            {struct n}
+#[polymorphic]
+Fixpoint get
+         (set:  list Type)
+         (n:    nat)
+         {struct n}
   : Type :=
   match n, set with
   | 0, t :: _
@@ -58,8 +60,9 @@ Polymorphic Fixpoint get
 
 (** The open [union] type. For instance, a value [(v: union [nat;
     bool])] will be either of type [nat] or [bool]. *)
-Polymorphic Program Inductive union
-            (set:  list Type)
+#[polymorphic, program]
+Inductive union
+          (set:  list Type)
   : Type :=
 | OneOf {t:  Type}
         (n:  nat)
@@ -72,7 +75,8 @@ Arguments OneOf [set t] (n Ht Hn x).
 
 (** An “open product”. Similarly to [union], it is parameterized by a
     list of types. *)
-Polymorphic Inductive product
+#[polymorphic]
+Inductive product
   : list Type -> Type :=
 | Acons (a:    Type)
         (x:    a)
@@ -86,11 +90,12 @@ Arguments Acons [a] (x) [set] (rst).
 
 (** Given an open product [(x: product set)], get the [n]th element of
     type [get set n]. *)
-Polymorphic Fixpoint fetch
-            {set:  list Type}
-            (x:    product set)
-            (n:    nat)
-            (H:    n < cardinal set)
+#[polymorphic]
+Fixpoint fetch
+         {set:  list Type}
+         (x:    product set)
+         (n:    nat)
+         (H:    n < cardinal set)
   : get set n.
 case_eq set.
 + intros Heq.
@@ -111,13 +116,14 @@ Defined.
 
 (** Given an open product [(x: product set)], change the [n]th element
     of type [get set n] by a new value [v]. *)
-Polymorphic Fixpoint swap
-            {set:  list Type}
-            (x:    product set)
-            (n:    nat)
-            (H:    n < cardinal set)
-            (v:    get set n)
-            {struct x}
+#[polymorphic]
+Fixpoint swap
+         {set:  list Type}
+         (x:    product set)
+         (n:    nat)
+         (H:    n < cardinal set)
+         (v:    get set n)
+         {struct x}
   : product set.
 case_eq set.
 + intros Heq.
@@ -138,9 +144,10 @@ Defined.
 
 (** Given a list of type [set] and a natural number [n], returns a
     list of type wherein the [n]th element of [set] is absent. *)
-Polymorphic Fixpoint remove
-            (set:  list Type)
-            (n:    nat)
+#[polymorphic]
+Fixpoint remove
+         (set:  list Type)
+         (n:    nat)
   : list Type :=
   match set, n with
   | _ :: rst, 0
@@ -155,9 +162,10 @@ Polymorphic Fixpoint remove
 (** Given an arbitrary list of types [set], we want to be able to tell
     whether or not it contains the type [t]. This is what the
     [Contains] typeclass is for. *)
-Polymorphic Class Contains
-            (t:    Type)
-            (set:  list Type)
+#[polymorphic]
+Class Contains
+      (t:    Type)
+      (set:  list Type)
   := { rank:            nat
      ; rank_get_t:      get set rank = t
      ; rank_bound:      rank < cardinal set
@@ -169,10 +177,11 @@ Arguments rank_bound (t set) [_].
 
 (** One obvious instance of [Contains] is that the type [get set n] is
     contains in [set]. *)
-Polymorphic Instance Contains_nat
-            (set:  list Type)
-            (n:    nat)
-            (H:    n < cardinal set)
+#[polymorphic]
+Instance Contains_nat
+         (set:  list Type)
+         (n:    nat)
+         (H:    n < cardinal set)
   : Contains (get set n) set :=
   { rank        := n
   ; rank_get_t  := eq_refl
@@ -183,9 +192,10 @@ Polymorphic Instance Contains_nat
     can define two instances of [Contains]:
 
     First, a list contains its head. *)
-Polymorphic Instance Contains_head
-            (t:    Type)
-            (set:  list Type)
+#[polymorphic]
+Instance Contains_head
+         (t:    Type)
+         (set:  list Type)
   : Contains t (cons t set) :=
   { rank        := 0
   ; rank_get_t  := eq_refl
@@ -195,10 +205,11 @@ Defined.
 
 (** Then, if a list [set] contains a type [t], then any list
     constructed by appending an element to [set] also contains [t]. *)
-Polymorphic Instance Contains_tail
-            (t any:  Type)
-            (set:    list Type)
-            (H:      Contains t set)
+#[polymorphic]
+Instance Contains_tail
+         (t any:  Type)
+         (set:    list Type)
+         (H:      Contains t set)
   : Contains t (cons any set) :=
   { rank       := S (rank t set)
   }.
@@ -210,10 +221,11 @@ Defined.
 
 (** Using the [Contains] typeclass, we can define a useful function
     [inj] to easily construct values of arbitrary open unions. *)
-Polymorphic Program Definition inj
-            {t:    Type}
-            {set:  list Type} `{Contains t set}
-            (x:    t)
+#[polymorphic, program]
+Definition inj
+           {t:    Type}
+           {set:  list Type} `{Contains t set}
+           (x:    t)
   : union set :=
   OneOf (rank t set) (rank_get_t t set) (rank_bound t set) x.
 
@@ -224,11 +236,11 @@ Polymorphic Program Definition inj
     union such that the value of type [t] has been [swap]ped with the
     value of type [t] produced by [f]. *)
 Definition visit
-        {t:    Type}
-        {set:  list Type} `{Contains t set}
-        {a:    Type}
-        (x:    product set)
-        (f:    t -> a * t)
+           {t:    Type}
+           {set:  list Type} `{Contains t set}
+           {a:    Type}
+           (x:    product set)
+           (f:    t -> a * t)
   : a * product set.
   refine (match fetch x (rank t set) (rank_bound t set)
                 return get set (rank t set) = t -> a * product set

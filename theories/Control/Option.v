@@ -23,9 +23,10 @@ Local Open Scope prelude_scope.
 Inductive is_some {a}: option a -> Prop :=
 | is_some_rule (x:  a): is_some (Some x).
 
-Program Definition is_some_dec
-        {a:  Type}
-        (x:  option a)
+#[program]
+Definition is_some_dec
+           {a:  Type}
+           (x:  option a)
   : { is_some x } + { ~ is_some x }:=
   match x with
   | Some x => left (is_some_rule x)

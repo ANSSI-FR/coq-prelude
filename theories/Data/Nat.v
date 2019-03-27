@@ -146,7 +146,8 @@ Lemma lt_wf a `{Nat a}: well_founded (lt (a:=a)).
   apply le_refl.
 Qed.
 
-Program Instance nat_Nat
+#[program]
+Instance nat_Nat
   : Nat nat :=
   { zero := O
   ; succ := S
