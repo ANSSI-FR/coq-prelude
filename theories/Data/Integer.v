@@ -6,6 +6,8 @@ Require Import Prelude.Control.
 Require Import Prelude.Control.Option.
 Require Import Prelude.Equality.
 Require Import Prelude.Tactics.
+Require Import Prelude.Data.Option.
+Require Import Prelude.Data.Either.
 
 (** From [Prelude], we reuse the [option] monad implementation and
     the [Equality] typeclass.
@@ -702,8 +704,8 @@ Qed.
 Lemma unsigned_mul_protect_some_trans
       {n:      size}
       (x y z:  unsigned.t n)
-  : is_some (unsigned_mul_protect y z >>= unsigned_mul_protect x)
-    -> is_some (unsigned_mul_protect x y >>= fun r => unsigned_mul_protect r z)
+  : sat (is_some (unsigned_mul_protect y z >>= unsigned_mul_protect x))
+    -> sat (is_some (unsigned_mul_protect x y >>= fun r => unsigned_mul_protect r z))
     -> unsigned_mul_protect y z >>= unsigned_mul_protect x == unsigned_mul_protect x y >>= fun r => unsigned_mul_protect r z.
 Proof.
   induction x as [x [Hmin__x Hmax__x]].

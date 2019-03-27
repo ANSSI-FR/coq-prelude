@@ -17,7 +17,10 @@ theories/Control/State.v
 theories/Control/IO.v
 theories/Control/IO/ExtrHaskell.v
 
-theories/Data/Nat.v
+theories/Data/Either.v
 theories/Data/Integer.v
+theories/Data/List.v
+theories/Data/Nat.v
 theories/Data/Open.v
+theories/Data/Option.v
 theories/Data/Void.v
