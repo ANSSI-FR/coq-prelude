@@ -37,6 +37,11 @@ Class Equality
 
 Arguments equal [A _] (_ _).
 
+Instance default_Equality
+         (A: Type)
+  : Equality A|999 :=
+  { equal := eq }.
+
 Infix "==" :=
   equal
     (at level 70, no associativity)
@@ -338,11 +343,6 @@ Defined.
 
  *)
 
-Instance nat_Equality
-  : Equality nat :=
-  { equal := eq
-  }.
-
 Instance nat_eq_eqb_PropBool2
   : PropBool2 (@eq nat) (Nat.eqb) :=
   {}.
@@ -360,19 +360,9 @@ Instance nat_EqualityBool
 
 Require Import Coq.ZArith.ZArith.
 
-Instance Z_Equality
-  : Equality Z :=
-  { equal := eq
-  }.
-
 (** ** Bool
 
  *)
-
-Instance bool_Equality
-  : Equality bool :=
-  { equal := eq
-  }.
 
 Instance bool_eq_eqb_PropBool2
   : PropBool2 (@eq bool) (Bool.eqb) :=
@@ -627,11 +617,6 @@ Instance list_EqualityBool
 (** ** String
 
  *)
-
-Instance string_Equality
-  : Equality string :=
-  { equal := eq
-  }.
 
 Instance string_EqualityDec
   : DecidableEquality string :=
