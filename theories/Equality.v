@@ -757,3 +757,39 @@ Ltac rewrite_equal_bool H :=
        end || fail "nothing to rewrite"
   | _ => fail "argument should be of the form x == y or x ?= y"
   end.
+
+(** We provide several tactics to easy the definition of [Equality]
+    and [DecidableEquality] instances. *)
+
+Ltac gen_default_decidable_equality a :=
+  match a with
+  | (?a == ?b /\ ?c)
+    => destruct (a =? b); [ gen_default_decidable_equality c
+                          | now right
+                          ]
+  | ?a == ?b
+    => destruct (a =? b); [ now left
+                          | now right
+                          ]
+  | _
+    => idtac
+  end.
+
+Ltac default_record_equality_instances :=
+  repeat constructor;
+    ( reflexivity
+    + (now symmetry)
+    + (repeat match goal with
+              | [H: ?a /\ ?b |- _] => destruct H as [?A ?B]
+              end;
+       match goal with
+       | [H1: ?a == ?b, H2: ?b == ?c |- ?a == ?c]
+         => transitivity b; [exact H1 | exact H2]
+       end)
+    ).
+
+Ltac default_decidable_equality :=
+  match goal with
+  | [|- { ?a } + { _ } ]
+    => gen_default_decidable_equality a
+  end.
