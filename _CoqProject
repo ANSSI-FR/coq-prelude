@@ -2,8 +2,6 @@
 
 theories/Tactics.v
 
-theories/PropBool.v
-
 theories/Equality.v
 
 theories/Control.v

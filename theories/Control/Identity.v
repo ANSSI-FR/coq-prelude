@@ -194,7 +194,6 @@ Proof.
     unfold identity_equal, identity_bind.
     destruct x.
     cbn in *.
-    unfold function_equal in Heq.
     apply unwrap_identity_equal.
     apply Heq.
   + intros; apply <- wrap_identity_equal; reflexivity.

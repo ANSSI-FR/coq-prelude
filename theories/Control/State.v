@@ -85,7 +85,7 @@ Lemma state_functor_identity
   : state_map _ _ id ps == id ps.
 Proof.
   cbn.
-  unfold function_equal, state_map.
+  unfold state_map.
   intros x.
   assert (R1: (fun (o: a * s) => (id (fst o), snd o)) = id). {
     apply functional_extensionality.
@@ -105,7 +105,7 @@ Lemma state_functor_composition_identity
   : state_map _ _ (u <<< v) ps == ((state_map _ _ u) <<< (state_map _ _ v)) ps.
 Proof.
   cbn.
-  unfold function_equal, state_map.
+  unfold state_map.
   intros x.
   assert (R1: (fun o : a * s => ((v >>> u) (fst o), snd o))
               = ((fun o : a * s => (v (fst o), snd o))
@@ -168,12 +168,12 @@ Lemma state_applicative_identity
   state_apply _ _ (state_pure (a -> a) id) v == v.
 Proof.
   cbn.
-  unfold function_equal, state_apply.
+  unfold state_apply.
   intros x.
   assert (R1: (u <- state_pure (a -> a) id x; v0 <- v (snd u); pure (fst u (fst v0), snd v0))
               == (v0 <- v x; pure (id (fst v0), snd v0))). {
     cbn.
-    unfold function_equal, state_apply, state_pure, id.
+    unfold state_apply, state_pure, id.
     rewrite monad_left_identity.
     reflexivity.
   }
@@ -200,7 +200,7 @@ Lemma state_applicative_homomorphism
   : state_apply _ _ (state_pure _ v) (state_pure _ x) == (state_pure _ (v x): StateT s m b).
 Proof.
   cbn.
-  unfold function_equal, state_apply, state_pure.
+  unfold state_apply, state_pure.
   intro y.
   rewrite monad_left_identity.
   cbn.
@@ -219,7 +219,6 @@ Lemma state_applicative_interchange
     == state_apply _ _ (state_pure ((a -> b) -> b) (fun z : a -> b => z y)) u.
 Proof.
   cbn.
-  unfold function_equal.
   intro x.
   unfold state_apply, state_pure.
   rewrite monad_left_identity.
@@ -230,7 +229,6 @@ Proof.
              == (fun (v: ((a -> b) * s))
                   => pure (f:=m) (fst v y, snd v))). {
     cbn.
-    unfold function_equal.
     intros z.
     rewrite monad_left_identity.
     reflexivity.
@@ -250,7 +248,7 @@ Proof.
   + apply (@state_applicative_identity m H s H0).
   + intros a b c C u v w.
     cbn.
-    unfold function_equal, state_apply, state_pure.
+    unfold state_apply, state_pure.
     intro x.
     assert (R1: (u0 <- pure (@compose a b c, x); v0 <- u (snd u0); pure (fst u0 (fst v0), snd v0))
                 == (v0 <- u (snd (@compose a b c, x)); pure (fst (compose, x) (fst v0), snd v0))). {
@@ -345,7 +343,7 @@ Lemma state_bind_associativity
     == state_bind a c f (fun x : a => state_bind b c (g x) h).
 Proof.
   cbn.
-  unfold state_bind, function_equal.
+  unfold state_bind.
   intros x.
   rewrite monad_bind_associativity.
   reflexivity.
@@ -360,13 +358,13 @@ Instance state_Monad
 Proof.
   + intros a b B x f.
     cbn.
-    unfold function_equal, state_bind, state_pure.
+    unfold state_bind, state_pure.
     intros y.
     rewrite monad_left_identity.
     reflexivity.
   + intros a A x.
     cbn.
-    unfold function_equal, state_bind, state_pure.
+    unfold state_bind, state_pure.
     intros y.
     assert (R1: (fun (u: (a * s)) => pure (f:=m) (fst u, snd u))
                 = fun (u: (a * s)) => pure u). {
@@ -379,7 +377,7 @@ Proof.
   + apply state_bind_associativity.
   + intros a b B p f f' Heq.
     cbn.
-    unfold function_equal, state_bind.
+    unfold state_bind.
     intros x.
     assert (R1: (fun u => f (fst u) (snd u))
                 == fun u => f' (fst u) (snd u)). {

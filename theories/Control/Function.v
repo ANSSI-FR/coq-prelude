@@ -94,7 +94,7 @@ Proof.
   + reflexivity.
   + intros b c H f g g' Heq.
     cbn.
-    unfold function_equal, func_bind.
+    unfold func_bind.
     intros x.
     apply Heq.
   + reflexivity.

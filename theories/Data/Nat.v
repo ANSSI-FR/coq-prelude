@@ -33,6 +33,7 @@ Inductive le
   : le n m -> le n (succ m).
 
 Notation "x <= y" := (le x y): Nat_scope.
+Notation "y >= x" := (le x y) (only parsing): Nat_scope.
 
 #[local]
 Open Scope Nat_scope.
@@ -114,6 +115,7 @@ Definition lt
   le (succ n) m.
 
 Notation "x < y" := (lt x y): Nat_scope.
+Notation "y > x" := (lt x y) (only parsing): Nat_scope.
 
 Lemma lt_not_refl
       {a} `{Nat a}

@@ -101,15 +101,15 @@ Instance option_Monad
   { bind := option_bind
   }.
 + intros a b Hb x f.
-  cbn.
+  cbn -[equal].
   reflexivity.
 + intros a Ha x.
   cbn.
   induction x; constructor.
   reflexivity.
 + intros a b c Hc f g h.
-  induction f; cbn; [| constructor ].
-  induction (g a0); cbn; [| constructor ].
+  induction f; cbn -[equal]; [| constructor ].
+  induction (g a0); cbn -[equal]; [| constructor ].
   reflexivity.
 + intros a b Hb x f f' Heq.
   destruct x; cbn; [| constructor ].

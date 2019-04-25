@@ -161,7 +161,7 @@ Add Parametric Morphism
     with signature (@equal _ _) ==> eq
       as unbox_is_morphism.
 Proof.
-  now intros [x Hx] [y Hy] [H].
+  now intros [x Hx] [y Hy] H.
 Qed.
 
 Lemma unbox_box_eq
@@ -170,7 +170,6 @@ Lemma unbox_box_eq
   : box n (unbox x) == x.
 Proof.
   induction x as [x Hx].
-  constructor.
   now apply Z.mod_small.
 Qed.
 
@@ -235,11 +234,9 @@ Add Parametric Morphism
     with signature (@equal _ _) ==> (@equal _ _)
       as unsigned_to_signed_is_morphism.
 Proof.
-  intros [x Hx] [y Hy] [H].
+  intros [x Hx] [y Hy] H.
   unfold unsigned_to_signed.
-  constructor.
-  unfold proj1_sig in *.
-  destruct Z_lt_ge_dec as [H1|H2]; destruct Z_lt_ge_dec as [H3|H4]; auto.
+  destruct Z_lt_ge_dec as [H1|H2]; destruct Z_lt_ge_dec as [H3|H4]; auto; cbn.
   + (* absurd case *)
     rewrite <- H in H4.
     apply Zlt_not_le in H1.
@@ -248,7 +245,8 @@ Proof.
     rewrite <- H in H3.
     apply Zlt_not_le in H3.
     now apply Z.ge_le in H2.
-  + rewrite H.
+  + cbn in H.
+    rewrite H.
     reflexivity.
 Qed.
 
@@ -300,18 +298,20 @@ Add Parametric Morphism
     with signature (@equal _ _) ==> (@equal _ _)
       as signed_to_unsigned_is_morphism.
 Proof.
-  intros [x Hx] [y Hy] [H].
+  intros [x Hx] [y Hy] H.
   unfold signed_to_unsigned.
-  constructor.
   unfold proj1_sig in *.
   destruct Z_lt_ge_dec as [H1|H2]; destruct Z_lt_ge_dec as [H3|H4]; auto.
-  + rewrite H.
+  + cbn in *.
+    rewrite H.
     reflexivity.
   + (* absurd case *)
+    cbn in *.
     rewrite <- H in H4.
     apply Zlt_not_le in H1.
     now apply Z.ge_le in H4.
   + (* absurd case *)
+    cbn in *.
     rewrite <- H in H3.
     apply Zlt_not_le in H3.
     now apply Z.ge_le in H2.
@@ -322,25 +322,27 @@ Lemma signed_to_unsigned_unsigned_to_signed
       (x: unsigned.t n)
   : signed_to_unsigned (unsigned_to_signed x) == x.
 Proof.
-  constructor.
   induction x as [x [Hmin Hmax]].
   unfold unsigned_to_signed.
   destruct Z_lt_ge_dec as [H1|H2]; unfold signed_to_unsigned.
   + cbn in H1.
     destruct Z_lt_ge_dec as [H3|H4]; unfold proj1_sig in *.
-    ++ apply Zlt_not_le in H3.
+    ++ cbn in *.
+       apply Zlt_not_le in H3.
        now apply H3 in Hmin.
     ++ reflexivity.
   + cbn in H2.
     destruct Z_lt_ge_dec as [H3|H4]; unfold proj1_sig in *.
-    ++ rewrite min_signed_max_signed.
+    ++ cbn in *.
+       rewrite min_signed_max_signed.
        rewrite Z.double_spec.
        rewrite Z.add_comm.
        rewrite Z.add_assoc.
        rewrite Z.double_spec.
        rewrite Z.mul_opp_r.
        now rewrite Z.add_opp_diag_r.
-    ++ rewrite Z.double_spec in *.
+    ++ cbn in *.
+       rewrite Z.double_spec in *.
        rewrite min_signed_max_signed in *.
        rewrite Z.mul_opp_r in *.
        rewrite <- max_signed_max_unsigned in *.
@@ -359,13 +361,13 @@ Lemma unsigned_to_signed_signed_to_unsigned
       (x: signed.t n)
   : unsigned_to_signed (signed_to_unsigned x) == x.
 Proof.
-  constructor.
   induction x as [x [Hmin Hmax]].
   unfold signed_to_unsigned.
   destruct Z_lt_ge_dec as [H1|H2]; unfold unsigned_to_signed.
   + cbn in H1.
     destruct Z_lt_ge_dec as [H3|H4]; unfold proj1_sig in *.
-    ++ rewrite Z.double_spec in *.
+    ++ cbn in *.
+       rewrite Z.double_spec in *.
        rewrite min_signed_max_signed in *.
        apply Zplus_lt_compat_r with (p:=- (2 * (signed.max n))) in H3.
        rewrite <- Z.add_assoc in H3.
@@ -378,7 +380,8 @@ Proof.
        rewrite Z.mul_comm in H3.
        rewrite <- Z.opp_eq_mul_m1 in H3.
        now apply Zlt_not_le in H3.
-    ++ rewrite min_signed_max_signed.
+    ++ cbn in *.
+       rewrite min_signed_max_signed.
        rewrite Z.double_spec.
        rewrite Z.add_comm.
        rewrite Z.double_spec.
@@ -389,7 +392,8 @@ Proof.
   + cbn in H2.
     destruct Z_lt_ge_dec as [H3|H4]; unfold proj1_sig in *.
     ++ reflexivity.
-    ++ apply Z.ge_le in H4.
+    ++ cbn in *.
+       apply Z.ge_le in H4.
        now apply Zlt_not_le in H4.
 Qed.
 
@@ -406,7 +410,7 @@ Add Parametric Morphism
     with signature @equal _ _ ==> @equal _ _ ==> @equal _ _
       as unsigned_add_is_morphism.
 Proof.
-  intros [x Hx] [x' Hx'] [H] [y Hy] [y' Hy'] [H'].
+  intros [x Hx] [x' Hx'] H [y Hy] [y' Hy'] H'.
   cbn in *.
   now subst.
 Qed.
@@ -426,12 +430,12 @@ Lemma unsigned_add_assoc
       (x y z:  unsigned.t n)
   : unsigned_add x (unsigned_add y z) == unsigned_add (unsigned_add x y) z.
 Proof.
-  constructor.
   induction n as [n Hn].
   induction x as [x Hx].
   induction y as [y Hy].
   induction z as [z Hz].
   unfold unsigned_add, box, proj1_sig.
+  cbn in *.
   rewrite (Z.add_comm ((x + y) mod _) z) at 1.
   repeat rewrite Zplus_mod_idemp_r.
   assert (R: x + (y + z) = z + (x + y)). {
@@ -591,7 +595,6 @@ Proof.
   destruct Z_lt_ge_dec.
   + destruct Z_lt_ge_dec.
     ++ constructor.
-       constructor.
        cbn.
        apply Z.add_comm.
     ++ apply Z.ge_le in g.
@@ -618,11 +621,11 @@ Proof.
   induction y as [y [Hmin__y Hmay__y]].
   induction z as [z [Hmin__z Hmaz__z]].
   unfold unsigned_add_protect; unfold proj1_sig.
-  destruct (Z_lt_ge_dec (y + z) (unsigned.max n)) as [H1|H1]; cbn.
-  + destruct (Z_lt_ge_dec (x + (y + z)) (unsigned.max n)) as [H2|H2]; cbn.
-    ++ destruct (Z_lt_ge_dec (x + y) (unsigned.max n)) as [H3|F]; cbn.
-       +++ destruct (Z_lt_ge_dec (x + y + z) (unsigned.max n)) as [H4|F]; cbn.
-           ++++ do 2 constructor.
+  destruct (Z_lt_ge_dec (y + z) (unsigned.max n)) as [H1|H1]; cbn -[equal].
+  + destruct (Z_lt_ge_dec (x + (y + z)) (unsigned.max n)) as [H2|H2]; cbn -[equal].
+    ++ destruct (Z_lt_ge_dec (x + y) (unsigned.max n)) as [H3|F]; cbn -[equal].
+       +++ destruct (Z_lt_ge_dec (x + y + z) (unsigned.max n)) as [H4|F]; cbn -[equal].
+           ++++ constructor.
                 unfold proj1_sig.
                 apply Z.add_assoc.
            ++++ (* absurd case *)
@@ -643,7 +646,7 @@ Proof.
            destruct H2' as [H2'|H2'].
            ++++ auto.
            ++++ now apply Zle_not_lt in H2'.
-    ++ destruct (Z_lt_ge_dec (x + y) (unsigned.max n)) as [H3|H3]; cbn.
+    ++ destruct (Z_lt_ge_dec (x + y) (unsigned.max n)) as [H3|H3]; cbn -[equal].
        +++ assert (H4: x + y + z >= unsigned.max n) by now rewrite <- Z.add_assoc.
            apply Z.ge_le in H4.
            apply Zle_not_lt in H4.
@@ -652,7 +655,7 @@ Proof.
                 now apply H4 in H5'.
            ++++ reflexivity.
        +++ reflexivity.
-  + destruct (Z_lt_ge_dec (x + y) (unsigned.max n)) as [H2|H2]; cbn; [| reflexivity].
+  + destruct (Z_lt_ge_dec (x + y) (unsigned.max n)) as [H2|H2]; cbn -[equal]; [| reflexivity].
     assert (H3: x + y + z >= unsigned.max n). {
       rewrite <- (Z.add_0_l (unsigned.max n)).
       apply Z.le_ge.
@@ -710,18 +713,19 @@ Proof.
   induction y as [y [Hmin__y Hmax__y]].
   induction z as [z [Hmin__z Hmax__z]].
   intros H1 H2.
-  inversion H1; inversion H2; subst; cbn in *.
+  inversion H1; inversion H2; subst; cbn -[equal] in *.
   unfold unsigned_mul_protect, proj1_sig in *.
   destruct (Z_lt_ge_dec (y * z) (unsigned.max n)) as [H4|H5]; [| discriminate].
-  cbn in *.
+  cbn -[equal] in *.
   destruct (Z_lt_ge_dec (x * (y * z)) (unsigned.max n)); [| discriminate].
-  cbn in *.
+  cbn -[equal] in *.
   destruct (Z_lt_ge_dec (x * y) (unsigned.max n)) as [H6|H7]; [| discriminate].
-  cbn in *.
+  cbn -[equal] in *.
   destruct (Z_lt_ge_dec (x * y * z) (unsigned.max n)) as [H8|H9]; [| discriminate].
-  cbn in *.
-  do 2 constructor.
+  cbn -[equal] in *.
+  constructor.
   unfold proj1_sig.
+  cbn in *.
   now rewrite Z.mul_assoc.
 Qed.
 
