@@ -32,9 +32,10 @@ Inductive le
 | le_succ (m: a)
   : le n m -> le n (succ m).
 
-Notation "x <= y" := (le x y): nat_scope.
+Notation "x <= y" := (le x y): Nat_scope.
 
-Open Scope nat_scope.
+#[local]
+Open Scope Nat_scope.
 
 Lemma le_n_succ_n
       {a} `{Nat a}
@@ -112,7 +113,7 @@ Definition lt
   : Prop :=
   le (succ n) m.
 
-Notation "x < y" := (lt x y): nat_scope.
+Notation "x < y" := (lt x y): Nat_scope.
 
 Lemma lt_not_refl
       {a} `{Nat a}
