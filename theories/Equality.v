@@ -761,6 +761,7 @@ Ltac rewrite_equal_bool H :=
 (** We provide several tactics to easy the definition of [Equality]
     and [DecidableEquality] instances. *)
 
+#[local]
 Ltac gen_default_decidable_equality a :=
   match a with
   | (?a == ?b /\ ?c)
