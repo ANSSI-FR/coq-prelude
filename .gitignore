@@ -12,3 +12,7 @@ html/*
 *.vo
 *.aux
 .coqdeps.d
+
+# Dune
+_build
+prelude.install

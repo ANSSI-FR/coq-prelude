@@ -1,0 +1,20 @@
+(coqlib
+  (name Prelude)
+  (public_name prelude.Prelude)
+  (modules Equality
+           Control
+           Control.Classes
+           Control.Function
+           Control.Identity
+           Control.State
+           Control.Reader
+           Control.Option
+           Control.Either
+           Data.Integer
+           Data.Nat
+           Data.Open
+           Data.Void
+           Data.Z
+           Tactics))
+
+(include_subdirs qualified)
