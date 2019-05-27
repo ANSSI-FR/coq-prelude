@@ -9,15 +9,21 @@ online.](https://anssi-fr.github.io/coq-prelude/toc.html)
 
 ### Installing From Source
 
-To install it from source, just use the `Makefile` provided with the source tree:
+This project uses `dune` as its build system.
 
 ```bash
-sudo make install
+dune install
 ```
 
-To uninstall it, you can just delete the directory `Prelude` in
-`/usr/lib/coq/user-contrib`, that is:
+For convenience purpose, a `Makefile` is provided, with the default rule being a
+call to `dune install`. Hence, one can just type:
 
 ```bash
-sudo rm -r /usr/lib/coq/user-contrib/Prelude
+make
+```
+
+One can also generate `coq-prelude` pretty-printed source tree thanks to `make`:
+
+```bash
+make html
 ```

@@ -1,20 +1,17 @@
--R theories Prelude
+-Q _build/default/theories Prelude
 
-theories/Tactics.v
-
-theories/Equality.v
-
-theories/Control.v
-theories/Control/Classes.v
-theories/Control/Identity.v
-theories/Control/Function.v
-theories/Control/Either.v
-theories/Control/Option.v
-theories/Control/Reader.v
-theories/Control/State.v
-
-theories/Data/Nat.v
-theories/Data/Z.v
-theories/Data/Integer.v
-theories/Data/Open.v
-theories/Data/Void.v
+_build/default/theories/Tactics.v
+_build/default/theories/Equality.v
+_build/default/theories/Control.v
+_build/default/theories/Control/Classes.v
+_build/default/theories/Control/Identity.v
+_build/default/theories/Control/Function.v
+_build/default/theories/Control/Either.v
+_build/default/theories/Control/Option.v
+_build/default/theories/Control/Reader.v
+_build/default/theories/Control/State.v
+_build/default/theories/Data/Nat.v
+_build/default/theories/Data/Z.v
+_build/default/theories/Data/Integer.v
+_build/default/theories/Data/Open.v
+_build/default/theories/Data/Void.v

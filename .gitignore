@@ -1,6 +1,6 @@
 # Makefiles configuration
-Makefile
-Makefile.conf
+Makefile.coq.conf
+Makefile.coq
 
 # documentation
 html/*

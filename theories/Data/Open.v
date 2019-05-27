@@ -23,8 +23,8 @@ Require Import Coq.Arith.PeanoNat.
 Require Import Omega.
 Require Import Coq.Program.Equality.
 
-Require Import Control.Either.
-Require Import Data.Void.
+Require Import Prelude.Control.Either.
+Require Import Prelude.Data.Void.
 
 Import ListNotations.
 Local Open Scope list_scope.
