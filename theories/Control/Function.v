@@ -15,87 +15,87 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-Require Import Coq.Program.Basics.
-Require Import Coq.Logic.FunctionalExtensionality.
+From Coq Require Import Basics FunctionalExtensionality.
+From Prelude Require Import Control Equality.
 
-Require Import Prelude.Control.
-Require Import Prelude.Equality.
+#[local]
+Open Scope prelude_scope.
 
-Local Open Scope prelude_scope.
+Definition func (a b : Type) := a -> b.
 
-Definition func
-           (a b:  Type) :=
-  a -> b.
+Bind Scope monad_scope with func.
+Bind Scope function_scope with func.
 
-Definition map_func
-           {a b c:  Type}
-           (f:      b -> c)
-           (g:      func a b)
-  : func a c :=
-  f <<< g.
+Definition map_func {a b c} (f : b -> c) (g : func a b) : func a c :=
+  fun (x : a) => f (g x).
 
-Instance func_Functor
-         (a:  Type)
-  : Functor (func a) :=
+#[program]
+Instance func_Functor (a : Type) : Functor (func a) :=
   { map := @map_func a
   }.
-Proof.
+
+Next Obligation.
   (* functor identity *)
-  + reflexivity.
-  (* functor composition *)
-  + reflexivity.
+  reflexivity.
 Defined.
 
-Definition func_apply
-           (a b c:  Type)
-           (f:      func a (b -> c))
-           (g:      func a b)
-  : func a c :=
-  fun (x: a)
-  => f x (g x).
+Next Obligation.
+  (* functor composition *)
+  reflexivity.
+Defined.
 
-Definition func_pure
-           {a b:  Type}
-           (x:    b)
-  : func a b :=
-  fun (_: a)
-  => x.
+Definition func_apply {a b c} (f : func a (b -> c)) (g : func a b) : func a c :=
+  fun (x : a) => f x (g x).
 
-Instance func_Applicative
-         (a:  Type)
-  : Applicative (func a) :=
+Definition func_pure {a b} (x : b) : func a b :=
+  fun (_ : a) => x.
+
+#[program]
+Instance func_Applicative (a:  Type) : Applicative (func a) :=
   { pure  := @func_pure a
   ; apply := @func_apply a
   }.
-Proof.
-  + reflexivity.
-  + reflexivity.
-  + reflexivity.
-  + reflexivity.
-  + reflexivity.
+
+Next Obligation.
+  reflexivity.
 Defined.
 
-Definition func_bind
-           {a b c:  Type}
-           (f:      func a b)
-           (g:      b -> func a c)
-  : func a c :=
-  fun (x: a)
-  => g (f x) x.
+Next Obligation.
+  reflexivity.
+Defined.
 
-Instance func_Monad
-         (a:  Type)
-  : Monad (func a) :=
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Definition func_bind {a b c} (f : func a b) (g : b -> func a c) : func a c :=
+  fun (x : a) => g (f x) x.
+
+#[program]
+Instance func_Monad (a : Type) : Monad (func a) :=
   { bind := @func_bind a
   }.
-Proof.
-  + reflexivity.
-  + reflexivity.
-  + reflexivity.
-  + intros b c H f g g' Heq.
-    cbn.
-    unfold func_bind.
-    intros x.
-    apply Heq.
-  + reflexivity.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
 Defined.

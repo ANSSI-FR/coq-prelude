@@ -1,7 +1,12 @@
 (coq.theory
   (name Prelude)
   (public_name prelude.Prelude)
-  (modules Equality
+  (modules Init
+           Data.Equality
+           Data.Nat
+           Data.Open
+           Data.Void
+           Data.Z
            Control
            Control.Classes
            Control.Function
@@ -9,12 +14,8 @@
            Control.State
            Control.Reader
            Control.Option
-           Control.Either
-           Data.Integer
-           Data.Nat
-           Data.Open
-           Data.Void
-           Data.Z
-           Tactics))
+           Control.Sum
+           Tactics
+           All))
 
 (include_subdirs qualified)

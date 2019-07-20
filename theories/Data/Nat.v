@@ -1,5 +1,7 @@
 Require Import Coq.Program.Tactics.
 
+Declare Scope Nat_scope.
+
 Class Nat a :=
   { zero: a
   ; succ: a -> a

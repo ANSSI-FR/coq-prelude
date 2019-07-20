@@ -15,179 +15,133 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-Require Import Prelude.Control.
-Require Import Prelude.Control.Classes.
-Require Import Prelude.Control.Identity.
-Require Import Prelude.Equality.
+Set Universe Polymorphism.
 
-Local Open Scope prelude_scope.
+From Prelude Require Import Control Control.Classes Identity Equality.
 
-(** * Definition
+#[local]
+Open Scope prelude_scope.
 
- *)
+(** * Definition *)
 
-Definition ReaderT
-           (r:  Type)
-           (m:  Type -> Type) `{Monad m}
-           (a:  Type)
-  : Type :=
+Definition reader_t (r : Type) (m : Type -> Type) (a : Type) : Type :=
   r -> m a.
 
-(** * Functor
+Bind Scope monad_scope with reader_t.
+Bind Scope function_scope with reader_t.
 
- *)
+(** * Functor *)
 
-Definition reader_map
-           {m:    Type -> Type} `{Monad m}
-           {r:    Type}
-           (a b:  Type)
-           (f:    a -> b)
-           (mr:   ReaderT r m a)
-  : ReaderT r m b :=
-  fun x
-  => f <$> (mr x).
+Definition reader_map {m r} `{Monad m} {a b} (f : a -> b) (rd : reader_t r m a)
+  : reader_t r m b :=
+  fun* x => f <$> (rd x).
 
-Instance reader_Functor
-         (m: Type -> Type) `{Monad m}
-         (r: Type)
-  : Functor (ReaderT r m) :=
-  { map := reader_map
+#[program]
+Instance reader_Functor (m : Type -> Type) `{Monad m} (r : Type)
+  : Functor (reader_t r m) :=
+  { map := @reader_map m r _
   }.
-Proof.
-  + intros a A x.
-    cbn.
-    intros y.
-    unfold reader_map.
-    exact (functor_identity (x y)).
-  + intros a b c C u v x.
-    cbn.
-    intros y.
-    unfold reader_map.
-    exact (functor_composition_identity u v (x y)).
+
+Next Obligation.
+  unfold reader_map.
+  apply functor_identity.
 Defined.
 
-(** * Applicative
-
- *)
-
-Definition reader_pure
-           {m:  Type -> Type} `{Monad m}
-           {r:  Type}
-           (a:  Type)
-           (x:  a)
-  : ReaderT r m a :=
-  fun _
-  => pure x.
-
-Definition reader_apply
-           {m:    Type -> Type} `{Monad m}
-           {r:    Type}
-           (a b:  Type)
-           (f:    ReaderT r m (a -> b))
-           (x:    ReaderT r m a)
-  : ReaderT r m b :=
-  fun r
-  => (f r) <*> (x r).
-
-Instance reader_Applicative
-         (m:  Type -> Type) `{Monad m}
-         (r:  Type)
-  : Applicative (ReaderT r m) :=
-  { pure  := reader_pure
-  ; apply := reader_apply
-  }.
-Proof.
-  + intros a A x.
-    cbn.
-    intros y.
-    unfold reader_apply.
-    exact (applicative_identity (x y)).
-  + intros a b c C u v w.
-    cbn.
-    intros y.
-    unfold reader_apply, reader_pure.
-    exact (applicative_composition (u y) (v y) (w y)).
-  + intros a b B v x.
-    cbn.
-    intros y.
-    unfold reader_apply, reader_pure.
-    exact (applicative_homomorphism v x).
-  + intros a b B u y.
-    cbn.
-    intros z.
-    unfold reader_apply, reader_pure.
-    exact (applicative_interchange (u z) y).
-  + intros a b B g x.
-    cbn.
-    intros y.
-    unfold reader_map, reader_apply, reader_pure.
-    exact (applicative_pure_map g (x y)).
+Next Obligation.
+  unfold reader_map.
+  apply functor_map_identity.
 Defined.
 
-(** * Monad
+(** * Applicative *)
 
- *)
+Definition reader_pure {m r} `{Monad m} {a} (x : a)
+  : reader_t r m a :=
+  fun _ => pure x.
 
-Definition reader_bind
-           {m:    Type -> Type} `{Monad m}
-           {r:    Type}
-           (a b:  Type)
-           (p:    ReaderT r m a)
-           (f:    a -> ReaderT r m b)
-  : ReaderT r m b :=
-  fun x
-  => p x >>= fun y => f y x.
+Definition reader_apply {m r} `{Monad m} {a b}
+  (rf : reader_t r m (a -> b)) (rx : reader_t r m a)
+  : reader_t r m b :=
+  fun* r => rf r <*> rx r.
 
-Instance reader_Monad
-         (m:  Type -> Type) `{Monad m}
-         (r:  Type)
-  : Monad (ReaderT r m) :=
-  { bind := reader_bind
+#[program]
+Instance reader_Applicative (m : Type -> Type) `{Monad m} (r : Type)
+  : Applicative (reader_t r m) :=
+  { pure  := @reader_pure m r _
+  ; apply := @reader_apply m r _
   }.
-Proof.
-  + intros a b B x f.
-    cbn.
-    intros y.
-    unfold reader_bind, reader_pure.
-    exact (monad_left_identity x _).
-  + intros a A x.
-    cbn.
-    unfold reader_bind, reader_pure.
-    intros y.
-    exact (monad_right_identity (x y)).
-  + intros a b c C f g h.
-    cbn.
-    unfold reader_bind, reader_pure.
-    intros x.
-    exact (monad_bind_associativity (f x) _ _).
-  + intros a b B x f f' Heq.
-    cbn.
-    unfold reader_bind, reader_pure.
-    intros y.
-    apply monad_bind_morphism.
-    intros z.
-    apply Heq.
-  + intros a b B x f.
-    cbn.
-    intros y.
-    unfold reader_map, reader_bind, reader_pure.
-    apply monad_bind_map.
+
+Next Obligation.
+  unfold reader_apply.
+  apply applicative_identity.
 Defined.
 
-(** * Reader Monad
+Next Obligation.
+  unfold reader_apply, reader_pure.
+  apply applicative_composition.
+Defined.
 
- *)
+Next Obligation.
+  unfold reader_apply, reader_pure.
+  apply applicative_homomorphism.
+Defined.
 
-Instance reader_MonadReader
-         (m:  Type -> Type) `{Monad m}
-         (r:  Type)
-  : MonadReader r (ReaderT r m) :=
-  { ask := fun x
-           => pure x
+Next Obligation.
+  unfold reader_apply, reader_pure.
+  apply applicative_interchange.
+Defined.
+
+Next Obligation.
+  unfold reader_map, reader_apply, reader_pure.
+  apply applicative_pure_map.
+Defined.
+
+(** * Monad *)
+
+Definition reader_bind {m r} `{Monad m} {a b}
+  (p : reader_t r m a) (f : a -> reader_t r m b)
+  : reader_t r m b :=
+  fun* x => p x >>= fun y => f y x.
+
+#[program]
+Instance reader_Monad (m : Type -> Type) `{Monad m} (r : Type)
+  : Monad (reader_t r m) :=
+  { bind := @reader_bind m r _
   }.
 
-(** * Pure Reader
+Next Obligation.
+  unfold reader_bind, reader_pure.
+  apply bind_left_identity.
+Defined.
 
- *)
+Next Obligation.
+  unfold reader_bind, reader_pure.
+  apply bind_right_identity.
+Defined.
 
-Definition Reader r x := ReaderT r Identity x.
+Next Obligation.
+  unfold reader_bind, reader_pure.
+  apply bind_associativity.
+Defined.
+
+Next Obligation.
+  unfold reader_bind, reader_pure.
+  apply bind_morphism.
+  intros z.
+  apply H1.
+Defined.
+
+Next Obligation.
+  unfold reader_map, reader_bind, reader_pure.
+  apply bind_map.
+Defined.
+
+(** * Reader Monad *)
+
+Instance reader_MonadReader (m : Type -> Type) `{Monad m} (r : Type)
+  : MonadReader r (reader_t r m) :=
+  { ask := fun x => pure x
+  }.
+
+(** * Pure Reader *)
+
+Definition reader r x := reader_t r id x.

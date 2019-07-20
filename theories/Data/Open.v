@@ -23,7 +23,7 @@ Require Import Coq.Arith.PeanoNat.
 Require Import Omega.
 Require Import Coq.Program.Equality.
 
-Require Import Prelude.Control.Either.
+Require Import Prelude.Control.Sum.
 Require Import Prelude.Data.Void.
 
 Import ListNotations.
@@ -31,7 +31,7 @@ Local Open Scope list_scope.
 
 (** If you use polymorphic definition, do no use function from the
     standard library. Define your own. *)
-#[polymorphic]
+#[universes(polymorphic)]
 Fixpoint cardinal
          {a:  Type}
          (l:  list a)
@@ -43,7 +43,7 @@ Fixpoint cardinal
     => O
   end.
 
-#[polymorphic]
+#[universes(polymorphic)]
 Fixpoint get
          (set:  list Type)
          (n:    nat)
@@ -60,7 +60,7 @@ Fixpoint get
 
 (** The open [union] type. For instance, a value [(v: union [nat;
     bool])] will be either of type [nat] or [bool]. *)
-#[polymorphic, program]
+#[universes(polymorphic)]
 Inductive union
           (set:  list Type)
   : Type :=
@@ -75,7 +75,7 @@ Arguments OneOf [set t] (n Ht Hn x).
 
 (** An “open product”. Similarly to [union], it is parameterized by a
     list of types. *)
-#[polymorphic]
+#[universes(polymorphic)]
 Inductive product
   : list Type -> Type :=
 | Acons (a:    Type)
@@ -90,7 +90,7 @@ Arguments Acons [a] (x) [set] (rst).
 
 (** Given an open product [(x: product set)], get the [n]th element of
     type [get set n]. *)
-#[polymorphic]
+#[universes(polymorphic)]
 Fixpoint fetch
          {set:  list Type}
          (x:    product set)
@@ -116,7 +116,7 @@ Defined.
 
 (** Given an open product [(x: product set)], change the [n]th element
     of type [get set n] by a new value [v]. *)
-#[polymorphic]
+#[universes(polymorphic)]
 Fixpoint swap
          {set:  list Type}
          (x:    product set)
@@ -144,7 +144,7 @@ Defined.
 
 (** Given a list of type [set] and a natural number [n], returns a
     list of type wherein the [n]th element of [set] is absent. *)
-#[polymorphic]
+#[universes(polymorphic)]
 Fixpoint remove
          (set:  list Type)
          (n:    nat)
@@ -162,7 +162,7 @@ Fixpoint remove
 (** Given an arbitrary list of types [set], we want to be able to tell
     whether or not it contains the type [t]. This is what the
     [Contains] typeclass is for. *)
-#[polymorphic]
+#[universes(polymorphic)]
 Class Contains
       (t:    Type)
       (set:  list Type)
@@ -171,13 +171,13 @@ Class Contains
      ; rank_bound:      rank < cardinal set
      }.
 
-Arguments rank (t set) [_].
-Arguments rank_get_t (t set) [_].
-Arguments rank_bound (t set) [_].
+Arguments rank (t set) {_}.
+Arguments rank_get_t (t set) {_}.
+Arguments rank_bound (t set) {_}.
 
 (** One obvious instance of [Contains] is that the type [get set n] is
     contains in [set]. *)
-#[polymorphic]
+#[universes(polymorphic)]
 Instance Contains_nat
          (set:  list Type)
          (n:    nat)
@@ -192,7 +192,7 @@ Instance Contains_nat
     can define two instances of [Contains]:
 
     First, a list contains its head. *)
-#[polymorphic]
+#[program, universes(polymorphic)]
 Instance Contains_head
          (t:    Type)
          (set:  list Type)
@@ -200,12 +200,14 @@ Instance Contains_head
   { rank        := 0
   ; rank_get_t  := eq_refl
   }.
-+ apply Nat.lt_0_succ.
+
+Next Obligation.
+  apply Nat.lt_0_succ.
 Defined.
 
 (** Then, if a list [set] contains a type [t], then any list
     constructed by appending an element to [set] also contains [t]. *)
-#[polymorphic]
+#[universes(polymorphic), program]
 Instance Contains_tail
          (t any:  Type)
          (set:    list Type)
@@ -213,15 +215,20 @@ Instance Contains_tail
   : Contains t (cons any set) :=
   { rank       := S (rank t set)
   }.
-+ apply rank_get_t.
-+ cbn.
+
+Next Obligation.
+  apply rank_get_t.
+Defined.
+
+Next Obligation.
+  cbn.
   apply lt_n_S.
   apply rank_bound.
 Defined.
 
 (** Using the [Contains] typeclass, we can define a useful function
     [inj] to easily construct values of arbitrary open unions. *)
-#[polymorphic, program]
+#[universes(polymorphic), program]
 Definition inj
            {t:    Type}
            {set:  list Type} `{Contains t set}

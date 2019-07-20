@@ -15,11 +15,10 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-Require Import Coq.Setoids.Setoid.
+From Coq Require Import Setoid.
 From Equations Require Import Equations Signature.
 
-Require Import Prelude.Control.
-Require Import Prelude.Equality.
+From Prelude Require Import Control Equality.
 
 Local Open Scope prelude_scope.
 Local Open Scope list_scope.

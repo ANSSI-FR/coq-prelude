@@ -1,17 +1,22 @@
 -Q _build/default/theories Prelude
 
-_build/default/theories/Tactics.v
-_build/default/theories/Equality.v
+_build/default/theories/Init.v
+
+_build/default/theories/Data/Equality.v
+_build/default/theories/Data/Nat.v
+_build/default/theories/Data/Z.v
+_build/default/theories/Data/Open.v
+_build/default/theories/Data/Void.v
+
 _build/default/theories/Control.v
 _build/default/theories/Control/Classes.v
 _build/default/theories/Control/Identity.v
 _build/default/theories/Control/Function.v
-_build/default/theories/Control/Either.v
+_build/default/theories/Control/Sum.v
 _build/default/theories/Control/Option.v
 _build/default/theories/Control/Reader.v
 _build/default/theories/Control/State.v
-_build/default/theories/Data/Nat.v
-_build/default/theories/Data/Z.v
-_build/default/theories/Data/Integer.v
-_build/default/theories/Data/Open.v
-_build/default/theories/Data/Void.v
+
+_build/default/theories/Tactics.v
+
+_build/default/theories/All.v

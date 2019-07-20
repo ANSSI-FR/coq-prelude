@@ -15,125 +15,116 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-Require Import Prelude.Control.
-Require Import Prelude.Equality.
+From Prelude Require Export Control Equality.
 
-Local Open Scope prelude_scope.
+#[local]
+Open Scope prelude_scope.
+
+Bind Scope monad_scope with option.
 
 Inductive is_some {a}: option a -> Prop :=
 | is_some_rule (x:  a): is_some (Some x).
 
 #[program]
-Definition is_some_dec
-           {a:  Type}
-           (x:  option a)
-  : { is_some x } + { ~ is_some x }:=
+Definition is_some_dec {a} (x : option a) : { is_some x } + { ~ is_some x } :=
   match x with
   | Some x => left (is_some_rule x)
   | None => right _
   end.
+
 Next Obligation.
   now intro H.
 Defined.
 
-
-Instance option_Functor
-  : Functor option :=
+#[program]
+Instance option_Functor : Functor option :=
   { map := option_map
   }.
-+ intros a Ha x.
-  cbn.
-  induction x; constructor.
-  reflexivity.
-+ intros a b c Hc u v x.
-  induction x; constructor.
-  reflexivity.
+
+Next Obligation.
+  destruct x.
+  + now constructor.
+  + constructor.
 Defined.
 
-Definition option_app
-           (a b:  Type)
-           (f:    option (a -> b))
-           (x:    option a)
-  : option b :=
+Next Obligation.
+  destruct x.
+  + now constructor.
+  + constructor.
+Defined.
+
+Definition option_app {a b} (f : option (a -> b)) (x : option a) : option b :=
   match f with
-  | Some f
-    => f <$> x
-  | None
-    => None
+  | Some f => f <$> x
+  | None => None
   end.
 
-Instance option_Applicative
-  : Applicative option :=
-  { apply := option_app
-  ; pure  := fun (a:  Type) => @Some a
+#[program]
+Instance option_Applicative : Applicative option :=
+  { apply := @option_app
+  ; pure  := @Some
   }.
-+ intros a Heq x.
-  induction x; constructor.
-  reflexivity.
-+ intros a b c Hc u v w; cbn.
-  induction w; induction v; induction u; constructor.
-  reflexivity.
-+ intros a b Hb v x.
-  cbn; constructor.
-  reflexivity.
-+ intros a b Hb u y.
-  cbn; destruct u; constructor.
-  reflexivity.
-+ intros a b Hb g x.
-  destruct x; cbn; constructor.
-  reflexivity.
+
+Next Obligation.
+  destruct v; now constructor.
 Defined.
 
-Definition option_bind
-           (a b:  Type)
-           (x:    option a)
-           (f:    a -> option b)
-  : option b :=
+Next Obligation.
+  destruct w; destruct v; destruct u; now constructor.
+Defined.
+
+Next Obligation.
+  now constructor.
+Defined.
+
+Next Obligation.
+  destruct u; now constructor.
+Defined.
+
+Next Obligation.
+  destruct x; now constructor.
+Defined.
+
+Definition option_bind {a b} (x : option a) (f : a -> option b) : option b :=
   match x with
-  | Some x
-    => f x
-  | None
-    => None
+  | Some x => f x
+  | None => None
   end.
 
+#[program]
 Instance option_Monad
   : Monad option :=
-  { bind := option_bind
+  { bind := @option_bind
   }.
-+ intros a b Hb x f.
-  cbn -[equal].
-  reflexivity.
-+ intros a Ha x.
-  cbn.
-  induction x; constructor.
-  reflexivity.
-+ intros a b c Hc f g h.
-  induction f; cbn -[equal]; [| constructor ].
-  induction (g a0); cbn -[equal]; [| constructor ].
-  reflexivity.
-+ intros a b Hb x f f' Heq.
-  destruct x; cbn; [| constructor ].
-  apply Heq.
-+ intros a b Hb x f; destruct x; cbn; constructor.
-  reflexivity.
+
+Next Obligation.
+  destruct (f x); now constructor.
 Defined.
 
-Definition maybe
-           {a b:  Type}
-           (f:    a -> b)
-           (x:    b)
-           (o:    option a)
-  : b :=
+Next Obligation.
+  destruct x; now constructor.
+Defined.
+
+Next Obligation.
+  destruct f; cbn; [| constructor ].
+  destruct (g a0); cbn; [| constructor ].
+  destruct (h b0); now constructor.
+Defined.
+
+Next Obligation.
+  destruct x; [| constructor].
+  apply H0.
+Defined.
+
+Next Obligation.
+  destruct x; now constructor.
+Defined.
+
+Definition maybe {a b} (f : a -> b) (x : b) (o : option a) : b :=
   match o with
-  | Some o
-    => f o
-  | None
-    => x
+  | Some o => f o
+  | None => x
   end.
 
-Definition fromMaybe
-           {a:  Type}
-           (x:  a)
-           (o:  option a)
-  : a :=
+Definition fromMaybe {a} (x : a) (o : option a) : a :=
   maybe id x o.

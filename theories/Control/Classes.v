@@ -15,85 +15,57 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-Require Import Prelude.Control.
-Require Import Prelude.Equality.
+From Prelude Require Export Control Equality.
 
-Local Open Scope prelude_scope.
+(** * Monad Transformer *)
 
-(** * Monad Transformer
-
- *)
-
-Class MonadTrans
-      (t: forall (m:  Type -> Type) `{Monad m}, Type -> Type)
-  := { monad_trans_is_monad (m: Type -> Type) `{Monad m} :> Monad (t m)
-     ; lift (m:  Type -> Type) `{Monad m}
-            (a:  Type)
-       : m a -> t m a
-     }.
-
-Arguments lift [t _ m _ a] (_).
-
-(** * State Monad
-
- *)
-
-Class MonadState
-      (s:  Type)
-      (m:  Type -> Type) :=
-  { monadstate_is_monad :> Monad m
-  ; put
-    : s -> m unit
-  ; get
-    : m s
+Class MonadTrans (t : forall (m : Type -> Type), Type -> Type) : Type :=
+  { monad_trans_is_monad (m : Type -> Type) `{Monad m} :> Monad (t m)
+  ; lift {m} `{Monad m} (a : Type) : m a -> t m a
   }.
 
-Arguments put [s m _] (_).
-Arguments get [s m _].
+Arguments lift [t _ m _ a] (_%monad).
 
-Definition modify
-           {s:  Type}
-           {m:  Type -> Type} `{MonadState s m}
-           (f:  s -> s)
-  : m unit :=
-  x <- get                             ;
-  put (f x).
+(** * State Monad *)
 
-Definition gets
-           {s a:  Type}
-           {m:    Type -> Type} `{MonadState s m}
-           (f:    s -> a)
-  : m a :=
-  x <- get                             ;
-  pure (f x).
+Class MonadState (s : Type) (m : Type -> Type) :=
+  { monadstate_is_monad :> Monad m
+  ; put : s -> m unit
+  ; get : m s
+  }.
+
+Arguments put [s m _] _.
+Arguments get {s m _}.
+
+#[local]
+Open Scope monad_scope.
+
+Definition modify {s m} `{MonadState s m} (f : s -> s) : m unit :=
+  get >>= fun x => put (f x).
+
+Definition gets {s a m} `{MonadState s m} (f : s -> a) : m a :=
+  get >>= fun x => pure (f x).
 
 Instance monadtransform_state
-         (t:  forall (m: Type -> Type) `{Monad m}, Type -> Type) `{MonadTrans t}
-         (s:  Type)
-         (m:  Type -> Type) `{MonadState s m}
+  (t : forall (m : Type -> Type), Type -> Type) `{MonadTrans t}
+  (s : Type) (m : Type -> Type) `{MonadState s m}
   : MonadState s (t m) :=
   { put := fun x => lift (put x)
   ; get := lift get
   }.
 
-(** * Reader Monad
+(** * Reader Monad *)
 
- *)
-
-Class MonadReader
-      (r:  Type)
-      (m:  Type -> Type) :=
+Class MonadReader (r : Type) (m : Type -> Type) : Type :=
   { monadreader_is_monad :> Monad m
-  ; ask
-    : m r
+  ; ask : m r
   }.
 
-Arguments ask [r m _].
+Arguments ask {r m _}.
 
 Instance monadtransform_reader
-         (t: forall (m: Type -> Type) `{Monad m}, Type -> Type) `{MonadTrans t}
-         (r: Type)
-         (m: Type -> Type) `{MonadReader r m}
+  (t : forall (m: Type -> Type), Type -> Type) `{MonadTrans t}
+  (r : Type) (m : Type -> Type) `{MonadReader r m}
   : MonadReader r (t m) :=
   { ask := lift ask
   }.

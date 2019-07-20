@@ -15,186 +15,90 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-Require Import Prelude.Control.
-Require Import Prelude.Equality.
+Generalizable All Variables.
 
-Local Open Scope prelude_scope.
+From Prelude Require Import Control Equality.
 
-Record Identity
-       (a:  Type)
-  := identity { runIdentity: a
-              }.
+#[local]
+Open Scope prelude_scope.
 
-Arguments runIdentity [a] (_).
-Arguments identity [a] (_).
+Definition identity_equal `{Equality a} (x y : id a) : Prop := x == y.
 
-Notation "! a" :=
-  (runIdentity a)
-    (at level 41, right associativity)
-  : prelude_scope.
-
-
-Definition identity_equal
-           {a:    Type} `{Equality a}
-           (x y:  Identity a)
-  : Prop :=
-  !x == !y.
-
-Lemma identity_equal_refl
-      {a:  Type} `{Equality a}
-      (x:  Identity a)
-  : identity_equal x x.
-Proof.
-  unfold identity_equal.
-  reflexivity.
-Qed.
-
-Lemma identity_equal_sym
-      {a:    Type} `{Equality a}
-      (x y:  Identity a)
-  : identity_equal x y
-    -> identity_equal y x.
-Proof.
-  unfold identity_equal.
-  intro H'.
-  symmetry.
-  exact H'.
-Qed.
-
-Lemma identity_equal_trans
-      {a:      Type} `{Equality a}
-      (x y z:  Identity a)
-  : identity_equal x y
-    -> identity_equal y z
-    -> identity_equal x z.
-Proof.
-  unfold identity_equal.
-  intros X Y.
-  rewrite X.
-  exact Y.
-Qed.
-
-Add Parametric Relation
-    (a:  Type) `{Equality a}
-  : (Identity a) (identity_equal)
-    reflexivity  proved by identity_equal_refl
-    symmetry     proved by identity_equal_sym
-    transitivity proved by identity_equal_trans
-      as identity_equal_equiv.
-
-Instance identity_Equal
-         (a:  Type) `{Equality a}
-  : Equality (Identity a) :=
+Instance id_Equality `{Equality a} : Equality (id a)|1000 :=
   { equal := identity_equal
   }.
-
-Lemma wrap_unwrap_identity
-      {a:  Type} `{Equality a}
-      (x:  Identity a)
-  : identity (! x) == x.
-Proof.
-  destruct x.
-  reflexivity.
-Qed.
-
-Lemma wrap_identity_equal
-      {a:    Type} `{Equality a}
-      (x y:  a)
-  : x == y <-> identity x == identity y.
-Proof.
-  split.
-  + intro Heq.
-    cbn; unfold identity_equal.
-    exact Heq.
-  + intro Heq.
-    cbn in *.
-    unfold identity_equal in Heq.
-    exact Heq.
-Qed.
-
-Lemma unwrap_identity_equal
-      {a:    Type} `{Equality a}
-      (x y:  Identity a)
-  : !x == !y <-> x == y.
-Proof.
-  destruct x as [x]; destruct y as [y].
-  cbn.
-  exact (wrap_identity_equal x y).
-Qed.
 
 (** * Functor
 
  *)
 
-Definition identity_map
-           (a b:  Type)
-           (f:    a -> b)
-           (x:    Identity a)
-  : Identity b :=
-  identity (f (!x)).
+Definition identity_map {a b} (f : a -> b) (x : id a) : id b :=
+  f x.
 
-Instance identity_Functor
-  : Functor Identity :=
-  { map := identity_map
+#[program, universes(polymorphic)]
+Instance identity_Functor : Functor id|1000 :=
+  { map := @identity_map
   }.
-Proof.
-  + intros a H x.
-    unfold identity_map; unfold id.
-    apply wrap_unwrap_identity.
-  + intros a b c H u v x.
-    apply wrap_identity_equal.
-    reflexivity.
+
+Next Obligation.
+  reflexivity.
+Qed.
+
+Next Obligation.
+  reflexivity.
 Defined.
 
-Definition identity_apply
-           (a b:  Type)
-           (f:    Identity (a -> b))
-           (x:    Identity a)
-  : Identity b :=
-  identity ((!f) (!x)).
+Definition identity_apply {a b} (f : id (a -> b)) (x : id a) : id b :=
+  f x.
 
-Definition identity_pure
-           (a:  Type)
-           (x:  a)
-  : Identity a :=
-  identity x.
+Definition identity_pure {a} (x : a) : id a := x.
 
-Instance identity_Applicative
-  : Applicative Identity :=
-  { pure  := identity_pure
-  ; apply := identity_apply
+#[program]
+Instance identity_Applicative : Applicative id|1000 :=
+  { pure  := @identity_pure
+  ; apply := @identity_apply
   }.
-Proof.
-  + intros; apply <- wrap_identity_equal; reflexivity.
-  + intros; apply <- wrap_identity_equal; reflexivity.
-  + intros; apply <- wrap_identity_equal; reflexivity.
-  + intros; apply <- wrap_identity_equal; reflexivity.
-  + intros; apply <- wrap_identity_equal; reflexivity.
+
+Next Obligation.
+  reflexivity.
 Defined.
 
-Definition identity_bind
-           (a b:  Type)
-           (x:    Identity a)
-           (f:    a -> Identity b)
-  : Identity b :=
-  f (!x).
+Next Obligation.
+  reflexivity.
+Defined.
 
-Instance identity_Monad
-  : Monad Identity :=
-  { bind := identity_bind
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Definition identity_bind {a b} (x : id a) (f : a -> id b) : id b :=
+  f x.
+
+#[program]
+Instance identity_Monad : Monad id|1000 :=
+  { bind := @identity_bind
   }.
-Proof.
-  + intros; apply wrap_identity_equal; reflexivity.
-  + intros; apply <- wrap_identity_equal; reflexivity.
-  + intros a b c C f g h.
-    unfold identity_bind.
-    reflexivity.
-  + intros a b H x f f' Heq.
-    cbn.
-    unfold identity_equal, identity_bind.
-    destruct x.
-    cbn in *.
-    apply unwrap_identity_equal.
-    apply Heq.
-  + intros; apply <- wrap_identity_equal; reflexivity.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
+Defined.
+
+Next Obligation.
+  reflexivity.
 Defined.
