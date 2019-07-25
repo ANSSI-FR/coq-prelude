@@ -35,7 +35,9 @@ install:
   - opam list
 
 script:
+  - git clone https://git.sr.ht/~lthms/coqbook.css ${HOME}/coqbook.css
   - make html
+  - cp ${HOME}/coqbook.css/coqdoc.css html
 
 deploy:
   provider: pages
