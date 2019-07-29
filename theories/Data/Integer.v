@@ -600,13 +600,13 @@ Proof.
     ++ apply Z.ge_le in g.
        rewrite Z.add_comm in g.
        apply Zle_not_gt in g.
-       dup l l'.
+       pose proof l as l'.
        now apply Z.lt_gt in l'.
   + destruct Z_lt_ge_dec.
     ++ apply Z.ge_le in g.
        rewrite Z.add_comm in g.
        apply Zle_not_gt in g.
-       dup l l'.
+       pose proof l as l'.
        now apply Z.lt_gt in l'.
     ++ reflexivity.
 Qed.
@@ -630,7 +630,7 @@ Proof.
                 apply Z.add_assoc.
            ++++ (* absurd case *)
                 rewrite <- Z.add_assoc in F.
-                dup H2 H2'.
+                pose proof H2 as H2'.
                 apply Z.lt_asymm in H2'.
                 apply Z.ge_le in F.
                 now apply Zle_not_lt in F.
@@ -639,7 +639,7 @@ Proof.
            apply Zle_not_gt in F.
            contradict F.
            apply Z.lt_gt.
-           dup H2 H2'.
+           pose proof H2 as H2'.
            rewrite Z.add_assoc in H2'.
            rewrite <- (Z.add_0_r (unsigned.max n)) in H2'.
            apply Z.add_lt_cases in H2'.
@@ -651,7 +651,7 @@ Proof.
            apply Z.ge_le in H4.
            apply Zle_not_lt in H4.
            destruct (Z_lt_ge_dec (x + y + z) (unsigned.max n)) as [H5|H5].
-           ++++ dup H5 H5'.
+           ++++ pose proof H5 as H5'.
                 now apply H4 in H5'.
            ++++ reflexivity.
        +++ reflexivity.
@@ -664,7 +664,7 @@ Proof.
       now apply Z.ge_le.
     }
     destruct Z_lt_ge_dec as [H4|H4]; [| reflexivity ].
-    dup H4 H4'.
+    pose proof H4 as H4'.
     now apply Zlt_not_le in H4'.
 Qed.
 
