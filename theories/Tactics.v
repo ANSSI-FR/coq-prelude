@@ -1,10 +1,5 @@
 Require Import Coq.Logic.Eqdep.
 
-(** [dup H H'] will duplicate the hypothesis [H], under the name [H'].
-    *)
-Ltac dup H H' :=
-  pose proof H as H'.
-
 (** [ssubst] will deal with hypotheses of the form [existT _ _ x =
     existT _ _ y] *)
 Ltac ssubst :=
