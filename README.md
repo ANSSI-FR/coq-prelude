@@ -12,11 +12,11 @@ online.](https://anssi-fr.github.io/coq-prelude/toc.html)
 This project uses `dune` as its build system.
 
 ```bash
-dune install
+dune build
 ```
 
 For convenience purpose, a `Makefile` is provided, with the default rule being a
-call to `dune install`. Hence, one can just type:
+call to `dune build`. Hence, one can just type:
 
 ```bash
 make
