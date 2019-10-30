@@ -9,6 +9,7 @@ _build/default/theories/Data/Open.v
 _build/default/theories/Data/Void.v
 
 _build/default/theories/Control.v
+_build/default/theories/Control/Alternative.v
 _build/default/theories/Control/Classes.v
 _build/default/theories/Control/Identity.v
 _build/default/theories/Control/Function.v

@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-From Prelude Require Export Control Equality.
+From Prelude Require Export Init Control Equality Alternative.
 
 #[local]
 Open Scope prelude_scope.
@@ -35,6 +35,15 @@ Definition is_some_dec {a} (x : option a) : { is_some x } + { ~ is_some x } :=
 Next Obligation.
   now intro H.
 Defined.
+
+Definition maybe {a b} (f : a -> b) (x : b) (o : option a) : b :=
+  match o with
+  | Some o => f o
+  | None => x
+  end.
+
+Definition fromMaybe {a} (x : a) (o : option a) : a :=
+  maybe id x o.
 
 #[program]
 Instance option_Functor : Functor option :=
@@ -85,6 +94,19 @@ Next Obligation.
   destruct x; now constructor.
 Defined.
 
+Definition option_alt {a} (p q : option a) : option a :=
+  maybe Some q p.
+
+Definition option_many {a} (p : option a) : option (list a) :=
+  maybe (fun x => Some [x]) (Some []) p.
+
+#[program]
+Instance option_Alternative : Alternative option :=
+  { empty := fun _ => None
+  ; alt := @option_alt
+  ; many := @option_many
+  }.
+
 Definition option_bind {a b} (x : option a) (f : a -> option b) : option b :=
   match x with
   | Some x => f x
@@ -119,12 +141,3 @@ Defined.
 Next Obligation.
   destruct x; now constructor.
 Defined.
-
-Definition maybe {a b} (f : a -> b) (x : b) (o : option a) : b :=
-  match o with
-  | Some o => f o
-  | None => x
-  end.
-
-Definition fromMaybe {a} (x : a) (o : option a) : a :=
-  maybe id x o.

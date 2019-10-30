@@ -8,6 +8,7 @@
            Data.Void
            Data.Z
            Control
+           Control.Alternative
            Control.Classes
            Control.Function
            Control.Identity
