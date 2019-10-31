@@ -3,6 +3,7 @@
   (public_name prelude.Prelude)
   (modules Init
            Data.Equality
+           Data.Bytes
            Data.Nat
            Data.Open
            Data.Void

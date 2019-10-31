@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-From Coq Require Import Setoid PeanoNat String Int63.
+From Coq Require Import Setoid PeanoNat String Int63 Byte.
 From Prelude Require Import Init.
 
 (** * Equality
@@ -394,4 +394,17 @@ Instance sigma_EquDec `(EquDec T) (P : T -> Prop)
 
 Next Obligation.
   apply equalb_equ_true.
+Defined.
+
+(** ** Byte *)
+
+#[program]
+Instance byte_EquDec : EquDec byte :=
+  { equalb := Byte.eqb
+  }.
+
+Next Obligation.
+  split.
+  + apply Byte.byte_dec_lb.
+  + apply Byte.byte_dec_bl.
 Defined.
