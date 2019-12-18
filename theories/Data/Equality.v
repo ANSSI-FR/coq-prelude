@@ -408,3 +408,14 @@ Next Obligation.
   + apply Byte.byte_dec_lb.
   + apply Byte.byte_dec_bl.
 Defined.
+
+(** ** Int *)
+
+#[program]
+Instance int_EquDec : EquDec int :=
+  { equalb := Int63.eqb
+  }.
+
+Next Obligation.
+  now rewrite eqb_spec.
+Defined.

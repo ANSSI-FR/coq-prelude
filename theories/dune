@@ -3,13 +3,15 @@
   (public_name prelude.Prelude)
   (modules Init
            Data.Equality
+           Data.Byte
            Data.Bytes
+           Data.Text
            Data.Nat
+           Data.Int
            Data.Open
            Data.Void
            Data.Z
            Control
-           Control.Alternative
            Control.Classes
            Control.Function
            Control.Identity

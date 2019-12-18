@@ -3,14 +3,16 @@
 _build/default/theories/Init.v
 
 _build/default/theories/Data/Equality.v
+_build/default/theories/Data/Byte.v
 _build/default/theories/Data/Bytes.v
+_build/default/theories/Data/Text.v
 _build/default/theories/Data/Nat.v
 _build/default/theories/Data/Z.v
+_build/default/theories/Data/Int.v
 _build/default/theories/Data/Open.v
 _build/default/theories/Data/Void.v
 
 _build/default/theories/Control.v
-_build/default/theories/Control/Alternative.v
 _build/default/theories/Control/Classes.v
 _build/default/theories/Control/Identity.v
 _build/default/theories/Control/Function.v

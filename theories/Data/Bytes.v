@@ -15,66 +15,33 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-From Coq Require Export Byte RelationClasses.
-From Prelude Require Import Init Control Option Equality.
-
-Definition format_byte_aux (x : list byte)
-  : option (byte * list byte) :=
-  match x with
-  | x5c :: x :: rst => match x with
-                       | x00 => Some (x00, rst) (* \0 *)
-                       | x6e => Some (x0a, rst) (* \n *)
-                       | x72 => Some (x0d, rst) (* \r *)
-                       | x74 => Some (x09, rst) (* \t *)
-                       | x5c => Some (x5c, rst) (* \\ *)
-                       | _ => None
-                       end
-  | x :: rst => Some (x, rst)
-  | _ => None
-  end.
-
-Definition format_byte (x : list byte) : option byte := fst <$> format_byte_aux x.
-Definition to_byte (x : byte) : byte := x.
-String Notation byte format_byte to_byte : byte_scope.
+From Coq Require Export Byte RelationClasses Int63.
+From Prelude Require Import Init Byte Equality Control Option.
 
 Inductive bytes := wrap_bytes { unwrap_bytes : list byte }.
 
 Register bytes as prelude.data.bytes.type.
 Register wrap_bytes as prelude.data.bytes.wrap_bytes.
 
-From Coq Require Import Program.
-
-#[program]
-Fixpoint format_bytes_aux (input : list byte) {measure (List.length input)} : option (list byte) :=
-  match input with
-  | [] => Some []
-  | _ => match format_byte_aux input with
-         | Some (x, rst) => cons x <$> format_bytes_aux rst
-         | None => None
-         end
-  end.
-
-Next Obligation.
-  destruct input.
-  + discriminate.
-  + cbn in Heq_anonymous.
-    destruct b; inversion Heq_anonymous; subst; auto with arith.
-    destruct input; inversion Heq_anonymous; subst; auto with arith.
-    destruct b; inversion Heq_anonymous; subst; auto with arith.
-Defined.
-
-Definition format_bytes (input : list byte) : option bytes := wrap_bytes <$> format_bytes_aux input.
-
 Declare Scope bytes_scope.
 Delimit Scope bytes_scope with bytes.
 Bind Scope bytes_scope with bytes.
 
-String Notation bytes format_bytes unwrap_bytes : bytes_scope.
-
 Definition append (x y : bytes) :=
-  wrap_bytes (List.app (unwrap_bytes x) (unwrap_bytes y)).
+  wrap_bytes (unwrap_bytes x ++ unwrap_bytes y).
 
 Infix "++" := append : bytes_scope.
+
+Definition length_nat (x : bytes) : nat :=
+  List.length (unwrap_bytes x).
+
+Definition length (x : bytes) : int :=
+  let fix list_length (x : list byte) (acc : int) : int :=
+      match x with
+      | _ :: rst => list_length rst (acc + 1)%int63
+      | [] => acc
+      end
+  in list_length (unwrap_bytes x) 0%int63.
 
 Definition bytes_equal (x y : bytes) : Prop :=
   unwrap_bytes x == unwrap_bytes y.
@@ -132,3 +99,23 @@ Next Obligation.
     assert (equ' : x ?= y = true) by apply equ.
     now rewrite <- equalb_equ_true in equ'.
 Qed.
+
+#[local]
+Fixpoint list_byte_of_list_byte_fmt (i : list byte) : option (list byte) :=
+  match i with
+  | c#"\" :: c#"0" :: rst => cons c#"\0" <$> list_byte_of_list_byte_fmt rst
+  | c#"\" :: c#"n" :: rst => cons c#"\n" <$> list_byte_of_list_byte_fmt rst
+  | c#"\" :: c#"r" :: rst => cons c#"\r" <$> list_byte_of_list_byte_fmt rst
+  | c#"\" :: c#"t" :: rst => cons c#"\t" <$> list_byte_of_list_byte_fmt rst
+  | c#"\" :: c#"\" :: rst => cons c#"\"  <$> list_byte_of_list_byte_fmt rst
+  | c#"\" :: _     :: rst => None
+  | x     :: rst          => cons x <$> list_byte_of_list_byte_fmt rst
+  | [] => Some []
+  end.
+
+#[local]
+Fixpoint bytes_of_list_byte_fmt (i : list byte) : option bytes :=
+  wrap_bytes <$> list_byte_of_list_byte_fmt i.
+
+String Notation bytes bytes_of_list_byte_fmt unwrap_bytes : bytes_scope.
+Notation "'b#' c" := (c%bytes) (at level 0, c constr, no associativity, only parsing) : prelude_scope.

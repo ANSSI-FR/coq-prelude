@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-From Prelude Require Export Init Control Equality Alternative.
+From Prelude Require Import Init Control Equality.
 
 #[local]
 Open Scope prelude_scope.
@@ -93,19 +93,6 @@ Defined.
 Next Obligation.
   destruct x; now constructor.
 Defined.
-
-Definition option_alt {a} (p q : option a) : option a :=
-  maybe Some q p.
-
-Definition option_many {a} (p : option a) : option (list a) :=
-  maybe (fun x => Some [x]) (Some []) p.
-
-#[program]
-Instance option_Alternative : Alternative option :=
-  { empty := fun _ => None
-  ; alt := @option_alt
-  ; many := @option_many
-  }.
 
 Definition option_bind {a b} (x : option a) (f : a -> option b) : option b :=
   match x with
