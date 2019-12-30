@@ -15,7 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  *)
 
-From Coq Require Export Byte RelationClasses Int63.
+From Coq Require Import RelationClasses Int63.
 From Prelude Require Import Init Byte Equality Control Option.
 
 Inductive bytes := wrap_bytes { unwrap_bytes : list byte }.

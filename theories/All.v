@@ -17,6 +17,11 @@
 
 From Prelude Require Export
      Init
+
+     Byte
+     Bytes
+     Text
+
      Control
      Classes
      Function

@@ -5,15 +5,15 @@ From Prelude Require Import Init Control Text Byte Bytes Equality Option.
 #[local] Close Scope nat_scope.
 #[local] Open Scope int63_scope.
 
-Definition lt (x y : int) : Prop := ([|x|] < [|y|])%Z.
-Definition le (x y : int) : Prop := ([|x|] <= [|y|])%Z.
+Definition lt (x y : int) : Prop := ([|x|]%int63 < [|y|]%int63)%Z.
+Definition le (x y : int) : Prop := ([|x|]%int63 <= [|y|]%int63)%Z.
 
 Notation "n < m" := (lt n m) : int63_scope.
 Notation "n <= m" := (le n m) : int63_scope.
 Notation "n <? m" := (ltb n m) : int63_scope.
 Notation "n <=? m" := (leb n m) : int63_scope.
 
-Axiom int_lt_false_spec : forall (x y : int), (x <? y)%int63 = false -> ~ (x < y).
+Axiom int_lt_false_spec : forall (x y : int), x <? y = false -> ~ x < y.
 
 Lemma int_div_lt (x y : int) (x_pos : 0 < x) (y_pos : 1 < y) : (x / y) < x.
 
