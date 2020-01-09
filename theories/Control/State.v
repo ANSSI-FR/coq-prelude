@@ -92,8 +92,8 @@ Definition state_apply {m s} `{Monad m} {a b}
   (f : state_t s m (a -> b)) (fs : state_t s m a)
   : state_t s m b :=
   fun* x => do
-    let* u <- f x in
-    let* v <- fs (snd u) in
+    let* u := f x in
+    let* v := fs (snd u) in
     pure (fst u (fst v), snd v)
   end.
 
@@ -210,7 +210,7 @@ Definition state_bind {m s} `{Monad m} {a b}
   (r : state_t s m a) (f : a -> state_t s m b)
   : state_t s m b :=
   fun* x => do
-    let* u <- r x in
+    let* u := r x in
     f (fst u) (snd u)
   end.
 

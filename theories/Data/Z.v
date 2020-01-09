@@ -99,7 +99,7 @@ Definition digit_of_wchar (x : wchar) : option Z :=
 
 Fixpoint Z_of_text_aux (x : text) (acc : Z) : option Z :=
   match x with
-  | TCons x rst => do let* x <- digit_of_wchar x in
+  | TCons x rst => do let* x := digit_of_wchar x in
                       Z_of_text_aux rst (10 * acc + x)
                    end
   | TNil => pure acc

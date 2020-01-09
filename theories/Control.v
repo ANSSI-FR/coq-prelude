@@ -179,7 +179,7 @@ Notation "'do' p 'end'" := p (p custom monad at level 10) : prelude_scope.
 Notation "p ';' q" := (bind p%monad (fun _ => q%monad))
   (in custom monad at level 10, q at level 10, right associativity, only parsing).
 
-Notation "'let*' a '<-' p 'in' q" := (bind p%monad (fun a => q%monad))
+Notation "'let*' a ':=' p 'in' q" := (bind p%monad (fun a => q%monad))
   (in custom monad at level 0, a ident, p constr, q at level 10, right associativity, only parsing).
 
 Notation "'let' a ':=' p 'in' q" := (let a := p in q%monad)
@@ -193,7 +193,7 @@ Definition test_monad_notation {m} `{Monad m}
     p >>= (fun _ => q 2%nat);
     p;
     let z := 3 in
-    let* x <- id <$> compute 3 in
-    let* y <- compute 4 in
+    let* x := id <$> compute 3 in
+    let* y := compute 4 in
     q (x + y + z)
   end.
