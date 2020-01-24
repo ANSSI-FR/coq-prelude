@@ -1,0 +1,23 @@
+(use-modules (guix utils)
+             (guix licenses)
+             (guix download)
+             (guix git-download)
+             (guix packages)
+             (guix build-system dune)
+             (gnu packages coq))
+
+(package
+ (name "coq-prelude")
+ (version "0.2.0")
+ (source (origin
+          (method git-fetch)
+          (uri (git-reference (url "https://github.com/ANSSI-FR/coq-prelude")
+                              (commit "193d9550258a57f6c68e3ba098ae95df779aafa5")))
+          (sha256 (base32 "1rxwjdkynzhmfqjq526b1cdf7illiwp9kvv3v2v2bb7ws81k1d1p"))))
+ (inputs `(("coq" ,coq)))
+ (build-system dune-build-system)
+ (arguments '(#:tests? #f))
+ (synopsis "An opinionated prelude")
+ (description "TODO")
+ (license gpl3)
+ (home-page "https://github.com/ANSSI-FR/coq-prelude"))
