@@ -16,7 +16,7 @@
  *)
 
 From Coq Require Import FunctionalExtensionality Program.Basics.
-From Prelude Require Import Control Classes Identity Equality.
+From Prelude Require Import Classes Identity Equality.
 
 Set Universe Polymorphism.
 

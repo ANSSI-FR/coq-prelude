@@ -22,7 +22,6 @@ From Prelude Require Export
      Bytes
      Text
 
-     Control
      Classes
      Function
      Identity

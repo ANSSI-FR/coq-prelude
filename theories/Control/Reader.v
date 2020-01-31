@@ -17,7 +17,7 @@
 
 Set Universe Polymorphism.
 
-From Prelude Require Import Control Control.Classes Identity Equality.
+From Prelude Require Import Control.Classes Identity Equality.
 
 #[local]
 Open Scope prelude_scope.
