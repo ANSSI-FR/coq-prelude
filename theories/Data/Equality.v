@@ -22,9 +22,7 @@ From Prelude Require Import Init.
 
     For a number of type, the Coq equality is too strong. Therefore,
     we introduce the idea of a _weaker equality_ one can use in place
-    of the Leibniz equality used in Coq.
-
- *)
+    of the Leibniz equality used in Coq. *)
 
 Class Equality (a : Type) :=
   { equal (x y : a) : Prop

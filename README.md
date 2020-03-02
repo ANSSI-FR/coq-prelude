@@ -1,7 +1,7 @@
 # `coq-prelude` [![Build Status](https://travis-ci.org/ANSSI-FR/coq-prelude.svg?branch=master)](https://travis-ci.org/ANSSI-FR/coq-prelude)
 
 Originally inspired by the Haskell standard library (Prelude),
-`coq-prelude` now strives to be convenient addition to the Coq
+`coq-prelude` now strives to be a convenient addition to the Coq
 standard library in order to ease *software development* (as opposed
 to theorem proving).
 
@@ -10,7 +10,7 @@ online.](https://anssi-fr.github.io/coq-prelude/toc.html)
 
 Here are some features provided by this library:
 
-- `Equatily` typeclass: to be used in place of built-in Leibniz
+- `Equality` typeclass: to be used in place of built-in Leibniz
   equality
 - Alternative string types: `text` (unicode text) and `bytes` (raw
   list of `byte`) whose string notations support escape characters
