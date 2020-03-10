@@ -1,7 +1,7 @@
 .PHONY: build html
 
 build:
-	dune build
+	dune build @install
 
 install: build
 	dune install

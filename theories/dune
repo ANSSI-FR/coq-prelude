@@ -1,6 +1,6 @@
 (coq.theory
   (name Prelude)
-  (public_name prelude.Prelude)
+  (package prelude)
   (modules Init
            Data.Equality
            Data.Byte
