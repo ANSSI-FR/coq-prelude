@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Prelude.Control.Identity</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Prelude.Control.Identity</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Generalizable</span> <span class="id" title="keyword">All</span> <span class="id" title="keyword">Variables</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Prelude</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Prelude.Control.html#"><span class="id" title="library">Control</span></a> <a class="idref" href="Prelude.Data.Equality.html#"><span class="id" title="library">Equality</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">local</span>]<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">prelude_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="identity_equal"><span class="id" title="definition">identity_equal</span></a> `{<a class="idref" href="Prelude.Data.Equality.html#Equality"><span class="id" title="class">Equality</span></a> <span class="id" title="var">a</span>} (<span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a>) : <span class="id" title="keyword">Prop</span> := <a class="idref" href="Prelude.Control.Identity.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="Prelude.Data.Equality.html#3397b130053afee45318995758be2a02"><span class="id" title="notation">==</span></a> <a class="idref" href="Prelude.Control.Identity.html#y"><span class="id" title="variable">y</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="id_Equality"><span class="id" title="instance">id_Equality</span></a> `{<a class="idref" href="Prelude.Data.Equality.html#Equality"><span class="id" title="class">Equality</span></a> <span class="id" title="var">a</span>} : <a class="idref" href="Prelude.Data.Equality.html#Equality"><span class="id" title="class">Equality</span></a> (<a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a>)|1000 :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Data.Equality.html#equal"><span class="id" title="method">equal</span></a> := <a class="idref" href="Prelude.Control.Identity.html#identity_equal"><span class="id" title="definition">identity_equal</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab23"></a><h1 class="section">Functor</h1>
+
+
+<div class="paragraph"> </div>
+
+ 
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="identity_map"><span class="id" title="definition">identity_map</span></a> {<span class="id" title="var">a</span> <span class="id" title="var">b</span>} (<span class="id" title="var">f</span> : <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Control.Identity.html#b"><span class="id" title="variable">b</span></a>) (<span class="id" title="var">x</span> : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a>) : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#b"><span class="id" title="variable">b</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Prelude.Control.Identity.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Prelude.Control.Identity.html#x"><span class="id" title="variable">x</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">program</span>, <span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Instance</span> <a name="identity_Functor"><span class="id" title="instance">identity_Functor</span></a> : <a class="idref" href="Prelude.Control.html#Functor"><span class="id" title="class">Functor</span></a> <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a>|1000 :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Control.html#map"><span class="id" title="method">map</span></a> := @<a class="idref" href="Prelude.Control.Identity.html#identity_map"><span class="id" title="definition">identity_map</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="identity_apply"><span class="id" title="definition">identity_apply</span></a> {<span class="id" title="var">a</span> <span class="id" title="var">b</span>} (<span class="id" title="var">f</span> : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> (<a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Control.Identity.html#b"><span class="id" title="variable">b</span></a>)) (<span class="id" title="var">x</span> : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a>) : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#b"><span class="id" title="variable">b</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Prelude.Control.Identity.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Prelude.Control.Identity.html#x"><span class="id" title="variable">x</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="identity_pure"><span class="id" title="definition">identity_pure</span></a> {<span class="id" title="var">a</span>} (<span class="id" title="var">x</span> : <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a>) : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a> := <a class="idref" href="Prelude.Control.Identity.html#x"><span class="id" title="variable">x</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a name="identity_Applicative"><span class="id" title="instance">identity_Applicative</span></a> : <a class="idref" href="Prelude.Control.html#Applicative"><span class="id" title="class">Applicative</span></a> <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a>|1000 :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Control.html#pure"><span class="id" title="method">pure</span></a>  := @<a class="idref" href="Prelude.Control.Identity.html#identity_pure"><span class="id" title="definition">identity_pure</span></a><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Control.html#apply"><span class="id" title="method">apply</span></a> := @<a class="idref" href="Prelude.Control.Identity.html#identity_apply"><span class="id" title="definition">identity_apply</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="identity_bind"><span class="id" title="definition">identity_bind</span></a> {<span class="id" title="var">a</span> <span class="id" title="var">b</span>} (<span class="id" title="var">x</span> : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a>) (<span class="id" title="var">f</span> : <a class="idref" href="Prelude.Control.Identity.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#b"><span class="id" title="variable">b</span></a>) : <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a> <a class="idref" href="Prelude.Control.Identity.html#b"><span class="id" title="variable">b</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Prelude.Control.Identity.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Prelude.Control.Identity.html#x"><span class="id" title="variable">x</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a name="identity_Monad"><span class="id" title="instance">identity_Monad</span></a> : <a class="idref" href="Prelude.Control.html#Monad"><span class="id" title="class">Monad</span></a> <a class="idref" href="Prelude.Control.html#id"><span class="id" title="definition">id</span></a>|1000 :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Control.html#bind"><span class="id" title="method">bind</span></a> := @<a class="idref" href="Prelude.Control.Identity.html#identity_bind"><span class="id" title="definition">identity_bind</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

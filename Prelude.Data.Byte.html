@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Prelude.Data.Byte</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Prelude.Data.Byte</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Strings.Byte.html#"><span class="id" title="library">Byte</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Numbers.Cyclic.Int63.Int63.html#"><span class="id" title="library">Int63</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Prelude</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Prelude.Init.html#"><span class="id" title="library">Init</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="int_of_byte"><span class="id" title="definition">int_of_byte</span></a> (<span class="id" title="var">c</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) : <span class="id" title="var">int</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Prelude.Data.Byte.html#c"><span class="id" title="variable">c</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x00"><span class="id" title="constructor">x00</span></a> =&gt; 0<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x01"><span class="id" title="constructor">x01</span></a> =&gt; 1<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x02"><span class="id" title="constructor">x02</span></a> =&gt; 2<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x03"><span class="id" title="constructor">x03</span></a> =&gt; 3<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x04"><span class="id" title="constructor">x04</span></a> =&gt; 4<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x05"><span class="id" title="constructor">x05</span></a> =&gt; 5<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x06"><span class="id" title="constructor">x06</span></a> =&gt; 6<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x07"><span class="id" title="constructor">x07</span></a> =&gt; 7<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x08"><span class="id" title="constructor">x08</span></a> =&gt; 8<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x09"><span class="id" title="constructor">x09</span></a> =&gt; 9<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x0a"><span class="id" title="constructor">x0a</span></a> =&gt; 10<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x0b"><span class="id" title="constructor">x0b</span></a> =&gt; 11<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x0c"><span class="id" title="constructor">x0c</span></a> =&gt; 12<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x0d"><span class="id" title="constructor">x0d</span></a> =&gt; 13<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x0e"><span class="id" title="constructor">x0e</span></a> =&gt; 14<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x0f"><span class="id" title="constructor">x0f</span></a> =&gt; 15<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x10"><span class="id" title="constructor">x10</span></a> =&gt; 16<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x11"><span class="id" title="constructor">x11</span></a> =&gt; 17<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x12"><span class="id" title="constructor">x12</span></a> =&gt; 18<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x13"><span class="id" title="constructor">x13</span></a> =&gt; 19<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x14"><span class="id" title="constructor">x14</span></a> =&gt; 20<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x15"><span class="id" title="constructor">x15</span></a> =&gt; 21<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x16"><span class="id" title="constructor">x16</span></a> =&gt; 22<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x17"><span class="id" title="constructor">x17</span></a> =&gt; 23<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x18"><span class="id" title="constructor">x18</span></a> =&gt; 24<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x19"><span class="id" title="constructor">x19</span></a> =&gt; 25<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x1a"><span class="id" title="constructor">x1a</span></a> =&gt; 26<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x1b"><span class="id" title="constructor">x1b</span></a> =&gt; 27<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x1c"><span class="id" title="constructor">x1c</span></a> =&gt; 28<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x1d"><span class="id" title="constructor">x1d</span></a> =&gt; 29<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x1e"><span class="id" title="constructor">x1e</span></a> =&gt; 30<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x1f"><span class="id" title="constructor">x1f</span></a> =&gt; 31<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x20"><span class="id" title="constructor">x20</span></a> =&gt; 32<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x21"><span class="id" title="constructor">x21</span></a> =&gt; 33<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x22"><span class="id" title="constructor">x22</span></a> =&gt; 34<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x23"><span class="id" title="constructor">x23</span></a> =&gt; 35<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x24"><span class="id" title="constructor">x24</span></a> =&gt; 36<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x25"><span class="id" title="constructor">x25</span></a> =&gt; 37<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x26"><span class="id" title="constructor">x26</span></a> =&gt; 38<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x27"><span class="id" title="constructor">x27</span></a> =&gt; 39<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x28"><span class="id" title="constructor">x28</span></a> =&gt; 40<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x29"><span class="id" title="constructor">x29</span></a> =&gt; 41<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x2a"><span class="id" title="constructor">x2a</span></a> =&gt; 42<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x2b"><span class="id" title="constructor">x2b</span></a> =&gt; 43<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x2c"><span class="id" title="constructor">x2c</span></a> =&gt; 44<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x2d"><span class="id" title="constructor">x2d</span></a> =&gt; 45<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x2e"><span class="id" title="constructor">x2e</span></a> =&gt; 46<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x2f"><span class="id" title="constructor">x2f</span></a> =&gt; 47<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x30"><span class="id" title="constructor">x30</span></a> =&gt; 48<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x31"><span class="id" title="constructor">x31</span></a> =&gt; 49<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x32"><span class="id" title="constructor">x32</span></a> =&gt; 50<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x33"><span class="id" title="constructor">x33</span></a> =&gt; 51<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x34"><span class="id" title="constructor">x34</span></a> =&gt; 52<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x35"><span class="id" title="constructor">x35</span></a> =&gt; 53<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x36"><span class="id" title="constructor">x36</span></a> =&gt; 54<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x37"><span class="id" title="constructor">x37</span></a> =&gt; 55<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x38"><span class="id" title="constructor">x38</span></a> =&gt; 56<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x39"><span class="id" title="constructor">x39</span></a> =&gt; 57<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x3a"><span class="id" title="constructor">x3a</span></a> =&gt; 58<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x3b"><span class="id" title="constructor">x3b</span></a> =&gt; 59<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x3c"><span class="id" title="constructor">x3c</span></a> =&gt; 60<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x3d"><span class="id" title="constructor">x3d</span></a> =&gt; 61<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x3e"><span class="id" title="constructor">x3e</span></a> =&gt; 62<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x3f"><span class="id" title="constructor">x3f</span></a> =&gt; 63<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x40"><span class="id" title="constructor">x40</span></a> =&gt; 64<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x41"><span class="id" title="constructor">x41</span></a> =&gt; 65<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x42"><span class="id" title="constructor">x42</span></a> =&gt; 66<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x43"><span class="id" title="constructor">x43</span></a> =&gt; 67<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x44"><span class="id" title="constructor">x44</span></a> =&gt; 68<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x45"><span class="id" title="constructor">x45</span></a> =&gt; 69<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x46"><span class="id" title="constructor">x46</span></a> =&gt; 70<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x47"><span class="id" title="constructor">x47</span></a> =&gt; 71<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x48"><span class="id" title="constructor">x48</span></a> =&gt; 72<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x49"><span class="id" title="constructor">x49</span></a> =&gt; 73<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x4a"><span class="id" title="constructor">x4a</span></a> =&gt; 74<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x4b"><span class="id" title="constructor">x4b</span></a> =&gt; 75<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x4c"><span class="id" title="constructor">x4c</span></a> =&gt; 76<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x4d"><span class="id" title="constructor">x4d</span></a> =&gt; 77<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x4e"><span class="id" title="constructor">x4e</span></a> =&gt; 78<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x4f"><span class="id" title="constructor">x4f</span></a> =&gt; 79<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x50"><span class="id" title="constructor">x50</span></a> =&gt; 80<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x51"><span class="id" title="constructor">x51</span></a> =&gt; 81<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x52"><span class="id" title="constructor">x52</span></a> =&gt; 82<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x53"><span class="id" title="constructor">x53</span></a> =&gt; 83<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x54"><span class="id" title="constructor">x54</span></a> =&gt; 84<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x55"><span class="id" title="constructor">x55</span></a> =&gt; 85<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x56"><span class="id" title="constructor">x56</span></a> =&gt; 86<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x57"><span class="id" title="constructor">x57</span></a> =&gt; 87<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x58"><span class="id" title="constructor">x58</span></a> =&gt; 88<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x59"><span class="id" title="constructor">x59</span></a> =&gt; 89<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5a"><span class="id" title="constructor">x5a</span></a> =&gt; 90<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5b"><span class="id" title="constructor">x5b</span></a> =&gt; 91<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5c"><span class="id" title="constructor">x5c</span></a> =&gt; 92<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5d"><span class="id" title="constructor">x5d</span></a> =&gt; 93<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5e"><span class="id" title="constructor">x5e</span></a> =&gt; 94<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5f"><span class="id" title="constructor">x5f</span></a> =&gt; 95<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x60"><span class="id" title="constructor">x60</span></a> =&gt; 96<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x61"><span class="id" title="constructor">x61</span></a> =&gt; 97<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x62"><span class="id" title="constructor">x62</span></a> =&gt; 98<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x63"><span class="id" title="constructor">x63</span></a> =&gt; 99<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x64"><span class="id" title="constructor">x64</span></a> =&gt; 100<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x65"><span class="id" title="constructor">x65</span></a> =&gt; 101<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x66"><span class="id" title="constructor">x66</span></a> =&gt; 102<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x67"><span class="id" title="constructor">x67</span></a> =&gt; 103<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x68"><span class="id" title="constructor">x68</span></a> =&gt; 104<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x69"><span class="id" title="constructor">x69</span></a> =&gt; 105<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x6a"><span class="id" title="constructor">x6a</span></a> =&gt; 106<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x6b"><span class="id" title="constructor">x6b</span></a> =&gt; 107<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x6c"><span class="id" title="constructor">x6c</span></a> =&gt; 108<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x6d"><span class="id" title="constructor">x6d</span></a> =&gt; 109<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x6e"><span class="id" title="constructor">x6e</span></a> =&gt; 110<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x6f"><span class="id" title="constructor">x6f</span></a> =&gt; 111<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x70"><span class="id" title="constructor">x70</span></a> =&gt; 112<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x71"><span class="id" title="constructor">x71</span></a> =&gt; 113<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x72"><span class="id" title="constructor">x72</span></a> =&gt; 114<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x73"><span class="id" title="constructor">x73</span></a> =&gt; 115<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x74"><span class="id" title="constructor">x74</span></a> =&gt; 116<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x75"><span class="id" title="constructor">x75</span></a> =&gt; 117<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x76"><span class="id" title="constructor">x76</span></a> =&gt; 118<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x77"><span class="id" title="constructor">x77</span></a> =&gt; 119<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x78"><span class="id" title="constructor">x78</span></a> =&gt; 120<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x79"><span class="id" title="constructor">x79</span></a> =&gt; 121<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x7a"><span class="id" title="constructor">x7a</span></a> =&gt; 122<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x7b"><span class="id" title="constructor">x7b</span></a> =&gt; 123<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x7c"><span class="id" title="constructor">x7c</span></a> =&gt; 124<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x7d"><span class="id" title="constructor">x7d</span></a> =&gt; 125<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x7e"><span class="id" title="constructor">x7e</span></a> =&gt; 126<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x7f"><span class="id" title="constructor">x7f</span></a> =&gt; 127<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x80"><span class="id" title="constructor">x80</span></a> =&gt; 128<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x81"><span class="id" title="constructor">x81</span></a> =&gt; 129<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x82"><span class="id" title="constructor">x82</span></a> =&gt; 130<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x83"><span class="id" title="constructor">x83</span></a> =&gt; 131<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x84"><span class="id" title="constructor">x84</span></a> =&gt; 132<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x85"><span class="id" title="constructor">x85</span></a> =&gt; 133<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x86"><span class="id" title="constructor">x86</span></a> =&gt; 134<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x87"><span class="id" title="constructor">x87</span></a> =&gt; 135<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x88"><span class="id" title="constructor">x88</span></a> =&gt; 136<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x89"><span class="id" title="constructor">x89</span></a> =&gt; 137<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x8a"><span class="id" title="constructor">x8a</span></a> =&gt; 138<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x8b"><span class="id" title="constructor">x8b</span></a> =&gt; 139<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x8c"><span class="id" title="constructor">x8c</span></a> =&gt; 140<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x8d"><span class="id" title="constructor">x8d</span></a> =&gt; 141<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x8e"><span class="id" title="constructor">x8e</span></a> =&gt; 142<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x8f"><span class="id" title="constructor">x8f</span></a> =&gt; 143<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x90"><span class="id" title="constructor">x90</span></a> =&gt; 144<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x91"><span class="id" title="constructor">x91</span></a> =&gt; 145<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x92"><span class="id" title="constructor">x92</span></a> =&gt; 146<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x93"><span class="id" title="constructor">x93</span></a> =&gt; 147<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x94"><span class="id" title="constructor">x94</span></a> =&gt; 148<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x95"><span class="id" title="constructor">x95</span></a> =&gt; 149<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x96"><span class="id" title="constructor">x96</span></a> =&gt; 150<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x97"><span class="id" title="constructor">x97</span></a> =&gt; 151<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x98"><span class="id" title="constructor">x98</span></a> =&gt; 152<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x99"><span class="id" title="constructor">x99</span></a> =&gt; 153<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x9a"><span class="id" title="constructor">x9a</span></a> =&gt; 154<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x9b"><span class="id" title="constructor">x9b</span></a> =&gt; 155<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x9c"><span class="id" title="constructor">x9c</span></a> =&gt; 156<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x9d"><span class="id" title="constructor">x9d</span></a> =&gt; 157<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x9e"><span class="id" title="constructor">x9e</span></a> =&gt; 158<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x9f"><span class="id" title="constructor">x9f</span></a> =&gt; 159<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa0"><span class="id" title="constructor">xa0</span></a> =&gt; 160<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa1"><span class="id" title="constructor">xa1</span></a> =&gt; 161<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa2"><span class="id" title="constructor">xa2</span></a> =&gt; 162<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa3"><span class="id" title="constructor">xa3</span></a> =&gt; 163<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa4"><span class="id" title="constructor">xa4</span></a> =&gt; 164<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa5"><span class="id" title="constructor">xa5</span></a> =&gt; 165<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa6"><span class="id" title="constructor">xa6</span></a> =&gt; 166<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa7"><span class="id" title="constructor">xa7</span></a> =&gt; 167<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa8"><span class="id" title="constructor">xa8</span></a> =&gt; 168<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xa9"><span class="id" title="constructor">xa9</span></a> =&gt; 169<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xaa"><span class="id" title="constructor">xaa</span></a> =&gt; 170<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xab"><span class="id" title="constructor">xab</span></a> =&gt; 171<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xac"><span class="id" title="constructor">xac</span></a> =&gt; 172<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xad"><span class="id" title="constructor">xad</span></a> =&gt; 173<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xae"><span class="id" title="constructor">xae</span></a> =&gt; 174<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xaf"><span class="id" title="constructor">xaf</span></a> =&gt; 175<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb0"><span class="id" title="constructor">xb0</span></a> =&gt; 176<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb1"><span class="id" title="constructor">xb1</span></a> =&gt; 177<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb2"><span class="id" title="constructor">xb2</span></a> =&gt; 178<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb3"><span class="id" title="constructor">xb3</span></a> =&gt; 179<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb4"><span class="id" title="constructor">xb4</span></a> =&gt; 180<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb5"><span class="id" title="constructor">xb5</span></a> =&gt; 181<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb6"><span class="id" title="constructor">xb6</span></a> =&gt; 182<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb7"><span class="id" title="constructor">xb7</span></a> =&gt; 183<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb8"><span class="id" title="constructor">xb8</span></a> =&gt; 184<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xb9"><span class="id" title="constructor">xb9</span></a> =&gt; 185<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xba"><span class="id" title="constructor">xba</span></a> =&gt; 186<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xbb"><span class="id" title="constructor">xbb</span></a> =&gt; 187<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xbc"><span class="id" title="constructor">xbc</span></a> =&gt; 188<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xbd"><span class="id" title="constructor">xbd</span></a> =&gt; 189<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xbe"><span class="id" title="constructor">xbe</span></a> =&gt; 190<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xbf"><span class="id" title="constructor">xbf</span></a> =&gt; 191<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc0"><span class="id" title="constructor">xc0</span></a> =&gt; 192<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc1"><span class="id" title="constructor">xc1</span></a> =&gt; 193<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc2"><span class="id" title="constructor">xc2</span></a> =&gt; 194<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc3"><span class="id" title="constructor">xc3</span></a> =&gt; 195<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc4"><span class="id" title="constructor">xc4</span></a> =&gt; 196<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc5"><span class="id" title="constructor">xc5</span></a> =&gt; 197<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc6"><span class="id" title="constructor">xc6</span></a> =&gt; 198<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc7"><span class="id" title="constructor">xc7</span></a> =&gt; 199<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc8"><span class="id" title="constructor">xc8</span></a> =&gt; 200<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xc9"><span class="id" title="constructor">xc9</span></a> =&gt; 201<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xca"><span class="id" title="constructor">xca</span></a> =&gt; 202<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xcb"><span class="id" title="constructor">xcb</span></a> =&gt; 203<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xcc"><span class="id" title="constructor">xcc</span></a> =&gt; 204<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xcd"><span class="id" title="constructor">xcd</span></a> =&gt; 205<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xce"><span class="id" title="constructor">xce</span></a> =&gt; 206<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xcf"><span class="id" title="constructor">xcf</span></a> =&gt; 207<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd0"><span class="id" title="constructor">xd0</span></a> =&gt; 208<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd1"><span class="id" title="constructor">xd1</span></a> =&gt; 209<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd2"><span class="id" title="constructor">xd2</span></a> =&gt; 210<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd3"><span class="id" title="constructor">xd3</span></a> =&gt; 211<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd4"><span class="id" title="constructor">xd4</span></a> =&gt; 212<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd5"><span class="id" title="constructor">xd5</span></a> =&gt; 213<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd6"><span class="id" title="constructor">xd6</span></a> =&gt; 214<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd7"><span class="id" title="constructor">xd7</span></a> =&gt; 215<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd8"><span class="id" title="constructor">xd8</span></a> =&gt; 216<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xd9"><span class="id" title="constructor">xd9</span></a> =&gt; 217<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xda"><span class="id" title="constructor">xda</span></a> =&gt; 218<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xdb"><span class="id" title="constructor">xdb</span></a> =&gt; 219<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xdc"><span class="id" title="constructor">xdc</span></a> =&gt; 220<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xdd"><span class="id" title="constructor">xdd</span></a> =&gt; 221<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xde"><span class="id" title="constructor">xde</span></a> =&gt; 222<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xdf"><span class="id" title="constructor">xdf</span></a> =&gt; 223<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe0"><span class="id" title="constructor">xe0</span></a> =&gt; 224<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe1"><span class="id" title="constructor">xe1</span></a> =&gt; 225<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe2"><span class="id" title="constructor">xe2</span></a> =&gt; 226<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe3"><span class="id" title="constructor">xe3</span></a> =&gt; 227<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe4"><span class="id" title="constructor">xe4</span></a> =&gt; 228<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe5"><span class="id" title="constructor">xe5</span></a> =&gt; 229<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe6"><span class="id" title="constructor">xe6</span></a> =&gt; 230<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe7"><span class="id" title="constructor">xe7</span></a> =&gt; 231<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe8"><span class="id" title="constructor">xe8</span></a> =&gt; 232<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xe9"><span class="id" title="constructor">xe9</span></a> =&gt; 233<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xea"><span class="id" title="constructor">xea</span></a> =&gt; 234<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xeb"><span class="id" title="constructor">xeb</span></a> =&gt; 235<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xec"><span class="id" title="constructor">xec</span></a> =&gt; 236<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xed"><span class="id" title="constructor">xed</span></a> =&gt; 237<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xee"><span class="id" title="constructor">xee</span></a> =&gt; 238<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xef"><span class="id" title="constructor">xef</span></a> =&gt; 239<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf0"><span class="id" title="constructor">xf0</span></a> =&gt; 240<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf1"><span class="id" title="constructor">xf1</span></a> =&gt; 241<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf2"><span class="id" title="constructor">xf2</span></a> =&gt; 242<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf3"><span class="id" title="constructor">xf3</span></a> =&gt; 243<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf4"><span class="id" title="constructor">xf4</span></a> =&gt; 244<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf5"><span class="id" title="constructor">xf5</span></a> =&gt; 245<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf6"><span class="id" title="constructor">xf6</span></a> =&gt; 246<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf7"><span class="id" title="constructor">xf7</span></a> =&gt; 247<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf8"><span class="id" title="constructor">xf8</span></a> =&gt; 248<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xf9"><span class="id" title="constructor">xf9</span></a> =&gt; 249<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xfa"><span class="id" title="constructor">xfa</span></a> =&gt; 250<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xfb"><span class="id" title="constructor">xfb</span></a> =&gt; 251<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xfc"><span class="id" title="constructor">xfc</span></a> =&gt; 252<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xfd"><span class="id" title="constructor">xfd</span></a> =&gt; 253<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xfe"><span class="id" title="constructor">xfe</span></a> =&gt; 254<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#xff"><span class="id" title="constructor">xff</span></a> =&gt; 255<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="byte_of_bytes_fmt"><span class="id" title="definition">byte_of_bytes_fmt</span></a> (<span class="id" title="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Prelude.Data.Byte.html#x"><span class="id" title="variable">x</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5c"><span class="id" title="constructor">x5c</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x30"><span class="id" title="constructor">x30</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x00"><span class="id" title="constructor">x00</span></a> <br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5c"><span class="id" title="constructor">x5c</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x6e"><span class="id" title="constructor">x6e</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x0a"><span class="id" title="constructor">x0a</span></a> <br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5c"><span class="id" title="constructor">x5c</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x72"><span class="id" title="constructor">x72</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x0d"><span class="id" title="constructor">x0d</span></a> <br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x5c"><span class="id" title="constructor">x5c</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x74"><span class="id" title="constructor">x74</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#e76c6291366b599375c28eba0aae94bb"><span class="id" title="notation">]</span></a> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#x09"><span class="id" title="constructor">x09</span></a> <br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><span class="id" title="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#Some"><span class="id" title="constructor">Some</span></a> <a class="idref" href="Prelude.Data.Byte.html#x"><span class="id" title="variable">x</span></a><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> =&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#None"><span class="id" title="constructor">None</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="bytes_of_byte"><span class="id" title="definition">bytes_of_byte</span></a> (<span class="id" title="var">x</span> : <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">[</span></a><a class="idref" href="Prelude.Data.Byte.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#ddd65c2f7ee73ecec433744948d846bb"><span class="id" title="notation">]</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">String</span> <span class="id" title="keyword">Notation</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Byte.html#byte"><span class="id" title="inductive">byte</span></a> <a class="idref" href="Prelude.Data.Byte.html#byte_of_bytes_fmt"><span class="id" title="definition">byte_of_bytes_fmt</span></a> <a class="idref" href="Prelude.Data.Byte.html#bytes_of_byte"><span class="id" title="definition">bytes_of_byte</span></a> : <span class="id" title="var">byte_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="14593c4d5e93c4709c94dc4d3e230d40"><span class="id" title="notation">&quot;</span></a>'c#' c" := (<span class="id" title="var">c</span>%<span class="id" title="var">byte</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 0, <span class="id" title="var">c</span> <span class="id" title="keyword">constr</span>, <span class="id" title="keyword">no</span> <span class="id" title="keyword">associativity</span>, <span class="id" title="var">only</span> <span class="id" title="var">parsing</span>) : <span class="id" title="var">prelude_scope</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

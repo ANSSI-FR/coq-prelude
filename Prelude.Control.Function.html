@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Prelude.Control.Function</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Prelude.Control.Function</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Coq</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Program.Basics.html#"><span class="id" title="library">Basics</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Logic.FunctionalExtensionality.html#"><span class="id" title="library">FunctionalExtensionality</span></a>.<br/>
+<span class="id" title="keyword">From</span> <span class="id" title="var">Prelude</span> <span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Prelude.Control.html#"><span class="id" title="library">Control</span></a> <a class="idref" href="Prelude.Data.Equality.html#"><span class="id" title="library">Equality</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">local</span>]<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">prelude_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="func"><span class="id" title="definition">func</span></a> (<span class="id" title="var">a</span> <span class="id" title="var">b</span> : <span class="id" title="keyword">Type</span>) := <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Bind</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">monad_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">func</span>.<br/>
+<span class="id" title="keyword">Bind</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">function_scope</span> <span class="id" title="keyword">with</span> <span class="id" title="var">func</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="map_func"><span class="id" title="definition">map_func</span></a> {<span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>} (<span class="id" title="var">f</span> : <a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Control.Function.html#c"><span class="id" title="variable">c</span></a>) (<span class="id" title="var">g</span> : <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a>) : <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Prelude.Control.Function.html#c"><span class="id" title="variable">c</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">x</span> : <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a>) =&gt; <a class="idref" href="Prelude.Control.Function.html#f"><span class="id" title="variable">f</span></a> (<a class="idref" href="Prelude.Control.Function.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="Prelude.Control.Function.html#x"><span class="id" title="variable">x</span></a>).<br/>
+
+<br/>
+#[<span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a name="func_Functor"><span class="id" title="instance">func_Functor</span></a> (<span class="id" title="var">a</span> : <span class="id" title="keyword">Type</span>) : <a class="idref" href="Prelude.Control.html#Functor"><span class="id" title="class">Functor</span></a> (<a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a>) :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Control.html#map"><span class="id" title="method">map</span></a> := @<a class="idref" href="Prelude.Control.Function.html#map_func"><span class="id" title="definition">map_func</span></a> <span class="id" title="var">a</span><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="func_apply"><span class="id" title="definition">func_apply</span></a> {<span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>} (<span class="id" title="var">f</span> : <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> (<a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Control.Function.html#c"><span class="id" title="variable">c</span></a>)) (<span class="id" title="var">g</span> : <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a>) : <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Prelude.Control.Function.html#c"><span class="id" title="variable">c</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">x</span> : <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a>) =&gt; <a class="idref" href="Prelude.Control.Function.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Prelude.Control.Function.html#x"><span class="id" title="variable">x</span></a> (<a class="idref" href="Prelude.Control.Function.html#g"><span class="id" title="variable">g</span></a> <a class="idref" href="Prelude.Control.Function.html#x"><span class="id" title="variable">x</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="func_pure"><span class="id" title="definition">func_pure</span></a> {<span class="id" title="var">a</span> <span class="id" title="var">b</span>} (<span class="id" title="var">x</span> : <a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a>) : <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">_</span> : <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a>) =&gt; <a class="idref" href="Prelude.Control.Function.html#x"><span class="id" title="variable">x</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a name="func_Applicative"><span class="id" title="instance">func_Applicative</span></a> (<span class="id" title="var">a</span>:  <span class="id" title="keyword">Type</span>) : <a class="idref" href="Prelude.Control.html#Applicative"><span class="id" title="class">Applicative</span></a> (<a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a>) :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Control.html#pure"><span class="id" title="method">pure</span></a>  := @<a class="idref" href="Prelude.Control.Function.html#func_pure"><span class="id" title="definition">func_pure</span></a> <span class="id" title="var">a</span><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Control.html#apply"><span class="id" title="method">apply</span></a> := @<a class="idref" href="Prelude.Control.Function.html#func_apply"><span class="id" title="definition">func_apply</span></a> <span class="id" title="var">a</span><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="func_bind"><span class="id" title="definition">func_bind</span></a> {<span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">c</span>} (<span class="id" title="var">f</span> : <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a>) (<span class="id" title="var">g</span> : <a class="idref" href="Prelude.Control.Function.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Prelude.Control.Function.html#c"><span class="id" title="variable">c</span></a>) : <a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="Prelude.Control.Function.html#c"><span class="id" title="variable">c</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">fun</span> (<span class="id" title="var">x</span> : <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a>) =&gt; <a class="idref" href="Prelude.Control.Function.html#g"><span class="id" title="variable">g</span></a> (<a class="idref" href="Prelude.Control.Function.html#f"><span class="id" title="variable">f</span></a> <a class="idref" href="Prelude.Control.Function.html#x"><span class="id" title="variable">x</span></a>) <a class="idref" href="Prelude.Control.Function.html#x"><span class="id" title="variable">x</span></a>.<br/>
+
+<br/>
+#[<span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a name="func_Monad"><span class="id" title="instance">func_Monad</span></a> (<span class="id" title="var">a</span> : <span class="id" title="keyword">Type</span>) : <a class="idref" href="Prelude.Control.html#Monad"><span class="id" title="class">Monad</span></a> (<a class="idref" href="Prelude.Control.Function.html#func"><span class="id" title="definition">func</span></a> <a class="idref" href="Prelude.Control.Function.html#a"><span class="id" title="variable">a</span></a>) :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Control.html#bind"><span class="id" title="method">bind</span></a> := @<a class="idref" href="Prelude.Control.Function.html#func_bind"><span class="id" title="definition">func_bind</span></a> <span class="id" title="var">a</span><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">reflexivity</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Prelude.Data.Open</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Prelude.Data.Open</h1>
+
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#"><span class="id" title="library">Coq.Lists.List</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Arith.PeanoNat.html#"><span class="id" title="library">Coq.Arith.PeanoNat</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.omega.Omega.html#"><span class="id" title="library">Omega</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Program.Equality.html#"><span class="id" title="library">Coq.Program.Equality</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Prelude.Control.Sum.html#"><span class="id" title="library">Prelude.Control.Sum</span></a>.<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="Prelude.Data.Void.html#"><span class="id" title="library">Prelude.Data.Void</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Import</span> <span class="id" title="var">ListNotations</span>.<br/>
+<span class="id" title="keyword">Local Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">list_scope</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If you use polymorphic definition, do no use function from the
+    standard library. Define your own. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="cardinal"><span class="id" title="definition">cardinal</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>:  <span class="id" title="keyword">Type</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">l</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="Prelude.Data.Open.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Prelude.Data.Open.html#l"><span class="id" title="variable">l</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cbcf67aac0c2a85b8d93d37de9969adf"><span class="id" title="notation">::</span></a> <span class="id" title="var">rst</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="Prelude.Data.Open.html#cardinal"><span class="id" title="definition">cardinal</span></a> <span class="id" title="var">rst</span>)<br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nil"><span class="id" title="constructor">nil</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="get"><span class="id" title="definition">get</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>:    <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="keyword">struct</span> <span class="id" title="var">n</span>}<br/>
+&nbsp;&nbsp;: <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a>, <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| 0, <span class="id" title="var">t</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cbcf67aac0c2a85b8d93d37de9969adf"><span class="id" title="notation">::</span></a> <span class="id" title="var">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <span class="id" title="var">t</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n</span>, <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cbcf67aac0c2a85b8d93d37de9969adf"><span class="id" title="notation">::</span></a> <span class="id" title="var">set'</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <span class="id" title="var">set'</span> <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <a class="idref" href="Prelude.Data.Void.html#Void"><span class="id" title="inductive">Void</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The open <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#union"><span class="id" title="inductive">union</span></a></span> type. For instance, a value <span class="inlinecode">(<a class="idref" href="Prelude.Control.html#v"><span class="id" title="variable">v</span></a>:</span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#union"><span class="id" title="inductive">union</span></a></span> <span class="inlinecode">[<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>;</span>
+    <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a>])</span> will be either of type <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a></span> or <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#bool"><span class="id" title="inductive">bool</span></a></span>. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Inductive</span> <a name="union"><span class="id" title="inductive">union</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;: <span class="id" title="keyword">Type</span> :=<br/>
+| <a name="OneOf"><span class="id" title="constructor">OneOf</span></a> {<span class="id" title="var">t</span>:  <span class="id" title="keyword">Type</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Ht</span>: <a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">Hn</span>: <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Peano.html#00fe0eaf5e6949f0a31725357afa4bba"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="Prelude.Data.Open.html#cardinal"><span class="id" title="definition">cardinal</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> )<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span>:  <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#union"><span class="id" title="inductive">union</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Prelude.Data.Open.html#OneOf"><span class="id" title="constructor">OneOf</span></a> [<span class="id" title="tactic">set</span> <span class="id" title="var">t</span>] (<span class="id" title="var">n</span> <span class="id" title="var">Ht</span> <span class="id" title="var">Hn</span> <span class="id" title="var">x</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+An “open product”. Similarly to <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#union"><span class="id" title="inductive">union</span></a></span>, it is parameterized by a
+    list of types. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Inductive</span> <a name="product"><span class="id" title="inductive">product</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Type</span> :=<br/>
+| <a name="Acons"><span class="id" title="constructor">Acons</span></a> (<span class="id" title="var">a</span>:    <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span>:    <a class="idref" href="Prelude.Data.Open.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">rst</span>:  <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> (<a class="idref" href="Prelude.Data.Open.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cbcf67aac0c2a85b8d93d37de9969adf"><span class="id" title="notation">::</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+| <a name="Anil"><span class="id" title="constructor">Anil</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Prelude.Data.Open.html#Acons"><span class="id" title="constructor">Acons</span></a> [<span class="id" title="var">a</span>] (<span class="id" title="var">x</span>) [<span class="id" title="tactic">set</span>] (<span class="id" title="var">rst</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Given an open product <span class="inlinecode">(<a class="idref" href="Prelude.Data.Equality.html#x"><span class="id" title="variable">x</span></a>:</span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a></span> <span class="inlinecode"><span class="id" title="tactic">set</span>)</span>, get the <span class="inlinecode"><a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a></span>th element of
+    type <span class="inlinecode"><a class="idref" href="Prelude.Control.Classes.html#get"><span class="id" title="projection">get</span></a></span> <span class="inlinecode"><span class="id" title="tactic">set</span></span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a></span>. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="fetch"><span class="id" title="definition">fetch</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span>:    <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>:    <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">H</span>:    <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Peano.html#00fe0eaf5e6949f0a31725357afa4bba"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="Prelude.Data.Open.html#cardinal"><span class="id" title="definition">cardinal</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="var">case_eq</span> <span class="id" title="tactic">set</span>.<br/>
++ <span class="id" title="tactic">intros</span> <span class="id" title="var">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
++ <span class="id" title="tactic">intros</span> <span class="id" title="var">T</span> <span class="id" title="var">l</span> <span class="id" title="var">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">dependent</span> <span class="id" title="tactic">induction</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">fetch</span>.<br/>
+&nbsp;&nbsp;++ <span class="id" title="tactic">exact</span> <span class="id" title="var">x0</span>.<br/>
+&nbsp;&nbsp;++ <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Given an open product <span class="inlinecode">(<a class="idref" href="Prelude.Data.Equality.html#x"><span class="id" title="variable">x</span></a>:</span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a></span> <span class="inlinecode"><span class="id" title="tactic">set</span>)</span>, change the <span class="inlinecode"><a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a></span>th element
+    of type <span class="inlinecode"><a class="idref" href="Prelude.Control.Classes.html#get"><span class="id" title="projection">get</span></a></span> <span class="inlinecode"><span class="id" title="tactic">set</span></span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a></span> by a new value <span class="inlinecode"><a class="idref" href="Prelude.Control.html#v"><span class="id" title="variable">v</span></a></span>. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="swap"><span class="id" title="definition">swap</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span>:    <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>:    <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">H</span>:    <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Peano.html#00fe0eaf5e6949f0a31725357afa4bba"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="Prelude.Data.Open.html#cardinal"><span class="id" title="definition">cardinal</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">v</span>:    <a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="keyword">struct</span> <span class="id" title="var">x</span>}<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>.<br/>
+<span class="id" title="var">case_eq</span> <span class="id" title="tactic">set</span>.<br/>
++ <span class="id" title="tactic">intros</span> <span class="id" title="var">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
++ <span class="id" title="tactic">intros</span> <span class="id" title="var">T</span> <span class="id" title="var">l</span> <span class="id" title="var">Heq</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">dependent</span> <span class="id" title="tactic">induction</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;++ <span class="id" title="tactic">exact</span> (<a class="idref" href="Prelude.Data.Open.html#Acons"><span class="id" title="constructor">Acons</span></a> <span class="id" title="var">v</span> <span class="id" title="var">x0</span>).<br/>
+&nbsp;&nbsp;++ <span class="id" title="tactic">refine</span> (<a class="idref" href="Prelude.Data.Open.html#Acons"><span class="id" title="constructor">Acons</span></a> <span class="id" title="var">x</span> <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> (<span class="id" title="var">swap</span> <span class="id" title="var">l</span> <span class="id" title="var">x0</span> <span class="id" title="var">n</span>).<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+++ <span class="id" title="var">cbn</span> <span class="id" title="tactic">in</span> <span class="id" title="var">H</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">omega</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+++ <span class="id" title="tactic">exact</span> <span class="id" title="var">v</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Given a list of type <span class="inlinecode"><span class="id" title="tactic">set</span></span> and a natural number <span class="inlinecode"><a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a></span>, returns a
+    list of type wherein the <span class="inlinecode"><a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a></span>th element of <span class="inlinecode"><span class="id" title="tactic">set</span></span> is absent. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Fixpoint</span> <a name="remove"><span class="id" title="definition">remove</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>:    <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>, <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cbcf67aac0c2a85b8d93d37de9969adf"><span class="id" title="notation">::</span></a> <span class="id" title="var">rst</span>, 0<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <span class="id" title="var">rst</span><br/>
+&nbsp;&nbsp;| <span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cbcf67aac0c2a85b8d93d37de9969adf"><span class="id" title="notation">::</span></a> <span class="id" title="var">rst</span>, <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <span class="id" title="var">x</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cbcf67aac0c2a85b8d93d37de9969adf"><span class="id" title="notation">::</span></a> <a class="idref" href="Prelude.Data.Open.html#remove"><span class="id" title="definition">remove</span></a> <span class="id" title="var">rst</span> <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a><br/>
+&nbsp;&nbsp;| <span class="id" title="var">_</span>, <span class="id" title="var">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Lists.List.html#ae9a5e1034e143b218b09d8e454472bd"><span class="id" title="notation">[]</span></a><br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Given an arbitrary list of types <span class="inlinecode"><span class="id" title="tactic">set</span></span>, we want to be able to tell
+    whether or not it contains the type <span class="inlinecode"><a class="idref" href="Prelude.Data.Text.html#t"><span class="id" title="variable">t</span></a></span>. This is what the
+    <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="record">Contains</span></a></span> typeclass is for. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Class</span> <a name="Contains"><span class="id" title="record">Contains</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">t</span>:    <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;:= { <a name="rank"><span class="id" title="projection">rank</span></a>:            <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <a name="rank_get_t"><span class="id" title="projection">rank_get_t</span></a>:      <a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> <a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <a name="rank_bound"><span class="id" title="projection">rank_bound</span></a>:      <a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Peano.html#00fe0eaf5e6949f0a31725357afa4bba"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="Prelude.Data.Open.html#cardinal"><span class="id" title="definition">cardinal</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> (<span class="id" title="var">t</span> <span class="id" title="tactic">set</span>) {<span class="id" title="var">_</span>}.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Prelude.Data.Open.html#rank_get_t"><span class="id" title="method">rank_get_t</span></a> (<span class="id" title="var">t</span> <span class="id" title="tactic">set</span>) {<span class="id" title="var">_</span>}.<br/>
+<span class="id" title="var">Arguments</span> <a class="idref" href="Prelude.Data.Open.html#rank_bound"><span class="id" title="method">rank_bound</span></a> (<span class="id" title="var">t</span> <span class="id" title="tactic">set</span>) {<span class="id" title="var">_</span>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+One obvious instance of <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="record">Contains</span></a></span> is that the type <span class="inlinecode"><a class="idref" href="Prelude.Control.Classes.html#get"><span class="id" title="projection">get</span></a></span> <span class="inlinecode"><span class="id" title="tactic">set</span></span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a></span> is
+    contains in <span class="inlinecode"><span class="id" title="tactic">set</span></span>. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Instance</span> <a name="Contains_nat"><span class="id" title="instance">Contains_nat</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>:    <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">H</span>:    <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Peano.html#00fe0eaf5e6949f0a31725357afa4bba"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="Prelude.Data.Open.html#cardinal"><span class="id" title="definition">cardinal</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="class">Contains</span></a> (<a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> <a class="idref" href="Prelude.Data.Open.html#n"><span class="id" title="variable">n</span></a>) <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a>        := <span class="id" title="var">n</span><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Open.html#rank_get_t"><span class="id" title="method">rank_get_t</span></a>  := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Open.html#rank_bound"><span class="id" title="method">rank_bound</span></a>  := <span class="id" title="var">H</span><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Then, following what is often done in Haskell in this context, we
+    can define two instances of <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="record">Contains</span></a></span>:
+
+<div class="paragraph"> </div>
+
+    First, a list contains its head. 
+</div>
+<div class="code">
+#[<span class="id" title="var">program</span>, <span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>)]<br/>
+<span class="id" title="keyword">Instance</span> <a name="Contains_head"><span class="id" title="instance">Contains_head</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">t</span>:    <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="class">Contains</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>) :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a>        := 0<br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Open.html#rank_get_t"><span class="id" title="method">rank_get_t</span></a>  := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#eq_refl"><span class="id" title="constructor">eq_refl</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Arith.PeanoNat.html#Nat.lt_0_succ"><span class="id" title="lemma">Nat.lt_0_succ</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Then, if a list <span class="inlinecode"><span class="id" title="tactic">set</span></span> contains a type <span class="inlinecode"><a class="idref" href="Prelude.Data.Text.html#t"><span class="id" title="variable">t</span></a></span>, then any list
+    constructed by appending an element to <span class="inlinecode"><span class="id" title="tactic">set</span></span> also contains <span class="inlinecode"><a class="idref" href="Prelude.Data.Text.html#t"><span class="id" title="variable">t</span></a></span>. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>), <span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a name="Contains_tail"><span class="id" title="instance">Contains_tail</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">t</span> <span class="id" title="var">any</span>:  <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="tactic">set</span>:    <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">H</span>:      <a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="class">Contains</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="class">Contains</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#cons"><span class="id" title="constructor">cons</span></a> <a class="idref" href="Prelude.Data.Open.html#any"><span class="id" title="variable">any</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>) :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a>       := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a> (<a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>)<br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Open.html#rank_get_t"><span class="id" title="method">rank_get_t</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Next</span> <span class="id" title="keyword">Obligation</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">cbn</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Arith.Lt.html#lt_n_S"><span class="id" title="lemma">lt_n_S</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Open.html#rank_bound"><span class="id" title="method">rank_bound</span></a>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Using the <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="record">Contains</span></a></span> typeclass, we can define a useful function
+    <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#inj"><span class="id" title="definition">inj</span></a></span> to easily construct values of arbitrary open unions. 
+</div>
+<div class="code">
+#[<span class="id" title="var">universes</span>(<span class="id" title="var">polymorphic</span>), <span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Definition</span> <a name="inj"><span class="id" title="definition">inj</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">t</span>:    <span class="id" title="keyword">Type</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>} `{<a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="class">Contains</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span>:    <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#union"><span class="id" title="inductive">union</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Prelude.Data.Open.html#OneOf"><span class="id" title="constructor">OneOf</span></a> (<a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>) (<a class="idref" href="Prelude.Data.Open.html#rank_get_t"><span class="id" title="method">rank_get_t</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>) (<a class="idref" href="Prelude.Data.Open.html#rank_bound"><span class="id" title="method">rank_bound</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>) <a class="idref" href="Prelude.Data.Open.html#x"><span class="id" title="variable">x</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The aim of the <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#visit"><span class="id" title="definition">visit</span></a></span> function is two fold. Given an open product
+    <span class="inlinecode"><a class="idref" href="Prelude.Data.Equality.html#x"><span class="id" title="variable">x</span></a></span> and a function <span class="inlinecode">(<a class="idref" href="Prelude.Data.Equality.html#f"><span class="id" title="variable">f</span></a>:</span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Text.html#t"><span class="id" title="variable">t</span></a></span> <span class="inlinecode">-&gt;</span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Equality.html#a"><span class="id" title="variable">a</span></a></span> <span class="inlinecode">*</span> <span class="inlinecode"><a class="idref" href="Prelude.Data.Text.html#t"><span class="id" title="variable">t</span></a>)</span> such that a value of type <span class="inlinecode"><a class="idref" href="Prelude.Data.Text.html#t"><span class="id" title="variable">t</span></a></span>
+    is present in <span class="inlinecode"><a class="idref" href="Prelude.Data.Equality.html#x"><span class="id" title="variable">x</span></a></span> (as enforced by the <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="record">Contains</span></a></span> constraint). It
+    returns the result of type <span class="inlinecode"><a class="idref" href="Prelude.Data.Equality.html#a"><span class="id" title="variable">a</span></a></span> produced by <span class="inlinecode"><a class="idref" href="Prelude.Data.Equality.html#f"><span class="id" title="variable">f</span></a></span> along with an open
+    union such that the value of type <span class="inlinecode"><a class="idref" href="Prelude.Data.Text.html#t"><span class="id" title="variable">t</span></a></span> has been <span class="inlinecode"><a class="idref" href="Prelude.Data.Open.html#swap"><span class="id" title="definition">swap</span></a></span>ped with the
+    value of type <span class="inlinecode"><a class="idref" href="Prelude.Data.Text.html#t"><span class="id" title="variable">t</span></a></span> produced by <span class="inlinecode"><a class="idref" href="Prelude.Data.Equality.html#f"><span class="id" title="variable">f</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="visit"><span class="id" title="definition">visit</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">t</span>:    <span class="id" title="keyword">Type</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="tactic">set</span>:  <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <span class="id" title="keyword">Type</span>} `{<a class="idref" href="Prelude.Data.Open.html#Contains"><span class="id" title="class">Contains</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>:    <span class="id" title="keyword">Type</span>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">x</span>:    <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">f</span>:    <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Open.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">*</span></a> <a class="idref" href="Prelude.Data.Open.html#t"><span class="id" title="variable">t</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Open.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">*</span></a> <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> <a class="idref" href="Prelude.Data.Open.html#set"><span class="id" title="variable">set</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<span class="id" title="keyword">match</span> <a class="idref" href="Prelude.Data.Open.html#fetch"><span class="id" title="definition">fetch</span></a> <span class="id" title="var">x</span> (<a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>) (<a class="idref" href="Prelude.Data.Open.html#rank_bound"><span class="id" title="method">rank_bound</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">return</span> <a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <span class="id" title="tactic">set</span> (<a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>) <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">t</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="var">a</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#11c698c8685bb8ab1cf725545c085ac4"><span class="id" title="notation">*</span></a> <a class="idref" href="Prelude.Data.Open.html#product"><span class="id" title="inductive">product</span></a> <span class="id" title="tactic">set</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| <span class="id" title="var">v</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <span class="id" title="keyword">fun</span> (<span class="id" title="var">H</span>: <a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <span class="id" title="tactic">set</span> (<a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>) <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <span class="id" title="var">t</span>)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&gt; <span class="id" title="var">_</span><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">end</span> (<a class="idref" href="Prelude.Data.Open.html#rank_get_t"><span class="id" title="method">rank_get_t</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>)).<br/>
+&nbsp;&nbsp;<span class="id" title="var">remember</span> (<span class="id" title="var">f</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#eq_rect"><span class="id" title="definition">eq_rect</span></a> (<a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <span class="id" title="tactic">set</span> (<a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>)) (<span class="id" title="keyword">fun</span> <span class="id" title="var">X</span> =&gt; <a class="idref" href="Prelude.Data.Open.html#X"><span class="id" title="variable">X</span></a>) <span class="id" title="var">v</span> <span class="id" title="var">t</span> <span class="id" title="var">H</span>)) <span class="id" title="keyword">as</span> <span class="id" title="var">p</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> <span class="id" title="keyword">as</span> [<span class="id" title="var">v'</span> <span class="id" title="var">u</span>].<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">(</span></a><span class="id" title="var">v'</span><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">,</span></a> <a class="idref" href="Prelude.Data.Open.html#swap"><span class="id" title="definition">swap</span></a> <span class="id" title="var">x</span> (<a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>) (<a class="idref" href="Prelude.Data.Open.html#rank_bound"><span class="id" title="method">rank_bound</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>) <span class="id" title="var">_</span><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#e6756e10c36f149b18b4a8741ed83079"><span class="id" title="notation">)</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">refine</span> (<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#eq_rect"><span class="id" title="definition">eq_rect</span></a> <span class="id" title="var">t</span> (<span class="id" title="keyword">fun</span> <span class="id" title="var">X</span> =&gt; <a class="idref" href="Prelude.Data.Open.html#X"><span class="id" title="variable">X</span></a>) <span class="id" title="var">u</span> (<a class="idref" href="Prelude.Data.Open.html#get"><span class="id" title="definition">get</span></a> <span class="id" title="tactic">set</span> (<a class="idref" href="Prelude.Data.Open.html#rank"><span class="id" title="method">rank</span></a> <span class="id" title="var">t</span> <span class="id" title="tactic">set</span>)) <span class="id" title="var">_</span>).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">symmetry</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">exact</span> <span class="id" title="var">H</span>.<br/>
+<span class="id" title="keyword">Defined</span>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>Prelude.Data.Nat</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library Prelude.Data.Nat</h1>
+
+<div class="code">
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Import</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Program.Tactics.html#"><span class="id" title="library">Coq.Program.Tactics</span></a>.<br/>
+
+<br/>
+<span class="id" title="var">Declare</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">Nat_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Class</span> <a name="Nat"><span class="id" title="record">Nat</span></a> <span class="id" title="var">a</span> :=<br/>
+&nbsp;&nbsp;{ <a name="zero"><span class="id" title="projection">zero</span></a>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a><br/>
+&nbsp;&nbsp;; <a name="succ"><span class="id" title="projection">succ</span></a>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a><br/>
+&nbsp;&nbsp;; <a name="succ_injective"><span class="id" title="projection">succ_injective</span></a>: <span class="id" title="keyword">forall</span> (<span class="id" title="var">n</span> <span class="id" title="var">m</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>), <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#6cd0f7b28b6092304087c7049437bb1a"><span class="id" title="notation">=</span></a> <a class="idref" href="Prelude.Data.Nat.html#m"><span class="id" title="variable">m</span></a><br/>
+&nbsp;&nbsp;; <a name="succ_not_zero"><span class="id" title="projection">succ_not_zero</span></a>: <span class="id" title="keyword">forall</span> (<span class="id" title="var">n</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>), <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#a0a5068f83a704fcfbda8cd473a6cfea"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#zero"><span class="id" title="method">zero</span></a><br/>
+&nbsp;&nbsp;; <a name="peano_rect"><span class="id" title="projection">peano_rect</span></a>: <span class="id" title="keyword">forall</span> (<span class="id" title="var">P</span>:   <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span>),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="Prelude.Data.Nat.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Prelude.Data.Nat.html#zero"><span class="id" title="method">zero</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">(</span></a><span class="id" title="keyword">forall</span> <span class="id" title="var">n</span>, <a class="idref" href="Prelude.Data.Nat.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#P"><span class="id" title="variable">P</span></a> (<a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">)</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">(</span></a><span class="id" title="keyword">forall</span> (<span class="id" title="var">n</span>:   <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>), <a class="idref" href="Prelude.Data.Nat.html#P"><span class="id" title="variable">P</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a><a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">)</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Ltac</span> <span class="id" title="var">nat_induction</span> <span class="id" title="var">p</span> := <span class="id" title="tactic">induction</span> <span class="id" title="var">p</span> <span class="id" title="keyword">using</span> <a class="idref" href="Prelude.Data.Nat.html#peano_rect"><span class="id" title="method">peano_rect</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="succ_n_neq_n"><span class="id" title="lemma">succ_n_neq_n</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#a0a5068f83a704fcfbda8cd473a6cfea"><span class="id" title="notation">&lt;&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">nat_induction</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#succ_not_zero"><span class="id" title="method">succ_not_zero</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">Hfalse</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#succ_injective"><span class="id" title="method">succ_injective</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">Hfalse</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Inductive</span> <a name="le"><span class="id" title="inductive">le</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <span class="id" title="var">a</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <span class="id" title="keyword">Prop</span> :=<br/>
+| <a name="le_refl"><span class="id" title="constructor">le_refl</span></a>: <a class="idref" href="Prelude.Data.Nat.html#le"><span class="id" title="inductive">le</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a><br/>
+| <a name="le_succ"><span class="id" title="constructor">le_succ</span></a> (<span class="id" title="var">m</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Nat.html#le"><span class="id" title="inductive">le</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="Prelude.Data.Nat.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#le"><span class="id" title="inductive">le</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> (<a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#m"><span class="id" title="variable">m</span></a>).<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&quot;</span></a>x &lt;= y" := (<a class="idref" href="Prelude.Data.Nat.html#le"><span class="id" title="inductive">le</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>): <span class="id" title="var">Nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="4dc4d23448a766bce65b4066ea723067"><span class="id" title="notation">&quot;</span></a>y &gt;= x" := (<a class="idref" href="Prelude.Data.Nat.html#le"><span class="id" title="inductive">le</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) (<span class="id" title="var">only</span> <span class="id" title="var">parsing</span>): <span class="id" title="var">Nat_scope</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">local</span>]<br/>
+<span class="id" title="keyword">Open</span> <span class="id" title="keyword">Scope</span> <span class="id" title="var">Nat_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="le_n_succ_n"><span class="id" title="lemma">le_n_succ_n</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">(</span></a><a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a><a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">)</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_succ"><span class="id" title="constructor">le_succ</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_refl"><span class="id" title="constructor">le_refl</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="le_trans_succ"><span class="id" title="lemma">le_trans_succ</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">r</span> <span class="id" title="var">s</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#r"><span class="id" title="variable">r</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#r"><span class="id" title="variable">r</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#s"><span class="id" title="variable">s</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">Hle</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">Hle</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_n_succ_n"><span class="id" title="lemma">le_n_succ_n</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_succ"><span class="id" title="constructor">le_succ</span></a>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHHle</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="not_le_succ_n_zero"><span class="id" title="lemma">not_le_succ_n_zero</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">~</span></a> <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#zero"><span class="id" title="method">zero</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">Hle</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">Hle</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#succ_not_zero"><span class="id" title="method">succ_not_zero</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#succ_not_zero"><span class="id" title="method">succ_not_zero</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="le_succ_n_succ_m_le_n_m"><span class="id" title="lemma">le_succ_n_succ_m_le_n_m</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span> <span class="id" title="var">m</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#m"><span class="id" title="variable">m</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#m"><span class="id" title="variable">m</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">Hle</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">inversion</span> <span class="id" title="var">Hle</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#succ_injective"><span class="id" title="method">succ_injective</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H1</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_refl"><span class="id" title="constructor">le_refl</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#succ_injective"><span class="id" title="method">succ_injective</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H0</span>; <span class="id" title="tactic">subst</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_trans_succ"><span class="id" title="lemma">le_trans_succ</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H1</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="not_le_succ_n_n"><span class="id" title="lemma">not_le_succ_n_n</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">~</span></a> <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">nat_induction</span> <span class="id" title="var">n</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#not_le_succ_n_zero"><span class="id" title="lemma">not_le_succ_n_zero</span></a>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">Hfalse</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_succ_n_succ_m_le_n_m"><span class="id" title="lemma">le_succ_n_succ_m_le_n_m</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">Hfalse</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="le_trans"><span class="id" title="lemma">le_trans</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">r</span> <span class="id" title="var">s</span> <span class="id" title="var">t</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Nat.html#r"><span class="id" title="variable">r</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#t"><span class="id" title="variable">t</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#r"><span class="id" title="variable">r</span></a> <a class="idref" href="Prelude.Data.Nat.html#cc2511fd6bf20573a5482fad414d00fe"><span class="id" title="notation">&lt;=</span></a> <a class="idref" href="Prelude.Data.Nat.html#t"><span class="id" title="variable">t</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">t</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">induction</span> <span class="id" title="var">H1</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">auto</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">t</span> <span class="id" title="var">H2</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHle</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_trans_succ"><span class="id" title="lemma">le_trans_succ</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">H2</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Definition</span> <a name="lt"><span class="id" title="definition">lt</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span> <span class="id" title="var">m</span>:  <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <span class="id" title="keyword">Prop</span> :=<br/>
+&nbsp;&nbsp;<a class="idref" href="Prelude.Data.Nat.html#le"><span class="id" title="inductive">le</span></a> (<a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a>) <a class="idref" href="Prelude.Data.Nat.html#m"><span class="id" title="variable">m</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="a25260fa96414aea76a943de2eb9fe6e"><span class="id" title="notation">&quot;</span></a>x &lt; y" := (<a class="idref" href="Prelude.Data.Nat.html#lt"><span class="id" title="definition">lt</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>): <span class="id" title="var">Nat_scope</span>.<br/>
+<span class="id" title="keyword">Notation</span> <a name="0b18cc1145acddc43bd518dc62f14fe4"><span class="id" title="notation">&quot;</span></a>y &gt; x" := (<a class="idref" href="Prelude.Data.Nat.html#lt"><span class="id" title="definition">lt</span></a> <span class="id" title="var">x</span> <span class="id" title="var">y</span>) (<span class="id" title="var">only</span> <span class="id" title="var">parsing</span>): <span class="id" title="var">Nat_scope</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="lt_not_refl"><span class="id" title="lemma">lt_not_refl</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="id" title="var">a</span>} `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="id" title="var">n</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)<br/>
+&nbsp;&nbsp;: <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#63a68285c81db8f9bc456233bb9ed181"><span class="id" title="notation">~</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a> <a class="idref" href="Prelude.Data.Nat.html#a25260fa96414aea76a943de2eb9fe6e"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#n"><span class="id" title="variable">n</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intro</span> <span class="id" title="var">Hfalse</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Prelude.Data.Nat.html#lt"><span class="id" title="definition">lt</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">Hfalse</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#not_le_succ_n_n"><span class="id" title="lemma">not_le_succ_n_n</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">Hfalse</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="Acc_lt"><span class="id" title="lemma">Acc_lt</span></a> <span class="id" title="var">a</span> `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>} (<span class="id" title="var">x</span> <span class="id" title="var">y</span>: <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>): <a class="idref" href="Prelude.Data.Nat.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="Prelude.Data.Nat.html#a25260fa96414aea76a943de2eb9fe6e"><span class="id" title="notation">&lt;</span></a> <a class="idref" href="Prelude.Data.Nat.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Logic.html#1c93e43e07fbeaeb6a625cb6614beb5d"><span class="id" title="notation">-&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Wf.html#Acc"><span class="id" title="inductive">Acc</span></a> <a class="idref" href="Prelude.Data.Nat.html#lt"><span class="id" title="definition">lt</span></a> <a class="idref" href="Prelude.Data.Nat.html#y"><span class="id" title="variable">y</span></a>.<br/>
+<span class="id" title="keyword">Proof</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">revert</span> <span class="id" title="var">y</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="var">nat_induction</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">y</span> <span class="id" title="var">Hfalse</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="var">now</span> <span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#not_le_succ_n_zero"><span class="id" title="lemma">not_le_succ_n_zero</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">Hfalse</span>.<br/>
+&nbsp;&nbsp;+ <span class="id" title="tactic">intros</span> <span class="id" title="var">y</span> <span class="id" title="var">Hy</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">constructor</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">z</span> <span class="id" title="var">Hz</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <span class="id" title="var">IHx</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Prelude.Data.Nat.html#lt"><span class="id" title="definition">lt</span></a> <span class="id" title="tactic">in</span> *.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_succ_n_succ_m_le_n_m"><span class="id" title="lemma">le_succ_n_succ_m_le_n_m</span></a> <span class="id" title="tactic">in</span> <span class="id" title="var">Hy</span>.<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="Prelude.Data.Nat.html#le_trans"><span class="id" title="lemma">le_trans</span></a>; <span class="id" title="tactic">eauto</span>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Lemma</span> <a name="lt_wf"><span class="id" title="lemma">lt_wf</span></a> <span class="id" title="var">a</span> `{<a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>}: <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Wf.html#well_founded"><span class="id" title="definition">well_founded</span></a> (<a class="idref" href="Prelude.Data.Nat.html#lt"><span class="id" title="definition">lt</span></a> (<span class="id" title="var">a</span>:=<a class="idref" href="Prelude.Data.Nat.html#a"><span class="id" title="variable">a</span></a>)).<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">intros</span> <span class="id" title="var">x</span>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">eapply</span> <a class="idref" href="Prelude.Data.Nat.html#Acc_lt"><span class="id" title="lemma">Acc_lt</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">unfold</span> <a class="idref" href="Prelude.Data.Nat.html#lt"><span class="id" title="definition">lt</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="tactic">apply</span> <a class="idref" href="Prelude.Data.Nat.html#le_refl"><span class="id" title="constructor">le_refl</span></a>.<br/>
+<span class="id" title="keyword">Qed</span>.<br/>
+
+<br/>
+#[<span class="id" title="var">program</span>]<br/>
+<span class="id" title="keyword">Instance</span> <a name="nat_Nat"><span class="id" title="instance">nat_Nat</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat"><span class="id" title="inductive">nat</span></a> :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Data.Nat.html#zero"><span class="id" title="method">zero</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Nat.html#peano_rect"><span class="id" title="method">peano_rect</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#nat_rect"><span class="id" title="definition">nat_rect</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.NArith.NArith.html#"><span class="id" title="library">Coq.NArith.NArith</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Instance</span> <a name="N_Nat"><span class="id" title="instance">N_Nat</span></a><br/>
+&nbsp;&nbsp;: <a class="idref" href="Prelude.Data.Nat.html#Nat"><span class="id" title="class">Nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Numbers.BinNums.html#N"><span class="id" title="inductive">BinNums.N</span></a> :=<br/>
+&nbsp;&nbsp;{ <a class="idref" href="Prelude.Data.Nat.html#zero"><span class="id" title="method">zero</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.NArith.BinNat.html#N.of_nat"><span class="id" title="definition">BinNat.N.of_nat</span></a> <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.Init.Datatypes.html#O"><span class="id" title="constructor">O</span></a><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Nat.html#succ"><span class="id" title="method">succ</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.NArith.BinNat.html#N.succ"><span class="id" title="definition">BinNat.N.succ</span></a><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Nat.html#peano_rect"><span class="id" title="method">peano_rect</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.NArith.BinNat.html#N.peano_rect"><span class="id" title="definition">BinNat.N.peano_rect</span></a><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Nat.html#succ_injective"><span class="id" title="method">succ_injective</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.NArith.BinNat.html#N.succ_inj"><span class="id" title="lemma">BinNat.N.succ_inj</span></a><br/>
+&nbsp;&nbsp;; <a class="idref" href="Prelude.Data.Nat.html#succ_not_zero"><span class="id" title="method">succ_not_zero</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/V8.11.0/stdlib//Coq.NArith.BinNat.html#N.neq_succ_0"><span class="id" title="lemma">BinNat.N.neq_succ_0</span></a><br/>
+&nbsp;&nbsp;}.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
