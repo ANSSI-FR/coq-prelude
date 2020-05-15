@@ -1,0 +1,3 @@
+(library
+  (name coqbase)
+  (public_name coq-base.lib))
