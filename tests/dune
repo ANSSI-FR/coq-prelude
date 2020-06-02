@@ -1,0 +1,5 @@
+(library
+  (name coqbase_tests)
+  (inline_tests)
+  (libraries coq-base.lib)
+  (preprocess (pps ppx_inline_test)))

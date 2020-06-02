@@ -236,6 +236,12 @@ Definition bytestring_of_int (x : i63) : bytestring :=
   then bytestring_of_int_aux x ""
   else bytes_cons "-" (bytestring_of_int_aux (-1 * x) "").
 
+Fixpoint bytestring_of_list (l : list byte) : bytestring :=
+  match l with
+  | x :: rst => bytes_cons x (bytestring_of_list rst)
+  | [] => bytes_nil
+  end.
+
 Module BytestringExtraction.
   Extract Inductive bytestring =>
   "Bytestring.t" [
@@ -249,4 +255,5 @@ Module BytestringExtraction.
   Extract Inlined Constant bytestring_of_int => "Bytestring.bytestring_of_int".
   Extract Inlined Constant int_of_bytestring => "Bytestring.int_of_bytestring".
   Extract Inlined Constant split => "Bytestring.split".
+  Extract Inlined Constant bytestring_of_list => "Bytestring.of_list".
 End BytestringExtraction.
