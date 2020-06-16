@@ -1,18 +1,18 @@
 From Coq Require Import Program.Equality Equivalence.
 From Base Require Export Init Equality Monad.
 
-Inductive option_equal `{EquP a} : option a -> option a -> Prop :=
+Inductive option_equal `{EquProp a} : option a -> option a -> Prop :=
 | option_equal_Some (x y : a) (equ : x === y) : option_equal (Some x) (Some y)
 | option_equal_None : option_equal None None.
 
-Lemma option_equal_refl `{EquP' a} (x : option a) : option_equal x x.
+Lemma option_equal_refl `{EquPropL a} (x : option a) : option_equal x x.
 
 Proof.
   destruct x; constructor.
   reflexivity.
 Qed.
 
-Lemma option_equal_sym `{EquP' a} (x y : option a) (equ : option_equal x y)
+Lemma option_equal_sym `{EquPropL a} (x y : option a) (equ : option_equal x y)
   : option_equal y x.
 
 Proof.
@@ -20,7 +20,7 @@ Proof.
   now symmetry.
 Qed.
 
-Lemma option_equal_trans `{EquP' a} (x y z : option a)
+Lemma option_equal_trans `{EquPropL a} (x y z : option a)
     (equ1 : option_equal x y) (equ2 : option_equal y z)
   : option_equal x z.
 
@@ -32,7 +32,7 @@ Proof.
 Qed.
 
 #[program]
-Instance option_Equivalence `(EquP' a) : Equivalence option_equal.
+Instance option_Equivalence `(EquPropL a) : Equivalence option_equal.
 
 Next Obligation.
   unfold Reflexive.
@@ -49,11 +49,11 @@ Next Obligation.
   apply option_equal_trans.
 Qed.
 
-Instance option_EquP `(EquP a) : EquP (option a) :=
+Instance option_EquProp `(EquProp a) : EquProp (option a) :=
   { equal := option_equal }.
 
 #[program]
-Instance option_EquP' `(EquP' a) : EquP' (option a).
+Instance option_EquPropL `(EquPropL a) : EquPropL (option a).
 
 Definition option_equalb `{Equ a} (x y : option a) : bool :=
   match x, y with
@@ -66,8 +66,8 @@ Instance option_Equ `(Equ a) : Equ (option a) :=
   { equalb := option_equalb }.
 
 #[refine]
-Instance option_Equ' `(Equ' a)
-  : Equ' (option a) := {}.
+Instance option_EquL `(EquL a)
+  : EquL (option a) := {}.
 
 Proof.
   intros x y.
@@ -88,7 +88,7 @@ Instance option_Functor : Functor option :=
   { map := option_map }.
 
 #[refine]
-Instance option_Functor' : Functor' option := {}.
+Instance option_FunctorL : FunctorL option := {}.
 
 Proof.
   + now intros a H H' [ x |].
@@ -97,7 +97,7 @@ Defined.
 
 Definition option_pure {a} (x : a) : option a := Some x.
 
-Instance option_pure_EquMorphism `(EquP a) : EquMorphism (@option_pure a).
+Instance option_pure_EquMorphism `(EquProp a) : EquMorphism (@option_pure a).
 
 Proof.
   add_morphism_tactic.
@@ -112,7 +112,7 @@ Definition option_apply {a b} (f : option (a -> b)) (x : option a) : option  b :
   end.
 
 Instance option_apply_Some_EquMorphism {a b} (f : a -> b)
-    `(EquP a, EquP b, EquMorphism f)
+    `(EquProp a, EquProp b, EquMorphism f)
   : EquMorphism (option_apply (Some f)).
 
 Proof.
@@ -122,7 +122,7 @@ Proof.
   apply equ0.
 Qed.
 
-Instance option_apply_None_EquMorphism `(EquP a, EquP b)
+Instance option_apply_None_EquMorphism `(EquProp a, EquProp b)
   : EquMorphism (@option_apply a b None).
 
 Proof.
@@ -136,7 +136,7 @@ Instance option_Applicative : Applicative option :=
   }.
 
 #[refine]
-Instance option_Applicative' : Applicative' option := {}.
+Instance option_ApplicativeL : ApplicativeL option := {}.
 
 Proof.
   + now intros a H1 H2 [ v |].
@@ -157,7 +157,7 @@ Instance option_Monad : Monad option :=
 
 
 #[refine]
-Instance option_Monad' : Monad' option := {}.
+Instance option_MonadL : MonadL option := {}.
 
 Proof.
   + now intros.

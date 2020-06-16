@@ -4,7 +4,7 @@ Instance id_Functor : Functor id|1000 :=
   { map := fun _ _ f x => f x }.
 
 #[refine]
-Instance id_Functor' : Functor' id|1000 := {}.
+Instance id_FunctorL : FunctorL id|1000 := {}.
 
 Proof.
   all: now intros.
@@ -16,7 +16,7 @@ Instance id_Applicative : Applicative id|1000 :=
   }.
 
 #[refine]
-Instance id_Applicative' : Applicative' id|1000 := {}.
+Instance id_ApplicativeL : ApplicativeL id|1000 := {}.
 
 Proof.
   all: now intros.
@@ -26,7 +26,7 @@ Instance id_Monad : Monad id|1000 :=
   { bind := fun _ _ x f => f x }.
 
 #[refine]
-Instance id_Monad' : Monad' id|1000 := {}.
+Instance id_MonadL : MonadL id|1000 := {}.
 
 Proof.
   all: try now intros.

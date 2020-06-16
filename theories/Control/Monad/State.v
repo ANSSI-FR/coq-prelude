@@ -25,7 +25,7 @@ Instance state_Functor `(Functor m) : Functor (state_t s m) :=
   { map := @state_map m s _ }.
 
 #[refine]
-Instance state_Functor' `(Functor' m) : Functor' (state_t s m) := {}.
+Instance state_FunctorL `(FunctorL m) : FunctorL (state_t s m) := {}.
 
 Proof.
   + intros a Ha Ha' x r.
@@ -62,7 +62,7 @@ Instance state_Applicative `(Monad m) : Applicative (state_t s m) :=
   }.
 
 #[refine]
-Instance state_Applicative' `(Monad' m) : Applicative' (state_t s m) := {}.
+Instance state_ApplicativeL `(MonadL m) : ApplicativeL (state_t s m) := {}.
 
 Proof.
   + intros a Ha Ha' v σ.
@@ -139,7 +139,7 @@ Instance state_Monad `(Monad m) : Monad (state_t s m) :=
   }.
 
 #[refine]
-Instance state_Monad' `(Monad' m) : Monad' (state_t s m) := {}.
+Instance state_MonadL `(MonadL m) : MonadL (state_t s m) := {}.
 
 Proof.
   + intros a b Hb Hb' x f σ.

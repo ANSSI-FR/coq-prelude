@@ -10,7 +10,7 @@ Instance sum_Functor : Functor (sum a) :=
   { map := @sum_map a }.
 
 #[refine]
-Instance sum_Functor' : Functor' (sum a) := {}.
+Instance sum_FunctorL : FunctorL (sum a) := {}.
 
 Proof.
   + now intros b Hb Hb' [ x | x ].
@@ -33,7 +33,7 @@ Instance sum_Applicative : Applicative (sum a) :=
   }.
 
 #[refine]
-Instance sum_Applicative' : Applicative' (sum a) := {}.
+Instance sum_ApplicativeL : ApplicativeL (sum a) := {}.
 
 Proof.
   + now intros b Hb Hb' [ v | v ].
@@ -53,7 +53,7 @@ Instance sum_Monad : Monad (sum a) :=
   { bind := @sum_bind a }.
 
 #[refine]
-Instance sum_Monad' : Monad' (sum a) := {}.
+Instance sum_MonadL : MonadL (sum a) := {}.
 
 Proof.
   + now intros b c Hc Hc' x f.

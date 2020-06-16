@@ -29,21 +29,21 @@ Definition when {a} `{Monad m} (cond : bool) (x : m a) : m unit :=
   then void x
   else pure tt.
 
-Class Monad' (m : Type -> Type) `{Applicative' m, ! Monad m} : Type :=
-  { bind_left_identity {a b} `{EquP' b} (x : a) (f : a -> m b)
+Class MonadL (m : Type -> Type) `{ApplicativeL m, ! Monad m} : Type :=
+  { bind_left_identity {a b} `{EquPropL b} (x : a) (f : a -> m b)
     : pure x >>= f === f x
-  ; bind_right_identity {a} `{EquP' a} (x : m a)
+  ; bind_right_identity {a} `{EquPropL a} (x : m a)
     : x >>= (fun y => pure y) === x
-  ; bind_associativity {a b c} `{EquP' c} (f : m a) (g : a -> m b) (h : b -> m c)
+  ; bind_associativity {a b c} `{EquPropL c} (f : m a) (g : a -> m b) (h : b -> m c)
     : (f >>= g) >>= h === f >>= (fun x => (g x) >>= h)
-  ; bind_morphism {a b} `{EquP' b} (x : m a) (f f' : a -> m b)
+  ; bind_morphism {a b} `{EquPropL b} (x : m a) (f f' : a -> m b)
     : f === f' -> bind x f === bind x f'
-  ; bind_map {a b} `{EquP' b} (x : m a) (f : a -> b)
+  ; bind_map {a b} `{EquPropL b} (x : m a) (f : a -> b)
     : f <$> x === (x >>= (fun y => pure (f y)))
   }.
 
 #[program]
-Instance bind_Proper `(Monad' m, EquP' b) (a : Type)
+Instance bind_Proper `(MonadL m, EquPropL b) (a : Type)
   : Proper (@eq (m a) ==> @equal (a -> m b) _ ==> @equal (m b) _) (@bind m _ _ _ _ _).
 
 Next Obligation.

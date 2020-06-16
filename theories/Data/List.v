@@ -1,7 +1,7 @@
 From Coq Require Import Program.Equality FunInd.
 From Base Require Import Init Equality Monad.
 
-Inductive list_equal `{EquP a} : list a -> list a -> Prop :=
+Inductive list_equal `{EquProp a} : list a -> list a -> Prop :=
 | nil_equal : list_equal [] []
 | cons_equal (x y : a) (rst rst' : list a) (equ1 : x === y)
     (equ2 : list_equal rst rst')
@@ -10,10 +10,10 @@ Inductive list_equal `{EquP a} : list a -> list a -> Prop :=
 Arguments cons_equal [a _] (x y rst rst' equ1 equ2).
 Arguments nil_equal {a _}.
 
-Instance list_EquP `(EquP a) : EquP (list a) :=
+Instance list_EquProp `(EquProp a) : EquProp (list a) :=
   { equal := list_equal }.
 
-Lemma list_equal_refl `{EquP' a} (x : list a) : list_equal x x.
+Lemma list_equal_refl `{EquPropL a} (x : list a) : list_equal x x.
 
 Proof.
   induction x.
@@ -21,7 +21,7 @@ Proof.
   + now apply cons_equal.
 Qed.
 
-Lemma list_equal_sym `{EquP' a} (x y : list a) (equ : list_equal x y)
+Lemma list_equal_sym `{EquPropL a} (x y : list a) (equ : list_equal x y)
   : list_equal y x.
 
 Proof.
@@ -32,7 +32,7 @@ Proof.
     ++ apply IHequ.
 Qed.
 
-Lemma list_equal_trans `{EquP' a} (x y z : list a) (equ : list_equal x y)
+Lemma list_equal_trans `{EquPropL a} (x y z : list a) (equ : list_equal x y)
     (equ' : list_equal y z)
   : list_equal x z.
 
@@ -51,7 +51,7 @@ Proof.
 Qed.
 
 #[program]
-Instance list_EquP' `(EquP' a) : EquP' (list a).
+Instance list_EquPropL `(EquPropL a) : EquPropL (list a).
 
 Next Obligation.
   constructor.
@@ -76,7 +76,7 @@ Instance list_Equ `(Equ a) : Equ (list a) :=
   { equalb := list_equalb }.
 
 #[refine]
-Instance list_Equ' `(Equ' a) : Equ' (list a) := {}.
+Instance list_EquL `(EquL a) : EquL (list a) := {}.
 
 Proof.
   intros x y.

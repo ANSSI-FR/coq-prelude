@@ -27,7 +27,7 @@ Instance byte_Equ : Equ byte :=
 Axiom byte_equal_equalb_equiv : forall x y : byte, x = y <-> (x =? y)%byte = true.
 
 #[program]
-Instance byte_Equ' : Equ' byte.
+Instance byte_EquL : EquL byte.
 
 Next Obligation.
   apply byte_equal_equalb_equiv.

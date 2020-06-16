@@ -55,7 +55,7 @@ Instance i63_Equ : Equ i63 :=
   { equalb := i63equalb }.
 
 #[refine]
-Instance i63_Equ' : Equ' i63 := {}.
+Instance i63_EquL : EquL i63 := {}.
 
 Proof.
   intros [x] [y].

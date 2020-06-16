@@ -15,15 +15,15 @@ Definition liftA2 {f a b c} `{Applicative f}
   : f c :=
   map g x <*> y.
 
-Class Applicative' (f : Type -> Type) `{Functor' f, ! Applicative f} : Type :=
-  { applicative_identity `{EquP' a} (v : f a) : pure id <*> v === v
-  ; applicative_composition {a b c} `{EquP' c} (u : f (b -> c)) (v : f (a -> b)) (w : f a)
+Class ApplicativeL (f : Type -> Type) `{FunctorL f, ! Applicative f} : Type :=
+  { applicative_identity `{EquPropL a} (v : f a) : pure id <*> v === v
+  ; applicative_composition {a b c} `{EquPropL c} (u : f (b -> c)) (v : f (a -> b)) (w : f a)
     : pure compose <*> u <*> v <*> w === u <*> (v <*> w)
-  ; applicative_homomorphism {a b} `{EquP' b} (v : a -> b) (x : a)
+  ; applicative_homomorphism {a b} `{EquPropL b} (v : a -> b) (x : a)
     : (pure v) <*> (pure x) === pure (v x)
-  ; applicative_interchange {a b} `{EquP' b} (u : f (a -> b)) (y : a)
+  ; applicative_interchange {a b} `{EquPropL b} (u : f (a -> b)) (y : a)
     : u <*> (pure y) === (pure (fun z => z y)) <*> u
-  ; applicative_pure_map {a b} `{EquP' b} (g : a -> b) (x : f a)
+  ; applicative_pure_map {a b} `{EquPropL b} (g : a -> b) (x : f a)
     : g <$> x === pure g <*> x
   }.
 

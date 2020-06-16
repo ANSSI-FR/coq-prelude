@@ -94,7 +94,7 @@ Qed.
 Functional Scheme bytes_equalb_ind := Induction for bytes_equalb Sort Type.
 
 #[refine]
-Instance bytes_Equ' : Equ' bytestring := {}.
+Instance bytes_EquL : EquL bytestring := {}.
 
 Proof.
   intros x y.

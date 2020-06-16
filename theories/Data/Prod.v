@@ -1,17 +1,17 @@
 From Coq Require Import Equivalence.
 From Base Require Export Init Equality.
 
-Inductive prod_equal `{EquP a, EquP b} : a * b -> a * b -> Prop :=
+Inductive prod_equal `{EquProp a, EquProp b} : a * b -> a * b -> Prop :=
 | prod_term_equal (x x' : a) (y y' : b) (equ1 : x === x') (equ2 : y === y')
   : prod_equal (x, y) (x', y').
 
-Lemma prod_equal_refl `{EquP' a, EquP' b} (x : a * b) : prod_equal x x.
+Lemma prod_equal_refl `{EquPropL a, EquPropL b} (x : a * b) : prod_equal x x.
 
 Proof.
   now destruct x.
 Qed.
 
-Lemma prod_equal_sym `{EquP' a, EquP' b} (x y : a * b) (equ : prod_equal x y)
+Lemma prod_equal_sym `{EquPropL a, EquPropL b} (x y : a * b) (equ : prod_equal x y)
   : prod_equal y x.
 
 Proof.
@@ -19,7 +19,7 @@ Proof.
   now constructor.
 Qed.
 
-Lemma prod_equal_trans `{EquP' a, EquP' b} (x y z : a * b)
+Lemma prod_equal_trans `{EquPropL a, EquPropL b} (x y z : a * b)
     (equ1 : prod_equal x y) (equ2 : prod_equal y z)
   : prod_equal x z.
 
@@ -32,7 +32,7 @@ Proof.
 Qed.
 
 #[refine]
-Instance prod_equal_Equivalence `(EquP' a, EquP' b)
+Instance prod_equal_Equivalence `(EquPropL a, EquPropL b)
   : Equivalence (@prod_equal a _ b _) := {}.
 
 Proof.
@@ -44,10 +44,10 @@ Proof.
     apply prod_equal_trans.
 Qed.
 
-Instance prod_EquP `(EquP a, EquP b) : EquP (a * b) :=
+Instance prod_EquProp `(EquProp a, EquProp b) : EquProp (a * b) :=
   { equal := prod_equal }.
 
-Instance prod_EquP' `(EquP' a, EquP' b) : EquP' (a * b) := {}.
+Instance prod_EquPropL `(EquPropL a, EquPropL b) : EquPropL (a * b) := {}.
 
 Definition prod_equalb `{Equ a, Equ b} (x y : a * b) : bool :=
   (fst x == fst y) && (snd x == snd y).
@@ -56,7 +56,7 @@ Instance prod_Equ `(Equ a, Equ b) : Equ (a * b) :=
   { equalb := prod_equalb }.
 
 #[refine]
-Instance prod_Equ' `(Equ' a, Equ' b) : Equ' (a * b) := {}.
+Instance prod_EquL `(EquL a, EquL b) : EquL (a * b) := {}.
 
 Proof.
   intros x y.

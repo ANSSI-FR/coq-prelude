@@ -4,7 +4,7 @@ Instance bool_Equ : Equ bool :=
   { equalb := Bool.eqb }.
 
 #[program]
-Instance bool_Equ' : Equ' bool.
+Instance bool_EquL : EquL bool.
 
 Next Obligation.
   now rewrite Bool.eqb_true_iff.

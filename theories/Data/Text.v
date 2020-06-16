@@ -27,7 +27,7 @@ Instance wchar_Equ : Equ wchar :=
   { equalb := wchar_equalb }.
 
 #[refine]
-Instance wchar_Equ' : Equ' wchar := {}.
+Instance wchar_EquL : EquL wchar := {}.
 
 Proof.
   intros x y.

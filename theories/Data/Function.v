@@ -4,7 +4,7 @@ Instance func_Functor : Functor (func a) :=
   { map := @compose a }.
 
 #[refine]
-Instance func_Functor' : Functor' (func a) := {}.
+Instance func_FunctorL : FunctorL (func a) := {}.
 
 Proof.
   all: now intros.
@@ -22,7 +22,7 @@ Instance func_Applicative : Applicative (func a) :=
   }.
 
 #[refine]
-Instance func_Applicative' : Applicative' (func a) := {}.
+Instance func_ApplicativeL : ApplicativeL (func a) := {}.
 
 Proof.
   all: now intros.
@@ -35,7 +35,7 @@ Instance func_Monad : Monad (func a) :=
   { bind := @func_bind a }.
 
 #[refine]
-Instance func_Monad' : Monad' (func a) := {}.
+Instance func_MonadL : MonadL (func a) := {}.
 
 Proof.
   all: try now intros.
