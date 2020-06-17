@@ -46,4 +46,4 @@ From Base.Data Require Export
 (** Besides, we provide typeclass implementations and extraction modules for a
     set of “base” types. *)
 
-     Function Bool Byte Bytestring Option List Sum.
+     Bool Byte Bytestring Function List Option Sum Utf8Char.

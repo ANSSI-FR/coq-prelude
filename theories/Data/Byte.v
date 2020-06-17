@@ -1,7 +1,42 @@
-From Coq Require Export Init.Byte Strings.Byte Int63.
+(* coq-base -- A base library to program in Coq
+ * Copyright (C) 2018–2020 ANSSI
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *)
+
+From Coq Require Export Init.Byte Strings.Byte.
 From Base Require Import Init Equality Int.
 
+(** The Coq standard library provides the [ascii] type, whose terms consist in a
+    collection of height booleans, and whose notation does not provide any
+    particular escape characters we tend to take for granted (e.g., <<\n>>,
+    <<\t>>, etc.).
+
+    On the contrary, <<coq-base>> relies on the <<byte>> type to model
+    characters. *)
+
 (** * Notation *)
+
+(** We introduce the necessary conversion functions to provide a nice string
+    notation for <<byte>>, which include in particular the following escape
+    characters:
+
+      - <<\0>> (the <<NULL>> character)
+      - <<\n>> (the newline character)
+      - <<\t>> (the TAB character)
+      - <<\r>> (the carriage return character)
+      - <<\xHH>>, where <<HH>> is an hexadecimal code *)
 
 #[local]
 Definition byte_of_bytes_fmt (x : list byte) : option byte :=
@@ -291,7 +326,7 @@ Qed.
 
 (** * Functions *)
 
-Definition int_of_byte (c : byte) : int :=
+Definition i63_of_byte (c : byte) : i63 :=
   match c with
   | x00 => 0
   | x01 => 1
@@ -552,21 +587,90 @@ Definition int_of_byte (c : byte) : int :=
   end.
 
 #[local] Open Scope i63_scope.
+#[local] Open Scope byte_scope.
 
 Definition digit_of_byte (x : byte) : option i63 :=
   match x with
-  | "0"%byte => Some 0
-  | "1"%byte => Some 1
-  | "2"%byte => Some 2
-  | "3"%byte => Some 3
-  | "4"%byte => Some 4
-  | "5"%byte => Some 5
-  | "6"%byte => Some 6
-  | "7"%byte => Some 7
-  | "8"%byte => Some 8
-  | "9"%byte => Some 9
+  | "0" => Some 0
+  | "1" => Some 1
+  | "2" => Some 2
+  | "3" => Some 3
+  | "4" => Some 4
+  | "5" => Some 5
+  | "6" => Some 6
+  | "7" => Some 7
+  | "8" => Some 8
+  | "9" => Some 9
   | _ => None
   end.
+
+Definition uppercase_ascii (x : byte) : byte :=
+  match x with
+  | "a" => "A"
+  | "b" => "B"
+  | "c" => "C"
+  | "d" => "D"
+  | "e" => "E"
+  | "f" => "F"
+  | "g" => "G"
+  | "h" => "H"
+  | "i" => "I"
+  | "j" => "J"
+  | "k" => "K"
+  | "l" => "L"
+  | "m" => "M"
+  | "n" => "N"
+  | "o" => "O"
+  | "p" => "P"
+  | "q" => "Q"
+  | "r" => "R"
+  | "s" => "S"
+  | "t" => "T"
+  | "u" => "U"
+  | "v" => "V"
+  | "w" => "W"
+  | "x" => "X"
+  | "y" => "Y"
+  | "z" => "Z"
+  | x => x
+  end.
+
+Definition lowercase_ascii (x : byte) : byte :=
+  match x with
+  | "A" => "a"
+  | "B" => "b"
+  | "C" => "c"
+  | "D" => "d"
+  | "E" => "e"
+  | "F" => "f"
+  | "G" => "g"
+  | "H" => "h"
+  | "I" => "i"
+  | "J" => "j"
+  | "K" => "k"
+  | "L" => "l"
+  | "M" => "m"
+  | "N" => "n"
+  | "O" => "o"
+  | "P" => "p"
+  | "Q" => "q"
+  | "R" => "r"
+  | "S" => "s"
+  | "T" => "t"
+  | "U" => "u"
+  | "V" => "v"
+  | "W" => "w"
+  | "X" => "x"
+  | "Y" => "y"
+  | "Z" => "z"
+  | x => x
+  end.
+
+Definition byte_ltb (c1 c2 : byte) : bool :=
+  i63_of_byte c1 <? i63_of_byte c2.
+
+Infix "<?" := byte_ltb : byte_scope.
+Notation "'#b' c" := (c%byte) (at level 200, only parsing).
 
 (** * Extraction *)
 
