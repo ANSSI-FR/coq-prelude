@@ -12,7 +12,7 @@ Notation "f >>= g" :=
 
 Notation "'let*' a ':=' p 'in' q" :=
   (bind p (fun a => q))
-    (at level 61, a ident, p constr, right associativity, format
+    (at level 61, a pattern, p constr, right associativity, format
     "'[v' 'let*'  a  ':='  p  'in' '/' q ']'")
   : base_scope.
 

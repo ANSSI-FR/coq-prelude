@@ -54,7 +54,7 @@ Proof.
       reflexivity.
 Qed.
 
-(** * Function *)
+(** * Functions *)
 
 #[local]
 Definition unpack2 (l : bytestring) : option (byte * byte * bytestring) :=
@@ -69,39 +69,41 @@ Definition unpack3 (l : bytestring) : option (byte * byte * byte * bytestring) :
   let* r3 := unpack (snd r2) in
   pure (fst r1, fst r2, fst r3, snd r3).
 
-Definition unpack_ut8 (l : bytestring) : option (uchar * bytestring) :=
-  match unpack l with
-  | Some (x, rst) => if i63_of_byte x <=? 127 (* variant 1 *)
-                then Some (uchar_var_1 x, rst)
-                else if i63_of_byte x <=? 223 (* variant 2 *)
-                then match unpack rst with
-                     | Some (y, rst) =>
-                       if i63_of_byte y <=? 191
-                       then Some (uchar_var_2 x y, rst)
-                       else None
-                     | None => None
-                     end
-                else if i63_of_byte x <=? 239 (* variant 3 *)
-                then match unpack2 rst with
-                     | Some (y, z, rst) =>
-                       if (i63_of_byte y <=? 191) && (i63_of_byte z <=? 191)
-                       then Some (uchar_var_3 x y z, rst)
-                       else None
-                     | _ => None
-                     end
-                else if i63_of_byte x <=? 247 (* variant 4 *)
-                then match unpack3 rst with
-                     | Some (y,  z,  r,  rst) =>
-                       if (i63_of_byte y <=? 191) &&
-                              (i63_of_byte z <=? 191) &&
-                              (i63_of_byte r <=? 191)
-                       then Some (uchar_var_4 x y z r, rst)
-                       else None
-                     | _ => None
-                     end
-                     else None
-  | _ => None
+#[local]
+Definition cond_pure {a} (c : bool) (x : a) : option a :=
+  if c then Some x else None.
+
+Definition unpack_utf8 (l : bytestring) : option (uchar * bytestring) :=
+  let* (x, rst) := unpack l in
+  (* variant 1 *)
+  if i63_of_byte x <=? 127
+  then Some (uchar_var_1 x, rst)
+  (* variant 2 *)
+  else if i63_of_byte x <=? 223
+  then let* (y, rst) := unpack rst in
+       cond_pure (i63_of_byte y <=? 191) (uchar_var_2 x y, rst)
+  (* variant 3 *)
+  else if i63_of_byte x <=? 239
+  then let* (y, z, rst) := unpack2 rst in
+       cond_pure ((i63_of_byte y <=? 191) && (i63_of_byte z <=? 191))
+                 (uchar_var_3 x y z, rst)
+  (* variant 4 *)
+  else if i63_of_byte x <=? 247
+       then let* (y, z, r, rst) := unpack3 rst in
+            cond_pure ((i63_of_byte y <=? 191) &&
+                       (i63_of_byte z <=? 191) &&
+                       (i63_of_byte r <=? 191))
+                      (uchar_var_4 x y z r, rst)
+  (* incorrect variant *)
+  else None.
+
+Unset Guard Checking.
+Fixpoint utf8_length (b : bytestring) {struct b} : i63 :=
+  match unpack_utf8 b with
+  | Some (_, rst) => 1 + utf8_length rst
+  | _ => 0
   end.
+Set Guard Checking.
 
 (** * Notation *)
 
@@ -123,7 +125,7 @@ Definition list_byte_of_uchar (c : uchar) : list byte :=
 
 #[local]
 Definition uchar_of_list_byte_fmt (x : list byte) : option uchar :=
-  let* x := unpack_ut8 <$> Bytestring.bytestring_of_list_byte_fmt x in
+  let* x := unpack_utf8 <$> Bytestring.bytestring_of_list_byte_fmt x in
   match x with
   | Some (x, ""%bytestring) => Some x
   | _ => None

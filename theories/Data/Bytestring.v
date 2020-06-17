@@ -384,7 +384,7 @@ Fixpoint bytestring_of_list_byte_fmt (i : list byte) : option (bytestring) :=
   | "\"%byte :: "x"%byte :: "f"%byte :: "c"%byte :: rst => bytes_cons "\xfc" <$> bytestring_of_list_byte_fmt rst
   | "\"%byte :: "x"%byte :: "f"%byte :: "d"%byte :: rst => bytes_cons "\xfd" <$> bytestring_of_list_byte_fmt rst
   | "\"%byte :: "x"%byte :: "f"%byte :: "e"%byte :: rst => bytes_cons "\xfe" <$> bytestring_of_list_byte_fmt rst
-
+  | "\"%byte :: "x"%byte :: "f"%byte :: "f"%byte :: rst => bytes_cons "\xff" <$> bytestring_of_list_byte_fmt rst
   | "\"%byte :: _     :: rst => None
   | x     :: rst          => bytes_cons x <$> bytestring_of_list_byte_fmt rst
   | [] => Some bytes_nil
