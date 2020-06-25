@@ -1,4 +1,16 @@
+*.vo
+*.vok
 *.vio
 *.vos
+*.glob
+.*.aux
+*.cmi
+*.cmx
+*.cmxs
+*.d
+*.o
 _build
 .merlin
+html/
+makefile*
+CoqMakefile.conf

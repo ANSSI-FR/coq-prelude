@@ -1,1 +1,22 @@
--Q theories Base
+-R _build/default/theories/ Base
+
+_build/default/theories/Prelude.v
+_build/default/theories/Data/Bool.v
+_build/default/theories/Data/Byte.v
+_build/default/theories/Data/Bytestring.v
+_build/default/theories/Data/Equality.v
+_build/default/theories/Data/Function.v
+_build/default/theories/Data/Int.v
+_build/default/theories/Data/List.v
+_build/default/theories/Data/Option.v
+_build/default/theories/Data/Prod.v
+_build/default/theories/Data/Ring.v
+_build/default/theories/Data/Sum.v
+_build/default/theories/Data/Utf8Char.v
+_build/default/theories/Control/Functor.v
+_build/default/theories/Control/Applicative.v
+_build/default/theories/Control/Monad.v
+_build/default/theories/Control/Identity.v
+_build/default/theories/Control/Monad/State.v
+_build/default/theories/Extraction.v
+_build/default/theories/Init.v
