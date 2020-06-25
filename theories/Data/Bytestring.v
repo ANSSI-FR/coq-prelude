@@ -500,16 +500,16 @@ Fixpoint bytestring_of_list (l : list byte) : bytestring :=
 
 Module BytestringExtraction.
   Extract Inductive bytestring =>
-  "Bytestring.t" [
-      "Bytestring.pack"
-      "Bytestring.empty"
-    ] "Bytestring.case".
+  "Coqbase.Bytestring.t" [
+      "Coqbase.Bytestring.pack"
+      "Coqbase.Bytestring.empty"
+    ] "Coqbase.Bytestring.case".
 
-  Extract Inlined Constant bytes_equalb => "Bytestring.equal".
-  Extract Inlined Constant append => "Bytestring.append".
-  Extract Inlined Constant length => "Bytestring.length".
-  Extract Inlined Constant bytestring_of_int => "Bytestring.bytestring_of_int".
-  Extract Inlined Constant int_of_bytestring => "Bytestring.int_of_bytestring".
-  Extract Inlined Constant split => "Bytestring.split".
-  Extract Inlined Constant bytestring_of_list => "Bytestring.of_list".
+  Extract Inlined Constant bytes_equalb => "Coqbase.Bytestring.equal".
+  Extract Inlined Constant append => "Coqbase.Bytestring.append".
+  Extract Inlined Constant length => "Coqbase.Bytestring.length".
+  Extract Inlined Constant bytestring_of_int => "Coqbase.Bytestring.bytestring_of_int".
+  Extract Inlined Constant int_of_bytestring => "Coqbase.Bytestring.int_of_bytestring".
+  Extract Inlined Constant split => "Coqbase.Bytestring.split".
+  Extract Inlined Constant bytestring_of_list => "Coqbase.Bytestring.of_list".
 End BytestringExtraction.
