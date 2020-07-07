@@ -15,3 +15,5 @@ val int_of_bytestring : t -> int option
 val split : t -> int -> (t * t) option
 val read_line : unit -> t
 val print_bytestring : t -> unit
+val write : Unix.file_descr -> t -> int -> int -> int
+val read : Unix.file_descr -> int -> t

@@ -64,3 +64,11 @@ let of_list l = List.to_seq l |> String.of_seq |> of_string
 let read_line x = Stdlib.read_line x |> of_string
 
 let print_bytestring b = to_string b |> print_string
+
+let write fd b ofs len =
+  Unix.write_substring fd b.data (b.offset + ofs) len
+
+let read fd len =
+  let buff = Bytes.create len in
+  let size = Unix.read fd buff 0 0 in
+  { data = Bytes.to_string buff ; offset = 0 ; size = size ; sub = (len = size) }
