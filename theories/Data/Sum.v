@@ -65,6 +65,6 @@ Proof.
 Qed.
 
 Module SumExtraction.
-  Extract Inductive sum => "Coqbase.Sum.t" ["Inl" "Inr"].
+  Extract Inductive sum => "Coqbase.Sum.t" ["Coqbase.Sum.Inl" "Coqbase.Sum.Inr"].
   Extraction Inline sum_Applicative.
 End SumExtraction.
