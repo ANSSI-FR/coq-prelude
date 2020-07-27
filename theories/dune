@@ -1,5 +1,6 @@
 (coq.theory
   (name Base)
-  (package coq-base))
+  (package coq-base)
+  (libraries coq-base.lib))
 
 (include_subdirs qualified)
