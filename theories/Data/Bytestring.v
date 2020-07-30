@@ -1,5 +1,5 @@
 From Coq Require Import Program.Equality FunInd.
-From Base Require Export Init Byte Equality Option Ring Int.
+From Base Require Export Init Byte Equality Option Int.
 
 #[local] Open Scope i63_scope.
 
@@ -399,16 +399,19 @@ Fixpoint list_byte_of_bytestring (x : bytestring) : list byte :=
 String Notation bytestring bytestring_of_list_byte_fmt list_byte_of_bytestring
   : bytestring_scope.
 
-#[local]
-Fixpoint length_aux `{Semiring i} (b : bytestring) : i :=
+Fixpoint bytestring_fold_left {α}
+    (b : bytestring) (f : α -> byte -> α) (init : α)
+  : α :=
   match b with
-  | bytes_cons _ rst => one + length_aux rst
-  | _ => zero
+  | bytes_cons x rst => bytestring_fold_left rst f (f init x)
+  | bytes_nil => init
   end.
 
-Definition length (b : bytestring) : i63 := length_aux b.
+Definition length (b : bytestring) : i63 :=
+  bytestring_fold_left b (fun x _ => x + 1) 0.
 
-Definition nat_length (b : bytestring) : nat := length_aux b.
+Definition nat_length (b : bytestring) : nat :=
+  bytestring_fold_left b (fun x _ => x + 1)%nat 0%nat.
 
 #[local] Open Scope i63_scope.
 

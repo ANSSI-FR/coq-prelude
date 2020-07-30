@@ -1,5 +1,5 @@
 From Coq Require Import NArith ZArith Int63 Program.Wf.
-From Base Require Export Init Option Ring.
+From Base Require Export Init Option.
 
 #[local] Open Scope Z_scope.
 
@@ -46,6 +46,9 @@ Definition i63sub : i63 -> i63 -> i63 := ibinop Int63.sub.
 Definition i63div : i63 -> i63 -> i63 := ibinop Int63.div.
 Definition i63lxor : i63 -> i63 -> i63 := ibinop Int63.lxor.
 
+Infix "+" := i63add : i63_scope.
+Infix "-" := i63sub : i63_scope.
+Infix "*" := i63mul : i63_scope.
 Infix "/" := i63div : i63_scope.
 
 Definition i63equalb (x y : i63) : bool :=
@@ -92,16 +95,6 @@ Definition i63leb (x y : i63) : bool :=
 
 Infix "<?" := i63ltb : i63_scope.
 Infix "<=?" := i63leb : i63_scope.
-
-Instance i63_Semiring : Semiring i63 :=
-  { zero := 0
-  ; one := 1
-  ; add := i63add
-  ; mul := i63mul
-  }.
-
-Instance i63_Ring : Ring i63 :=
-  { sub := i63sub }.
 
 Definition i63_mod (x y : i63) : i63 :=
   mk_i63 ((un_i63 x) \% (un_i63 y))%int63.

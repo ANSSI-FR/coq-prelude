@@ -10,7 +10,6 @@ _build/default/theories/Data/Int.v
 _build/default/theories/Data/List.v
 _build/default/theories/Data/Option.v
 _build/default/theories/Data/Prod.v
-_build/default/theories/Data/Ring.v
 _build/default/theories/Data/Sum.v
 _build/default/theories/Data/Utf8Char.v
 _build/default/theories/Control/Functor.v
