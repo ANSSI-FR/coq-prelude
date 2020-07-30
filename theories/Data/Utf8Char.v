@@ -1,4 +1,4 @@
-From Base Require Export Init Equality Byte Bytestring Int Option.
+From Base Require Export Init Equality Byte Bytestring Int Option State.
 
 #[local] Open Scope i63_scope.
 #[local] Open Scope byte_scope.
@@ -57,45 +57,45 @@ Qed.
 (** * Functions *)
 
 #[local]
-Definition unpack2 (l : bytestring) : option (byte * byte * bytestring) :=
-  let* r1 := unpack l in
-  let* r2 := unpack (snd r1) in
-  pure (fst r1, fst r2, snd r2).
+Definition unpack2 : state_t bytestring option (byte * byte) :=
+  pair <$> unpack <*> unpack.
 
 #[local]
-Definition unpack3 (l : bytestring) : option (byte * byte * byte * bytestring) :=
-  let* r1 := unpack l in
-  let* r2 := unpack (snd r1) in
-  let* r3 := unpack (snd r2) in
-  pure (fst r1, fst r2, fst r3, snd r3).
+Definition unpack3 : state_t bytestring option (byte * byte * byte) :=
+  (fun x y z => (x, y, z)) <$> unpack <*> unpack <*> unpack.
 
 #[local]
-Definition cond_pure {a} (c : bool) (x : a) : option a :=
-  if c then Some x else None.
+Definition lift `{Monad m} {a s} (x : m a) : state_t s m a :=
+  fun s => (fun x => (x, s)) <$> x.
 
-Definition unpack_utf8 (l : bytestring) : option (uchar * bytestring) :=
-  let* (x, rst) := unpack l in
+#[local]
+Definition cond_pure {a s} (c : bool) (x : a) : state_t s option a :=
+  if c then pure x else lift None.
+
+Definition unpack_utf8 : state_t bytestring option uchar :=
+  let* x := unpack in
   (* variant 1 *)
   if i63_of_byte x <=? 127
-  then Some (uchar_var_1 x, rst)
+  then pure (uchar_var_1 x)
   (* variant 2 *)
   else if i63_of_byte x <=? 223
-  then let* (y, rst) := unpack rst in
-       cond_pure (i63_of_byte y <=? 191) (uchar_var_2 x y, rst)
+  then let* y := unpack in
+       cond_pure (i63_of_byte y <=? 191) (uchar_var_2 x y)
   (* variant 3 *)
   else if i63_of_byte x <=? 239
-  then let* (y, z, rst) := unpack2 rst in
+  then let* (y, z) := unpack2 in
        cond_pure ((i63_of_byte y <=? 191) && (i63_of_byte z <=? 191))
-                 (uchar_var_3 x y z, rst)
+                 (uchar_var_3 x y z)
+
   (* variant 4 *)
   else if i63_of_byte x <=? 247
-       then let* (y, z, r, rst) := unpack3 rst in
-            cond_pure ((i63_of_byte y <=? 191) &&
-                       (i63_of_byte z <=? 191) &&
-                       (i63_of_byte r <=? 191))
-                      (uchar_var_4 x y z r, rst)
+  then let* (y, z, r) := unpack3 in
+       cond_pure ((i63_of_byte y <=? 191) &&
+                  (i63_of_byte z <=? 191) &&
+                  (i63_of_byte r <=? 191))
+                 (uchar_var_4 x y z r)
   (* incorrect variant *)
-  else None.
+  else lift None.
 
 Unset Guard Checking.
 Fixpoint utf8_length (b : bytestring) {struct b} : i63 :=
